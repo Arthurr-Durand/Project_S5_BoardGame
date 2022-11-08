@@ -2,8 +2,13 @@
 - Durand Arthur 		email: adurand015@enseirb-matmeca.fr
 
 
-[ACHIEV0][DATE][END]
+[ACHIEV0][8/11/22][END]
 	- Master of git[IN_PROGRESS]
 	- Begginer of git [DONE]
+	- Debut du projet (geometry) [DONE]
+	- fichier de test [DONE]
+	- Make file [IN_PROGRESS]
 	
 	[OBJECTIVES]
+	-Finir les .h 
+	-Avancer sur Base version
