@@ -4,38 +4,27 @@
 #include <string.h>
 const char* place_to_string(enum color_t c,enum sort_t s)
 {
-    const char* T="";
-    const char* S="";
-    char P[100];
-    switch (c)
-    {
-    case 0:
-        T="No color";
-        break;
-    case 1:
-        T="Black";
-        break;
-    case 2:
-        T="White";
-        break;
-    
-    default:
-        return "Pas compris";
+    if (s==0 && c==0){
+        return "No color and no pawn";
     }
-    strcpy(P,T);
-     switch (s)
-    {
-    case 0:
-         S="Nothing en";
-         break;
-    case 1:
-        S="Pawn en";
-        break;
-    default:
-        return "Pas compris";
+    if (s==1 && c==0){
+        return "Pawn and no color";
     }
-    const char* R=strcat(S,P);
-    return R;
+      if (s==0 && c==1){
+        return "Black and no pawn";
+    }
+      if (s==0 && c==2){
+        return "White and no pawn";
+    }
+      if (s==1 && c==1){
+        return "Pawn and Black";
+    }
+      if (s==1 && c==2){
+        return "Pawn and white";
+    }
+    else {
+        return "pas compris";
+    }
 }
 
 const char* dir_to_string(enum dir_t d)
