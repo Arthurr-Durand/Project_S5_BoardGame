@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "../src/geometry.h"
+#include "../src/neighbors.h"
 
 /*
 void test_place_to_string()
@@ -14,10 +15,10 @@ void test_place_to_string()
 void test_dir_to_string()
 {
     printf("test_dir_to_string :\n");
-    printf("%d > %s\n", -2, dir_to_string(-2));
-    printf("%d > %s\n", 3, dir_to_string(3));
-    printf("%d > %s\n", -5, dir_to_string(-5));
-    printf("%d > %s\n", 12, dir_to_string(12));
+    printf("\t%d > %s\n", -2, dir_to_string(-2));
+    printf("\t%d > %s\n", 3, dir_to_string(3));
+    printf("\t%d > %s\n", -5, dir_to_string(-5));
+    printf("\t%d > %s\n", 12, dir_to_string(12));
 }
 
 int main()
