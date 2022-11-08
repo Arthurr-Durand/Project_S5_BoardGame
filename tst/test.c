@@ -3,14 +3,12 @@
 #include "../src/geometry.h"
 #include "../src/neighbors.h"
 
-/*
 void test_place_to_string()
 {
     printf("test_place_to_string :\n");
-    printf("%d, %d > %s\n", 2, 1, place_to_string(2, 1));
-    printf("%d, %d > %s\n", 0, 3, place_to_string(0, 3));
+    printf("\t%d, %d > %s\n", 2, 1, place_to_string(2, 1));
+    printf("\t%d, %d > %s\n", 0, 3, place_to_string(0, 3));
 }
-*/
 
 void test_dir_to_string()
 {
@@ -24,7 +22,7 @@ void test_dir_to_string()
 int main()
 {
     printf("test.c :\n");
-    //test_place_to_string();
+    test_place_to_string();
     test_dir_to_string();
     return 0;
 }
