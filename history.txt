@@ -1,7 +1,9 @@
--
--
+- Hamouche Luxel		email: lhamouche@enseirb-matmeca.fr	
+- Durand Arthur 		email: adurand015@enseirb-matmeca.fr
+
 
 [ACHIEV0][DATE][END]
-	- [IN_PROGRESS]
-	- [DONE]
+	- Master of git[IN_PROGRESS]
+	- Begginer of git [DONE]
+	
 	[OBJECTIVES]
