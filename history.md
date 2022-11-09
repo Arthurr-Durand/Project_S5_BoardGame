@@ -10,5 +10,5 @@
 	- Make file [IN_PROGRESS]
 	
 	[OBJECTIVES]
-	-Finir les .h 
-	-Avancer sur Base version
+	- Finir les .c 
+	- Avancer sur Base version
