@@ -16,25 +16,25 @@ const char* place_to_string(enum color_t c,enum sort_t s)
 const char* dir_to_string(enum dir_t d)
 {
     switch (d) {
-    case 0:
-        return "NO_DIR";
-    case 1:
-        return "EAST";
-    case 2:
-        return "NEAST";
-    case 3:
-        return "NORTH";
-    case 4:
-        return "NWEST";
-    case -1:
-        return "WEST";
-    case -2:
-        return "SWEST";
-    case -3:
-        return "SOUTH";
-    case -4: 
-        return "SEAST";
-    default:
-        return "ERROR";
+        case NO_DIR:
+            return "NO_DIR";
+        case EAST:
+            return "EAST";
+        case NEAST:
+            return "NEAST";
+        case NORTH:
+            return "NORTH";
+        case NWEST:
+            return "NWEST";
+        case WEST:
+            return "WEST";
+        case SWEST:
+            return "SWEST";
+        case SOUTH:
+            return "SOUTH";
+        case SEAST: 
+            return "SEAST";
+        default:
+            return "ERROR";
     }
 }
