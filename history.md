@@ -12,3 +12,15 @@
 	[OBJECTIVES]
 	- Finir les .c 
 	- Avancer sur Base version
+
+
+[ACHIEV0][15/11/2022]
+	- Master of git[IN_PROGRESS]
+	- User of git [DONE]
+	- World.h et presque neighbors.h [DONE]
+	- Makefile [DONE]
+	
+	[OBJECTIVES]
+	-Améliorer Makefile
+	-Finir ACHIEV0
+	
