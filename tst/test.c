@@ -4,9 +4,16 @@
 
 #include "../src/geometry.h"
 #include "../src/world.h"
+#include "../src/neighbors.h"
 
-void str_test(const char str1[], const char str2[]) {
+void str_test(const char str1[], const char str2[])
+{
     (!strcmp(str1, str2)) ? printf("\t\tPASSED\n") : printf("\t\tRecieve %s instead of %s.\n", str1, str2);
+}
+
+void int_test(const int int1, const int int2)
+{
+    (int1 == int2) ? printf("\t\tPASSED\n") : printf("\t\tRecieve %d instead of %d.\n", int1, int2);
 }
 
 void test_place_to_string()
@@ -42,6 +49,16 @@ void test_world_set_get()
     str_test(place_to_string(world_get(world, 0), world_get_sort(world, 0)), "NO_COLOR NO_SORT");
 }
 
+void test_get_neighbors()
+{
+    puts("\ttest_get_neighbor :");
+    int_test(get_neighbor(5, NORTH), 95);
+    int_test(get_neighbor(33, WEST), 32);
+    int_test(get_neighbor(89, EAST), 80);
+    int_test(get_neighbor(99, SEAST), 0);
+    int_test(get_neighbor(10, WEST), 19);
+}
+
 int main()
 {
     puts("test_geometry.c :");
@@ -50,6 +67,9 @@ int main()
     
     puts("test_world.c :");
     test_world_set_get();
+
+    puts("test_neighbors.c :");
+    test_get_neighbors();
 
     return 0;
 }
