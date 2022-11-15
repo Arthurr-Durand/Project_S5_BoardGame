@@ -17,10 +17,11 @@ struct world_t {
     struct place_t p[WORLD_SIZE]; // The list of all places in the world
 };
 
+struct world_t world;
+
 /** Initializes a world (NO_COLOR, NO_SORT everywhere)
     Always returns the same pointer */
 struct world_t* world_init() {
-    static struct world_t world;
     for (int i = 0; i < WORLD_SIZE; ++i) {
         world.p[i].index = i;
         world.p[i].color = NO_COLOR;
