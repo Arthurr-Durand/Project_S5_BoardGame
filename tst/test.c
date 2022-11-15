@@ -11,7 +11,7 @@ void str_test(const char str1[], const char str2[]) {
 
 void test_place_to_string()
 {
-    printf("\ttest_place_to_string :\n");
+    puts("\ttest_place_to_string :");
     str_test(place_to_string(2, 1), "WHITE PAWN");
     str_test(place_to_string(3, 0), "MAX_COLOR NO_SORT");
     str_test(place_to_string(0, 3), "ERROR");
@@ -20,16 +20,18 @@ void test_place_to_string()
 
 void test_dir_to_string()
 {
-    printf("\ttest_dir_to_string :\n");
+    puts("\ttest_dir_to_string :");
     str_test(dir_to_string(-2), "SWEST");
     str_test(dir_to_string(3), "NORTH");
     str_test(dir_to_string(-5), "ERROR");
     str_test(dir_to_string(12), "ERROR");
 }
 
-void test_world_set_get(struct world_t* world)
+void test_world_set_get()
 {
-    printf("\ttest_world_set_get :\n");
+    puts("\ttest_world_set_get :");
+    //init world
+    struct world_t* world = world_init();
     //set index 0 to WHITE PAWN
     world_set(world, 0, WHITE);
     world_set_sort(world, 0, PAWN);
@@ -42,13 +44,12 @@ void test_world_set_get(struct world_t* world)
 
 int main()
 {
-    printf("test_geometry.c :\n");
+    puts("test_geometry.c :");
     test_place_to_string();
     test_dir_to_string();
     
-    struct world_t* world = world_init();
-    printf("test_world.c :\n");
-    test_world_set_get(world);
+    puts("test_world.c :");
+    test_world_set_get();
 
     return 0;
 }
