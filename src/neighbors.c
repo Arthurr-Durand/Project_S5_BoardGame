@@ -92,3 +92,25 @@ struct neighbors_t get_neighbors(unsigned int idx)
     voisins.n[p].d = NO_DIR;
     return voisins;
 }
+
+//fonction de BG
+
+// int len_voisins(struct neighbors_t);
+
+// struct set_t get_all_moves(struct piece,int idx_piece)
+// {   
+//     int idx=0;
+//     struct set_t places;
+//     for(int k=0;k<len_voisins(get_neighbors(idx_piece)-1);k++){
+//         idx=get_neighbors(idx_piece).n[k].i;
+//         d=get_neighbors(idx_piece).n[k].d;
+//         for(int i=0;i<piece.Maxdep;i++){
+//             if  (world_get_sort(world,idx)==0){
+//                 places[p]=idx;
+//             }
+//             idx=get_neighbor(idx,d);
+        
+//         }
+//     }
+//     return places;
+// }

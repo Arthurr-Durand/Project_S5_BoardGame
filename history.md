@@ -23,4 +23,18 @@
 	[OBJECTIVES]
 	-Améliorer Makefile
 	-Finir ACHIEV0
+
+
+[ACHIEV0][18/11/2022]
+	- Master of git [IN_PROGRESS]
+	- Finalisation du plateau Torique [DONE]
+	- Test neighbors.c [DONE]
+	- Type sets(.c/.h) [IN_PROGRESS]
+	- Calcul des déplacement [IN_PROGRESS]
+
+	[OBJECTIVES]
+	- Finir sets(.c/.h)
+	- Premieres parties
+
+
 	
