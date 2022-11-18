@@ -2,15 +2,14 @@
 
 #include "geometry.h"
 
+static const char* place_strings[MAX_SORT][MAX_COLOR] = {{"NO_COLOR NO_SORT", "BLACK NO_SORT", "WHITE NO_SORT"},
+                                                    {"NO_COLOR PAWN", "BLACK PAWN", "WHITE PAWN"}}
+;
 const char* place_to_string(enum color_t c,enum sort_t s)
 {
-    if ((c < 0 || c > 3) || (s < 0 || s > 2))
+    if ((c < 0 || c >= MAX_COLOR) || (s < 0 || s >= MAX_SORT))
         return "ERROR";
-    char* colors[] = {"NO_COLOR", "BLACK", "WHITE", "MAX_COLOR"};
-    char* sorts[] = {"NO_SORT", "PAWN", "MAX_SORT"};
-    static char result[20];
-    sprintf(result, "%s %s", colors[c], sorts[s]);
-    return result;
+    return place_strings[s][c];
 }
 
 const char* dir_to_string(enum dir_t d)

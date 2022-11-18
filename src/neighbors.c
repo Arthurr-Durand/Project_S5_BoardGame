@@ -77,7 +77,4 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d) // Fonction faite pour
 }
 /** Returns the list of the neighbors of the place `idx`, terminated
     by UINT_MAX.  */
-struct neighbors_t get_neighbors(unsigned int idx)
-{
-    return neighbors[idx];
-}
+struct neighbors_t get_neighbors(unsigned int idx);

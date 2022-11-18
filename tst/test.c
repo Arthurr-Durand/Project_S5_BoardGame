@@ -20,7 +20,8 @@ void test_place_to_string()
 {
     puts("\ttest_place_to_string :");
     str_test(place_to_string(2, 1), "WHITE PAWN");
-    str_test(place_to_string(3, 0), "MAX_COLOR NO_SORT");
+    str_test(place_to_string(1, 0), "BLACK NO_SORT");
+    str_test(place_to_string(3, 0), "ERROR");
     str_test(place_to_string(0, 3), "ERROR");
     str_test(place_to_string(-5, 3), "ERROR");
 }
