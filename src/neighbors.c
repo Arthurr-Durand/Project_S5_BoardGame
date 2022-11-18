@@ -77,4 +77,20 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d) // Fonction faite pour
 }
 /** Returns the list of the neighbors of the place `idx`, terminated
     by UINT_MAX.  */
-struct neighbors_t get_neighbors(unsigned int idx);
+struct neighbors_t get_neighbors(unsigned int idx)
+{
+    struct neighbors_t voisins;
+    int p=0;
+    for(enum dir_t i=SEAST;i<=MAX_DIR/2;i++){
+        if (get_neighbor(idx,i)!=UINT_MAX){
+            voisins.n[p].i = get_neighbor(idx,i);
+            voisins.n[p].d = i;
+            printf("idx:%d, dir:%s\n",voisins.n[p].i,dir_to_string(voisins.n[p].d));
+            p++;
+        }
+    }
+    voisins.n[p].i=UINT_MAX;
+    voisins.n[p].i=NO_DIR;
+    printf("idx:%d, dir:%s\n\n",voisins.n[p].i,dir_to_string(voisins.n[p].d));
+    return voisins;
+}

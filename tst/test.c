@@ -50,7 +50,7 @@ void test_world_set_get()
     str_test(place_to_string(world_get(world, 0), world_get_sort(world, 0)), "NO_COLOR NO_SORT");
 }
 
-void test_get_neighbors()
+void test_get_neighbor()
 {
     puts("\ttest_get_neighbor :");
     int_test(get_neighbor(5, NORTH), 95);
@@ -58,6 +58,12 @@ void test_get_neighbors()
     int_test(get_neighbor(89, EAST), 80);
     int_test(get_neighbor(99, SEAST), 0);
     int_test(get_neighbor(10, WEST), 19);
+}
+void test_get_neighbors()
+{
+    get_neighbors(0);
+    get_neighbors(33);
+    get_neighbors(19);
 }
 
 int main()
@@ -70,6 +76,7 @@ int main()
     test_world_set_get();
 
     puts("test_neighbors.c :");
+    test_get_neighbor();
     test_get_neighbors();
 
     return 0;
