@@ -5,7 +5,7 @@
 #include "world.h"
 
 /** Struct representing a place in a world*/
-struct place_t {
+struct places_t {
     unsigned int index; // The index of the place
     enum color_t color; // The color of the place
     enum sort_t sort; // The sort of the place
@@ -14,7 +14,7 @@ struct place_t {
 /** Abstract struct representing the possible places in the world
     These places are indexed from 0 to WORLD_SIZE-1 */
 struct world_t {
-    struct place_t p[WORLD_SIZE]; // The list of all places in the world
+    struct places_t p[WORLD_SIZE]; // The list of all places in the world
 };
 
 struct world_t world;
