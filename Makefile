@@ -16,7 +16,8 @@ test_project: # (Add your dependency here, e.g "test.o")
 	gcc -c $(CFLAGS) src/geometry.c
 	gcc -c $(CFLAGS) src/world.c
 	gcc -c $(CFLAGS) src/neighbors.c
-	gcc $(CFLAGS) test.o geometry.o world.o neighbors.o -o test_project.out
+	gcc -c $(CFLAGS) src/sets.c
+	gcc $(CFLAGS) test.o geometry.o world.o neighbors.o sets.o -o test_project.out
 	# (Add your compile command here, e.g "gcc $(CFLAGS) test.o -o test_project")
 
 clean:
