@@ -74,13 +74,24 @@ void test_get_neighbors()
 void test_sets()
 {
     puts("\ttest_sets :");
-    // init set
+    // worlds init
+    struct world_t* world = world_init();
+    // sets init
     struct sets_t* set = sets_init();
     int_test(sets_get_nb(set), 0);
-    // add place 1 et 2 to set
+    // add place 0 et 1 to set
     sets_add(set, 1);
     sets_add(set, 2);
     int_test(sets_get_nb(set), 2);
+    int_test(world_get(world, 0), NO_COLOR);
+    // change color of set to BLACK
+    sets_set_color(set, world, BLACK);
+    int_test(world_get(world, 0), BLACK);
+    int_test(world_get_sort(world, 0), NO_SORT);
+    // change sort of set to PAWN
+    sets_set_sort(set, world, PAWN);
+    int_test(world_get_sort(world, 0), PAWN);
+
 }
 
 int main()
