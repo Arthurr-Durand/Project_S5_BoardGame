@@ -7,12 +7,22 @@
     It contains the index of the neighbor, and the direction it's in */
 struct sets_t;
 
-struct sets_t set_init(); // Inits an empty set
+/** Inits an empty set */
+struct sets_t* sets_init();
 
-void get_nb_in_set(const struct sets_t s); // Returns the number of places pointers in a set
+/** Returns the number of places pointers in a set */
+int sets_get_nb(const struct sets_t* s);
 
-// void add_to_set(struct sets_t, struct places_t* p); // Adds a place pointer to a set
+/** Adds a place pointer to a set */
+void sets_add(struct sets_t* s, int nb);
 
-// struct place_t* random_in_set(struct sets_t s, struct places_t p); // Returns a random place pointer in a set
+/** Returns a random place pointer in a set */
+int sets_get_random(struct sets_t* s);
+
+/** Sets the sort of all places in a set */
+void sets_set_sort(struct sets_t* s);
+
+/** Sets the color of all places in a set */
+void sets_set_color(struct sets_t* s);
 
 #endif // __SETS_H__

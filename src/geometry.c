@@ -3,8 +3,8 @@
 #include "geometry.h"
 
 static const char* place_strings[MAX_SORT][MAX_COLOR] = {{"NO_COLOR NO_SORT", "BLACK NO_SORT", "WHITE NO_SORT"},
-                                                    {"NO_COLOR PAWN", "BLACK PAWN", "WHITE PAWN"}}
-;
+                                                    {"NO_COLOR PAWN", "BLACK PAWN", "WHITE PAWN"}};
+
 const char* place_to_string(enum color_t c,enum sort_t s)
 {
     if ((c < 0 || c >= MAX_COLOR) || (s < 0 || s >= MAX_SORT))

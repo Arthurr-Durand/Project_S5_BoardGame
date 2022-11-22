@@ -5,6 +5,7 @@
 #include "../src/geometry.h"
 #include "../src/world.h"
 #include "../src/neighbors.h"
+#include "../src/sets.h"
 
 void str_test(const char str1[], const char str2[])
 {
@@ -38,13 +39,13 @@ void test_dir_to_string()
 void test_world_set_get()
 {
     puts("\ttest_world_set_get :");
-    //init world
+    // init world
     struct world_t* world = world_init();
-    //set index 0 to WHITE PAWN
+    // set index 0 to WHITE PAWN
     world_set(world, 0, WHITE);
     world_set_sort(world, 0, PAWN);
     str_test(place_to_string(world_get(world, 0), world_get_sort(world, 0)), "WHITE PAWN");
-    //set index 0 to NO_COLOR NO_SORT
+    // set index 0 to NO_COLOR NO_SORT
     world_set(world, 0, NO_COLOR);
     world_set_sort(world, 0, NO_SORT);
     str_test(place_to_string(world_get(world, 0), world_get_sort(world, 0)), "NO_COLOR NO_SORT");
@@ -70,6 +71,18 @@ void test_get_neighbors()
     int_test(get_neighbors(19).n[2].d, SWEST);
 }
 
+void test_sets()
+{
+    puts("\ttest_sets :");
+    // init set
+    struct sets_t* set = sets_init();
+    int_test(sets_get_nb(set), 0);
+    // add place 1 et 2 to set
+    sets_add(set, 1);
+    sets_add(set, 2);
+    int_test(sets_get_nb(set), 2);
+}
+
 int main()
 {
     puts("test_geometry.c :");
@@ -82,6 +95,9 @@ int main()
     puts("test_neighbors.c :");
     test_get_neighbor();
     test_get_neighbors();
+
+    puts("test_sets.c : ");
+    test_sets();
 
     return 0;
 }
