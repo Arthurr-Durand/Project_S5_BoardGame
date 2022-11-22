@@ -6,16 +6,16 @@ CC= gcc
 
 all: project
 
-%.o: %.c
-	gcc -c $(CFLAGS) $<
+%.o: %.c99
+	gcc -c $(CFLAGS) $^ -o $@
 
 project: # (Add your dependency here, e.g "project.o")
 	# (Add your compile command here, e.g "gcc $(CFLAGS) project.o -o project")
 
-test_project: test.o geometry.o world.o neighbors.o   # (Add your dependency here, e.g "test.o")
+test_project: tst/test.o src/geometry.o src/world.o src/neighbors.o src/sets.o # (Add your dependency here, e.g "test.o")
 
-	$(CC) $(CFLAGS) $^ -o $@
-	rm -R *.o
-	
+	$(CC) $^ -o $@.out
+	rm -R src/*.o
+	rm -R tst/*.o
 clean:
 	rm -f *.o *~ *.out 
