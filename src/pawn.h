@@ -5,7 +5,7 @@
 /** A struct representing a piece */
 struct pawns_t;
 
-/** Inits a panws */
+/** Inits a pawn */
 struct pawns_t* pawns_init(int max_dep, int idx);
 
 /** Returns all free neighbors */

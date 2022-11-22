@@ -11,7 +11,10 @@ struct sets_t;
 struct sets_t* sets_init();
 
 /** Returns the number places in a set */
-int sets_get_nb(const struct sets_t* s);
+int sets_get_nb(const struct sets_t* set);
+
+/** Returns the value at nb */
+int sets_get_at_nb(const struct sets_t* set, const int nb);
 
 /** Adds a place to a set */
 void sets_add(struct sets_t* set, int nb);

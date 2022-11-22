@@ -17,11 +17,16 @@ struct sets_t* sets_init() {
     return &s;
 }
 
-int sets_get_nb(const struct sets_t* s) {
+int sets_get_nb(const struct sets_t* set) {
     int i = 0;
-    for (; s->l[i] != UINT_MAX; ++i);
+    for (; set->l[i] != UINT_MAX; ++i);
     return i;
 }
+
+int sets_get_at_nb(const struct sets_t* set, const int nb) {
+    return (nb < sets_get_nb(set)) ? set->l[nb] : UINT_MAX;
+}
+
 
 void sets_add(struct sets_t* s, int p) {
     int nb = sets_get_nb(s);
