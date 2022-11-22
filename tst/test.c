@@ -61,9 +61,13 @@ void test_get_neighbor()
 }
 void test_get_neighbors()
 {
-    get_neighbors(0);
-    get_neighbors(33);
-    get_neighbors(19);
+    puts("\ttest_get_neighbors :");
+    int_test(get_neighbors(0).n[0].i, 11);
+    int_test(get_neighbors(0).n[4].d, EAST);
+    int_test(get_neighbors(33).n[8].i, WORLD_SIZE);
+    int_test(get_neighbors(33).n[8].d, NO_DIR);
+    int_test(get_neighbors(19).n[7].i, 8);
+    int_test(get_neighbors(19).n[2].d, SWEST);
 }
 
 int main()
