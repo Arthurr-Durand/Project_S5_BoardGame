@@ -26,14 +26,14 @@ struct pawns_t* pawns_init(int max_dep, int idx)
     return &pawns;
 }
 
-struct sets_t* pawns_all_moves(struct pawns_t piece,struct world_t* world)
+struct sets_t* pawns_all_moves(struct pawns_t* piece, struct world_t* world)
 {   
     int idx, d;
     struct sets_t* places = sets_init();
-    for (int k = 0; k < (len_voisins(get_neighbors(piece.idx))-1); ++k) {
-        idx = get_neighbors(piece.idx).n[k].i;
-        d = get_neighbors(piece.idx).n[k].d;
-        for (int i=0;i<piece.max_dep;i++) {
+    for (int k = 0; k < (len_voisins(get_neighbors(piece->idx))-1); ++k) {
+        idx = get_neighbors(piece->idx).n[k].i;
+        d = get_neighbors(piece->idx).n[k].d;
+        for (int i=0;i<piece->max_dep;i++) {
             if (!world_get_sort(world, idx))
                 sets_add(places, idx);
             idx = get_neighbor(idx,d);
