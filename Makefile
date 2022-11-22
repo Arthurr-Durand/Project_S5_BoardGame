@@ -2,6 +2,7 @@ WIDTH ?= 10
 HEIGHT ?= 10
 MANSUBA_FLAGS = -DWIDTH=$(WIDTH) -DHEIGHT=$(HEIGHT)
 CFLAGS = -Wall -Wextra -std=c99 -g3 $(MANSUBA_FLAGS)
+CC= gcc 
 
 all: project
 
@@ -11,14 +12,10 @@ all: project
 project: # (Add your dependency here, e.g "project.o")
 	# (Add your compile command here, e.g "gcc $(CFLAGS) project.o -o project")
 
-test_project: # (Add your dependency here, e.g "test.o")
-	gcc -c $(CFLAGS) tst/test.c
-	gcc -c $(CFLAGS) src/geometry.c
-	gcc -c $(CFLAGS) src/world.c
-	gcc -c $(CFLAGS) src/neighbors.c
-	gcc -c $(CFLAGS) src/sets.c
-	gcc $(CFLAGS) test.o geometry.o world.o neighbors.o sets.o -o test_project.out
-	# (Add your compile command here, e.g "gcc $(CFLAGS) test.o -o test_project")
+test_project: test.o geometry.o world.o neighbors.o   # (Add your dependency here, e.g "test.o")
 
+	$(CC) $(CFLAGS) $^ -o $@
+	rm -R *.o
+	
 clean:
 	rm -f *.o *~ *.out 
