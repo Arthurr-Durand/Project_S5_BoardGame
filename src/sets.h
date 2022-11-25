@@ -5,7 +5,9 @@
 #include "world.h"
 
 /** A struct representing a set of places by their index in the world */
-struct sets_t;
+struct sets_t {
+    int l[WORLD_SIZE+1];
+};
 
 /** Inits an empty set */
 struct sets_t* sets_init();

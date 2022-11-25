@@ -1,14 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "neighbors.h"
 #include "sets.h"
 #include "geometry.h"
 #include "world.h"
+#include "pawn.h"
 
 #define UINT_MAX WORLD_SIZE
 
-struct pawns_t {
-    int max_dep;
-    int idx;
-};
+struct pawns_t;
 
 int len_voisins(const struct neighbors_t voisin)
 {

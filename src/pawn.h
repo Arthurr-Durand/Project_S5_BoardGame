@@ -3,7 +3,10 @@
 #include "geometry.h"
 
 /** A struct representing a piece */
-struct pawns_t;
+struct pawns_t {
+    int max_dep;
+    int idx;
+};
 
 /** Inits a pawn */
 struct pawns_t* pawns_init(int max_dep, int idx);

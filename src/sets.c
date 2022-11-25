@@ -7,9 +7,7 @@
 
 #define UINT_MAX WORLD_SIZE
 
-struct sets_t {
-    int l[WORLD_SIZE+1];
-};
+struct sets_t;
 
 struct sets_t* sets_init() {
     static struct sets_t s;
