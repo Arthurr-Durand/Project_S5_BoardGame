@@ -7,8 +7,14 @@
 
 struct players_t {
     int index;
-    struct pawns_t pawns[WORLD_SIZE+1];
-    struct sets_t initial_set;
+    int pawns_nb;
+    struct pawns_t* pawns[WORLD_SIZE+1];
 };
+
+void players_init(struct players_t* players[], int nb_players);
+
+void players_add_pawn(struct players_t* player, struct pawns_t* pawn);
+
+int players_get_nb_pawns(struct players_t* player);
 
 #endif // __PLAYERS_H__
