@@ -42,3 +42,7 @@ struct sets_t* pawns_all_moves(struct pawns_t* piece, struct world_t* world)
     }
     return places;
 }
+void pawns_moves(struct pawns_t* piece,int idx)
+{
+    piece->idx=idx;
+}
