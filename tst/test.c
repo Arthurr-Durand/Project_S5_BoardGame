@@ -55,11 +55,11 @@ void test_world_set_get()
 void test_get_neighbor()
 {
     puts("\ttest_get_neighbor :");
-    int_test(get_neighbor(5, NORTH), 95);
-    int_test(get_neighbor(33, WEST), 32);
-    int_test(get_neighbor(89, EAST), 80);
-    int_test(get_neighbor(99, SEAST), 0);
-    int_test(get_neighbor(10, WEST), 19);
+    int_test(get_neighbor(90, NEAST), 81);
+    int_test(get_neighbor(6, EAST), 7);
+    int_test(get_neighbor(28, SEAST), 39);
+    int_test(get_neighbor(46, NWEST), 35);
+    int_test(get_neighbor(99, SWEST), 8);
 }
 void test_get_neighbors()
 {
@@ -100,7 +100,7 @@ void test_pawns_all_moves(){
     // world init
     struct world_t* world = world_init();
     // pawns init
-    struct pawns_t* pawns = pawns_init(2, 33);
+    struct pawns_t* pawns = pawns_init(2, 0);
     int i=0;
     struct sets_t* set = pawns_all_moves(pawns, world);
     while (sets_get_at_nb(set,i) != WORLD_SIZE){
