@@ -6,6 +6,7 @@
 #include "../src/world.h"
 #include "../src/neighbors.h"
 #include "../src/sets.h"
+#include "../src/pawn.h"
 
 void str_test(const char str1[], const char str2[])
 {
@@ -74,7 +75,7 @@ void test_get_neighbors()
 void test_sets()
 {
     puts("\ttest_sets :");
-    // worlds init
+    // world init
     struct world_t* world = world_init();
     // sets init
     struct sets_t* set = sets_init();
@@ -94,6 +95,21 @@ void test_sets()
 
 }
 
+void test_pawns_all_moves(){
+    puts("\ttest_pawns_all_moves:");
+    // world init
+    struct world_t* world = world_init();
+    // pawns init
+    struct pawns_t* pawns = pawns_init(2, 33);
+    int i=0;
+    struct sets_t* set = pawns_all_moves(pawns, world);
+    while (sets_get_at_nb(set,i) != WORLD_SIZE){
+    printf("%d\n",sets_get_at_nb(set,i));
+    i++;
+    }
+
+}
+
 int main()
 {
     puts("test_geometry.c :");
@@ -109,6 +125,9 @@ int main()
 
     puts("test_sets.c : ");
     test_sets();
+
+    puts("test_pawns.c :");
+    test_pawns_all_moves();
 
     return 0;
 }
