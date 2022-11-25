@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../src/geometry.h"
-#include "../src/world.h"
-#include "../src/neighbors.h"
-#include "../src/sets.h"
-#include "../src/pawn.h"
+#include "geometry.h"
+#include "world.h"
+#include "neighbors.h"
+#include "sets.h"
+#include "pawn.h"
 
 void str_test(const char str1[], const char str2[])
 {

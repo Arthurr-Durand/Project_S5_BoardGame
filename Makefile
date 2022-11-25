@@ -6,14 +6,11 @@ CC = gcc
 
 all: project
 
-%.o: %.c99
-	$(CC) -c $(CFLAGS) $^
+%.o: %.c
+	$(CC) -c -I src $(CFLAGS) $^ -o $@
 
 project: # (Add your dependency here, e.g "project.o")
 	# (Add your compile command here, e.g "gcc $(CFLAGS) project.o -o project")
-
-test: test_project.out
-	./test_project.out
 
 test_project: tst/test.o src/geometry.o src/world.o src/neighbors.o src/sets.o src/pawn.o
 	$(CC) $^ -o $@.out
