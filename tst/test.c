@@ -18,6 +18,7 @@ void int_test(const int int1, const int int2)
     (int1 == int2) ? printf("\t\tPASSED\n") : printf("\t\tRecieve %d instead of %d.\n", int1, int2);
 }
 
+
 void test_place_to_string()
 {
     puts("\ttest_place_to_string :");
@@ -101,13 +102,19 @@ void test_pawns_all_moves(){
     struct world_t* world = world_init();
     // pawns init
     struct pawns_t* pawns = pawns_init(2, 0);
-    int i=0;
     struct sets_t* set = pawns_all_moves(pawns, world);
-    while (sets_get_at_nb(set,i) != WORLD_SIZE){
-    printf("%d\n",sets_get_at_nb(set,i));
-    i++;
-    }
+    int_test(sets_get_at_nb(set,2),10);
+    int_test(sets_get_at_nb(set,14),99);
+    int_test(sets_get_at_nb(set,8),1);
 
+}
+
+void test_pawns_move()
+{
+    puts("\ttest_pawns_move:");
+    struct pawns_t* pawns= pawns_init(2,0);
+    pawns_moves(pawns,69);
+    int_test(pawns->idx,69);
 }
 
 int main()
@@ -128,6 +135,7 @@ int main()
 
     puts("test_pawns.c :");
     test_pawns_all_moves();
+    test_pawns_move();
 
     return 0;
 }
