@@ -30,7 +30,7 @@ struct sets_t* pawns_all_moves(struct pawns_t* piece, struct world_t* world)
 {   
     int idx, d;
     struct sets_t* places = sets_init();
-    for (int k = 0; k < (len_voisins(get_neighbors(piece->idx))-1); ++k) {
+    for (int k = 0; k < (len_voisins(get_neighbors(piece->idx))); ++k) {
         idx = get_neighbors(piece->idx).n[k].i;
         d = get_neighbors(piece->idx).n[k].d;
         for (int i=0;i<piece->max_dep;i++) {
