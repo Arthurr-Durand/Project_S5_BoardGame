@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "players.h"
+#include "sets.h"
 #include "world.h"
 struct players_t;
 
@@ -15,7 +16,7 @@ struct players_t* _player_init(int idx)
 
 void players_init(struct players_t* players[], int nb_players)
 {
-    for(int i = 0; i < nb_players; ++i)
+    for (int i = 0; i < nb_players; ++i)
         players[i] = _player_init(i);
 }
 
@@ -30,10 +31,10 @@ int players_get_nb_pawns(struct players_t* player)
     return player->pawns_nb;
 }
 
-void players_set_initial_set(int nb_player,struct players_t* player[])
+void players_set_initial_set(int nb_players, struct players_t* players[], struct sets_t* sets[])
 {
-    for(int i=0;i<nb_player;i++){
-        for(int k=(HEIGHT/nb_player)*WIDTH;k<((HEIGHT/nb_player)+1)*WIDTH;k++)
-            sets_add(&player[i]->initial_set,(i+1)*k);
+    for(int i = 0; i < nb_players; i++){
+        for (int k = (HEIGHT/nb_players)*WIDTH; k<((HEIGHT/nb_players)+1)*WIDTH; k++)
+            sets_add(sets[i], (i+1)*k);
     }
 }
