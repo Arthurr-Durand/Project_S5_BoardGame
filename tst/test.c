@@ -96,7 +96,13 @@ void test_sets()
 
 }
 
-void test_pawns_all_moves(){
+void test_len_voisins()
+{
+    puts("\ttest_len_voisins:");
+    int_test(len_voisins(get_neighbors(33)),8);
+}
+void test_pawns_all_moves()
+{
     puts("\ttest_pawns_all_moves:");
     // world init
     struct world_t* world = world_init();
@@ -117,6 +123,14 @@ void test_pawns_move()
     int_test(pawns->idx,69);
 }
 
+
+void test_players_set_initial_set()
+{
+
+
+}
+
+
 int main()
 {
     puts("test_geometry.c :");
@@ -134,8 +148,13 @@ int main()
     test_sets();
 
     puts("test_pawns.c :");
+    test_len_voisins();
     test_pawns_all_moves();
     test_pawns_move();
+
+
+    puts("test_players.c");
+    test_players_set_initial_set();
 
     return 0;
 }

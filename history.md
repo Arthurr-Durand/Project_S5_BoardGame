@@ -2,7 +2,7 @@
 - Durand Arthur 		email: adurand015@enseirb-matmeca.fr
 
 
-[ACHIEV0][8/11/22][END]
+[ACHIEV0][8/11/22]
 	- Master of git[IN_PROGRESS]
 	- Begginer of git [DONE]
 	- Debut du projet (geometry) [DONE]
@@ -45,4 +45,15 @@
 	- Finir le debugage
 	- Modeliser le plateau 
 	- Test une partie 
+
+[ACHIEV0][21/11/2022]
+	- Mise en place d'un systeme de joueurs 
+	- Définition des points de départ 
+	- Débugages des fonctions de déplacement 
+	
+	[OBJECTIVES]
+	- Créer un main pour les lier tous 
+	- Tester une partie 
+	- Finir ACHIEVE0
+
 	

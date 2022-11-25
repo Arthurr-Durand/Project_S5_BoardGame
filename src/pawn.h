@@ -7,7 +7,7 @@ struct pawns_t {
     int max_dep;
     int idx;
 };
-
+int len_voisins(const struct neighbors_t voisin);
 /** Inits a pawn */
 struct pawns_t* pawns_init(int max_dep, int idx);
 
