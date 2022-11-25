@@ -36,5 +36,13 @@
 	- Finir sets(.c/.h)
 	- Premieres parties
 
+[ACHIEV0][21/11/2022]
+	- Implémentation du calcul de déplacement des pions [IN_PROGRESS]
+	- Finalision du set.h/.c [DONE]
+	- Debug [IN_PROGRESS]
 
+	[OBJECTIVES]
+	- Finir le debugage
+	- Modeliser le plateau 
+	- Test une partie 
 	
