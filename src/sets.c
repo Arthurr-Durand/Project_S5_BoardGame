@@ -15,6 +15,12 @@ struct sets_t* sets_init() {
     return &s;
 }
 
+void sets_list_init(struct sets_t* sets[], int nb_sets)
+{
+    for (int i = 0; i < nb_sets; ++i)
+        sets[i] = sets_init();
+}
+
 int sets_get_nb(const struct sets_t* set) {
     int i = 0;
     for (; set->l[i] != UINT_MAX; ++i);
@@ -44,4 +50,12 @@ void sets_set_sort(struct sets_t* set, struct world_t* world, enum sort_t sort) 
 void sets_set_color(struct sets_t* set, struct world_t* world, enum color_t color) {
     for (int i = 0; i < sets_get_nb(set); ++i)
         world_set(world, i, color);
+}
+
+void sets_set_initial_sets(int nb_players, struct sets_t* sets[])
+{
+    for(int i = 0; i < nb_players; i++) {
+        for (int k = (HEIGHT/nb_players)*WIDTH; k<((HEIGHT/nb_players)+1)*WIDTH; k++)
+            sets_add(sets[i], (i+1)*k);
+    }
 }

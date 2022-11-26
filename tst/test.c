@@ -19,7 +19,6 @@ void int_test(const int int1, const int int2)
     (int1 == int2) ? printf("\t\tPASSED\n") : printf("\t\tRecieve %d instead of %d.\n", int1, int2);
 }
 
-
 void test_place_to_string()
 {
     puts("\ttest_place_to_string :");
@@ -97,6 +96,21 @@ void test_sets()
 
 }
 
+void test_sets_set_initial_sets()
+{
+    puts("\ttest_sets_set_initial_sets");
+    // init 2 players
+    struct players_t* players[2];
+    players_init(players, 2);
+    // init 2 sets
+    struct sets_t* sets[2];
+    sets_list_init(sets, 2);
+    // set_initials_sets
+    sets_set_initial_sets(2, sets);
+    printf("\t\t%d\n", sets_get_nb(sets[0]));
+    printf("\t\t%d\n", sets_get_nb(sets[1]));
+}
+
 void test_pawns_get_neighbors_nb()
 {
     puts("\ttest_pawns_get_neighbors_nb:");
@@ -124,11 +138,6 @@ void test_pawns_move()
     int_test(pawns->idx,69);
 }
 
-void test_players_set_initial_set()
-{
-    //
-}
-
 int main()
 {
     puts("test_geometry.c :");
@@ -144,6 +153,7 @@ int main()
 
     puts("test_sets.c : ");
     test_sets();
+    test_sets_set_initial_sets();
 
     puts("test_pawns.c :");
     test_pawns_get_neighbors_nb();
@@ -151,7 +161,7 @@ int main()
     test_pawns_move();
 
     puts("test_players.c");
-    test_players_set_initial_set();
+    
 
     return 0;
 }

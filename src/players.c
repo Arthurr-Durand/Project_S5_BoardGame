@@ -31,11 +31,3 @@ int players_get_nb_pawns(struct players_t* player)
 {
     return player->pawns_nb;
 }
-
-void players_set_initial_set(int nb_players, struct sets_t* sets[])
-{
-    for(int i = 0; i < nb_players; i++){
-        for (int k = (HEIGHT/nb_players)*WIDTH; k<((HEIGHT/nb_players)+1)*WIDTH; k++)
-            sets_add(sets[i], (i+1)*k);
-    }
-}

@@ -12,6 +12,9 @@ struct sets_t {
 /** Inits an empty set */
 struct sets_t* sets_init();
 
+/** Inits an empty list of sets */
+void sets_list_init(struct sets_t* sets[], int nb_sets);
+
 /** Returns the number places in a set */
 int sets_get_nb(const struct sets_t* set);
 
@@ -29,5 +32,8 @@ void sets_set_sort(struct sets_t* set, struct world_t* world, enum sort_t sort);
 
 /** Sets the color of all places in a set */
 void sets_set_color(struct sets_t* set, struct world_t* world, enum color_t color);
+
+/** Sets the initial set for a number of players */
+void sets_set_initial_sets(int nb_players, struct sets_t* sets[]);
 
 #endif // __SETS_H__
