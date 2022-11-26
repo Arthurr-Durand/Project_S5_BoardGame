@@ -3,21 +3,12 @@
 
 #include "neighbors.h"
 #include "sets.h"
-#include "geometry.h"
 #include "world.h"
-#include "pawn.h"
+#include "pawns.h"
 
 #define UINT_MAX WORLD_SIZE
 
 struct pawns_t;
-
-int len_voisins(const struct neighbors_t voisin)
-{
-    int k = 0;
-    while (voisin.n[k].i != UINT_MAX)
-        k++;
-    return k;
-}
 
 struct pawns_t* pawns_init(int max_dep, int idx)
 {
@@ -27,11 +18,19 @@ struct pawns_t* pawns_init(int max_dep, int idx)
     return &pawns;
 }
 
+int pawns_get_neighbors_nb(const struct neighbors_t neighbors)
+{
+    int k = 0;
+    while (neighbors.n[k].i != UINT_MAX)
+        k++;
+    return k;
+}
+
 struct sets_t* pawns_all_moves(struct pawns_t* piece, struct world_t* world)
 {   
     int idx, d;
     struct sets_t* places = sets_init();
-    for (int k = 0; k < (len_voisins(get_neighbors(piece->idx))); ++k) {
+    for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors(piece->idx))); ++k) {
         idx = get_neighbors(piece->idx).n[k].i;
         d = get_neighbors(piece->idx).n[k].d;
         for (int i=0;i<piece->max_dep;i++) {
@@ -42,6 +41,7 @@ struct sets_t* pawns_all_moves(struct pawns_t* piece, struct world_t* world)
     }
     return places;
 }
+
 void pawns_moves(struct pawns_t* piece,int idx)
 {
     piece->idx=idx;

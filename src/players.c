@@ -4,6 +4,7 @@
 #include "players.h"
 #include "sets.h"
 #include "world.h"
+
 struct players_t;
 
 struct players_t* _player_init(int idx)

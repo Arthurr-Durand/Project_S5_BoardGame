@@ -6,7 +6,7 @@
 #include "world.h"
 #include "neighbors.h"
 #include "sets.h"
-#include "pawn.h"
+#include "pawns.h"
 
 void str_test(const char str1[], const char str2[])
 {
@@ -96,10 +96,10 @@ void test_sets()
 
 }
 
-void test_len_voisins()
+void test_pawns_get_neighbors_nb()
 {
-    puts("\ttest_len_voisins:");
-    int_test(len_voisins(get_neighbors(33)),8);
+    puts("\ttest_pawns_get_neighbors_nb:");
+    int_test(pawns_get_neighbors_nb(get_neighbors(33)),8);
 }
 void test_pawns_all_moves()
 {
@@ -123,13 +123,10 @@ void test_pawns_move()
     int_test(pawns->idx,69);
 }
 
-
 void test_players_set_initial_set()
 {
-
-
+    //
 }
-
 
 int main()
 {
@@ -148,10 +145,9 @@ int main()
     test_sets();
 
     puts("test_pawns.c :");
-    test_len_voisins();
+    test_pawns_get_neighbors_nb();
     test_pawns_all_moves();
     test_pawns_move();
-
 
     puts("test_players.c");
     test_players_set_initial_set();
