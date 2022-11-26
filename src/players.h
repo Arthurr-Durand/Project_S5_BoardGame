@@ -22,6 +22,6 @@ void players_add_pawn(struct players_t* player, struct pawns_t* pawn);
 int players_get_nb_pawns(struct players_t* player);
 
 /** Sets the initial set of a table of players */
-void players_set_initial_set(int nb_players, struct players_t* players[], struct sets_t* sets[]);
+void players_set_initial_set(int nb_players, struct sets_t* sets[]);
 
 #endif // __PLAYERS_H__

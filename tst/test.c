@@ -7,6 +7,7 @@
 #include "neighbors.h"
 #include "sets.h"
 #include "pawns.h"
+#include "players.h"
 
 void str_test(const char str1[], const char str2[])
 {
