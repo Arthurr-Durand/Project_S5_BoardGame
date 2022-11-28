@@ -9,11 +9,15 @@ all: project
 %.o: %.c
 	$(CC) -c -I src $(CFLAGS) $^ -o $@
 
+	
 project: # (Add your dependency here, e.g "project.o")
 	# (Add your compile command here, e.g "gcc $(CFLAGS) project.o -o project")
 
+test:
+	make test_project
+
 test_project: tst/test.o src/geometry.o src/world.o src/neighbors.o src/sets.o src/pawns.o src/players.o
-	$(CC) $^ -o $@.out
+	$(CC) -g -O0 $^ -o $@.out
 	rm */*.o
 
 clean:
