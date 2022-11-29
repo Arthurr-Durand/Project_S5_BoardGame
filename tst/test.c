@@ -114,6 +114,19 @@ void test_sets_set_initial_sets()
     int_test(sets_get_nb(&sets[2]), 10);
 }
 
+void test_sets_get_random(){
+
+    puts("\ttest_sets_get_random :");
+    struct world_t* world = world_init();
+    struct pawns_t* pawns = pawns_init(2, 0);
+    struct sets_t set;
+    pawns_all_moves(&set, pawns, world);
+    for(int i=0; i<10;i++)
+        int_test(sets_get_random(&set),0);
+}
+
+        
+
 void test_pawns_get_neighbors_nb()
 {
     puts("\ttest_pawns_get_neighbors_nb:");
@@ -169,6 +182,7 @@ int main()
     puts("test_sets.c : ");
     test_sets();
     test_sets_set_initial_sets();
+    test_sets_get_random();
 
     puts("test_pawns.c :");
     test_pawns_get_neighbors_nb();

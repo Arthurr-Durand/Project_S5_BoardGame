@@ -36,7 +36,11 @@ void sets_add(struct sets_t* s, int p)
     }
 }
 
-int sets_get_random(struct sets_t* s);
+int sets_get_random(struct sets_t* s)
+{
+    return s->l[rand()%sets_get_nb(s)];
+}
+
 
 void sets_set_sort(struct sets_t* set, struct world_t* world, enum sort_t sort)
 {
