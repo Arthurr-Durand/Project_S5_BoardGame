@@ -79,19 +79,20 @@ void test_sets()
     // world init
     struct world_t* world = world_init();
     // sets init
-    struct sets_t* set = sets_init();
-    int_test(sets_get_nb(set), 0);
+    struct sets_t set;
+    sets_init(&set);
+    int_test(sets_get_nb(&set), 0);
     // add place 0 et 1 to set
-    sets_add(set, 1);
-    sets_add(set, 2);
-    int_test(sets_get_nb(set), 2);
+    sets_add(&set, 1);
+    sets_add(&set, 2);
+    int_test(sets_get_nb(&set), 2);
     int_test(world_get(world, 0), NO_COLOR);
     // change color of set to BLACK
-    sets_set_color(set, world, BLACK);
+    sets_set_color(&set, world, BLACK);
     int_test(world_get(world, 0), BLACK);
     int_test(world_get_sort(world, 0), NO_SORT);
     // change sort of set to PAWN
-    sets_set_sort(set, world, PAWN);
+    sets_set_sort(&set, world, PAWN);
     int_test(world_get_sort(world, 0), PAWN);
 
 }
@@ -99,16 +100,18 @@ void test_sets()
 void test_sets_set_initial_sets()
 {
     puts("\ttest_sets_set_initial_sets");
-    // init 2 players
-    struct players_t* players[2];
-    players_init(players, 2);
-    // init 2 sets
-    struct sets_t* sets[2];
-    sets_list_init(sets, 2);
+    // init 3 players
+    struct players_t* players[3];
+    players_init(players, 3);
+    // init 3 sets
+    struct sets_t sets[3];
+    sets_init(&sets[0]);
+    sets_init(&sets[1]);
+    sets_init(&sets[2]);
     // set_initials_sets
-    sets_set_initial_sets(2, sets);
-    printf("\t\t%d\n", sets_get_nb(sets[0]));
-    printf("\t\t%d\n", sets_get_nb(sets[1]));
+    sets_set_initial_sets(3, sets);
+    int_test(sets_get_nb(&sets[0]), 10);
+    int_test(sets_get_nb(&sets[2]), 10);
 }
 
 void test_pawns_get_neighbors_nb()
@@ -116,6 +119,7 @@ void test_pawns_get_neighbors_nb()
     puts("\ttest_pawns_get_neighbors_nb:");
     int_test(pawns_get_neighbors_nb(get_neighbors(33)),8);
 }
+
 void test_pawns_all_moves()
 {
     puts("\ttest_pawns_all_moves:");
@@ -123,17 +127,18 @@ void test_pawns_all_moves()
     struct world_t* world = world_init();
     // pawns init
     struct pawns_t* pawns = pawns_init(2, 0);
-    struct sets_t* set = pawns_all_moves(pawns, world);
-    int_test(sets_get_at_nb(set,2),10);
-    int_test(sets_get_at_nb(set,14),99);
-    int_test(sets_get_at_nb(set,8),1);
-
+    struct sets_t set;
+    sets_init(&set);
+    pawns_all_moves(&set, pawns, world);
+    int_test(sets_get_at_nb(&set,2),10);
+    int_test(sets_get_at_nb(&set,14),99);
+    int_test(sets_get_at_nb(&set,8),1);
 }
 
 void test_pawns_move()
 {
     puts("\ttest_pawns_move:");
-    struct pawns_t* pawns= pawns_init(2,0);
+    struct pawns_t* pawns = pawns_init(2,0);
     pawns_moves(pawns,69);
     int_test(pawns->idx,69);
 }
@@ -161,7 +166,6 @@ int main()
     test_pawns_move();
 
     puts("test_players.c");
-    
 
     return 0;
 }

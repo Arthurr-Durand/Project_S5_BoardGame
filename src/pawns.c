@@ -26,10 +26,9 @@ int pawns_get_neighbors_nb(const struct neighbors_t neighbors)
     return k;
 }
 
-struct sets_t* pawns_all_moves(struct pawns_t* piece, struct world_t* world)
+void pawns_all_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world)
 {   
     int idx, d;
-    struct sets_t* places = sets_init();
     for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors(piece->idx))); ++k) {
         idx = get_neighbors(piece->idx).n[k].i;
         d = get_neighbors(piece->idx).n[k].d;
@@ -39,7 +38,6 @@ struct sets_t* pawns_all_moves(struct pawns_t* piece, struct world_t* world)
             idx = get_neighbor(idx,d);
         }
     }
-    return places;
 }
 
 void pawns_moves(struct pawns_t* piece,int idx)
