@@ -10,12 +10,10 @@
 
 struct pawns_t;
 
-struct pawns_t* pawns_init(int max_dep, int idx)
+void pawns_init(struct pawns_t* pawn, int max_dep, int idx)
 {
-    static struct pawns_t pawns;
-    pawns.max_dep = max_dep;
-    pawns.idx = idx;
-    return &pawns;
+    pawn->max_dep = max_dep;
+    pawn->idx = idx;
 }
 
 int pawns_get_neighbors_nb(const struct neighbors_t neighbors)

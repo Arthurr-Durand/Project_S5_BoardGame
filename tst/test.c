@@ -118,14 +118,13 @@ void test_sets_get_random(){
 
     puts("\ttest_sets_get_random :");
     struct world_t* world = world_init();
-    struct pawns_t* pawns = pawns_init(2, 0);
+    struct pawns_t pawn;
+    pawns_init(&pawn, 2, 0);
     struct sets_t set;
-    pawns_all_moves(&set, pawns, world);
+    pawns_all_moves(&set, &pawn, world);
     for(int i=0; i<10;i++)
         int_test(sets_get_random(&set),0);
 }
-
-        
 
 void test_pawns_get_neighbors_nb()
 {
@@ -139,10 +138,11 @@ void test_pawns_all_moves()
     // world init
     struct world_t* world = world_init();
     // pawns init
-    struct pawns_t* pawns = pawns_init(2, 0);
+    struct pawns_t pawn;
+    pawns_init(&pawn, 2, 0);
     struct sets_t set;
     sets_init(&set);
-    pawns_all_moves(&set, pawns, world);
+    pawns_all_moves(&set, &pawn, world);
     int_test(sets_get_at_nb(&set,2),10);
     int_test(sets_get_at_nb(&set,14),99);
     int_test(sets_get_at_nb(&set,8),1);
@@ -151,9 +151,10 @@ void test_pawns_all_moves()
 void test_pawns_move()
 {
     puts("\ttest_pawns_move:");
-    struct pawns_t* pawns = pawns_init(2,0);
-    pawns_moves(pawns,69);
-    int_test(pawns->idx,69);
+    struct pawns_t pawn;
+    pawns_init(&pawn, 2,0);
+    pawns_moves(&pawn,69);
+    int_test(pawn.idx,69);
 }
 
 void test_players_init()

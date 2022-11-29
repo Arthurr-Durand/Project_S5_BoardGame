@@ -12,7 +12,7 @@ struct pawns_t {
 };
 
 /** Inits a pawn */
-struct pawns_t* pawns_init(int max_dep, int idx);
+void pawns_init(struct pawns_t* pawn, int max_dep, int idx);
 
 /** Returns the numbers of pawn's neighbors */
 int pawns_get_neighbors_nb(const struct neighbors_t neighbors);
