@@ -11,7 +11,7 @@
 
 #define PLAYERS_NB 2
 
-int main(int argc, char* argv[])
+int main()
 {
     // Init world
     puts("[-] Init world.\n");
