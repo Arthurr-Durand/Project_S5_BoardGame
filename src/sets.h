@@ -12,6 +12,9 @@ struct sets_t {
 /** Inits an empty set */
 void sets_init(struct sets_t* s);
 
+/** Inits a list of empty sets */
+void sets_list_init(struct sets_t s[], const int nb);
+
 /** Returns the number places in a set */
 int sets_get_nb(const struct sets_t* set);
 

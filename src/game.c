@@ -6,13 +6,13 @@
 
 #define UNIT_MAX WIDTH*HEIGHT
 
-void print_game(struct world_t* world){
-    
+void print_game(const struct world_t* world)
+{
     for(int i=0; i<UNIT_MAX; i++){
         switch (world_get_sort(world,i))
         {
         case PAWN:
-            if (world_get(world,i) == BLACK)
+            if (world_get(world, i) == BLACK)
                 printf("B\t");
             else
                 printf("W\t");
@@ -24,7 +24,6 @@ void print_game(struct world_t* world){
         }
         if ((i%10)==9)
             printf("\n\n\n");
-        
     }
     printf("\n");
 }

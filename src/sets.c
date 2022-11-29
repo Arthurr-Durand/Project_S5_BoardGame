@@ -14,6 +14,12 @@ void sets_init(struct sets_t* s)
     s->l[0] = UINT_MAX;
 }
 
+void sets_list_init(struct sets_t s[], const int nb)
+{
+    for (int i = 0; i < nb; ++i) 
+        sets_init(&s[i]);
+}
+
 int sets_get_nb(const struct sets_t* set)
 {
     int i = 0;
@@ -25,7 +31,6 @@ int sets_get_at_nb(const struct sets_t* set, const int nb)
 {
     return (nb < sets_get_nb(set)) ? set->l[nb] : UINT_MAX;
 }
-
 
 void sets_add(struct sets_t* s, int p)
 {
@@ -40,7 +45,6 @@ int sets_get_random(struct sets_t* s)
 {
     return s->l[rand()%sets_get_nb(s)];
 }
-
 
 void sets_set_sort(struct sets_t* set, struct world_t* world, enum sort_t sort)
 {
