@@ -8,6 +8,7 @@
 #include "sets.h"
 #include "pawns.h"
 #include "players.h"
+#include "game.h"
 
 void str_test(const char str1[], const char str2[])
 {
@@ -167,6 +168,12 @@ void test_players_init()
     int_test(players[1].index, 1);
 }
 
+void test_print_game(){
+    puts("\t le JEU :");
+    struct world_t* world = world_init();
+    print_game(world);
+}
+
 int main()
 {
     puts("test_geometry.c :");
@@ -192,6 +199,9 @@ int main()
 
     puts("test_players.c");
     test_players_init();
+
+    puts("test_game.c :");
+    test_print_game();
 
     return 0;
 }
