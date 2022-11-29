@@ -57,8 +57,8 @@ void sets_set_initial_sets(int nb_players, struct sets_t* sets[])
     for(int i = 0; i < nb_players; i++) {
         int p = 0;
         for (int k =((HEIGHT/nb_players)*WIDTH); k < (((HEIGHT/nb_players)+1)*WIDTH); k++){
-            printf("%d\n",k);
-            sets_add(sets[i], (i*WIDTH*nb_players)+p);
+            printf("%d\n",i);
+            sets_add(sets[i], ((i*WIDTH*HEIGHT)/nb_players)+p);
             p+=1;
         }
     }
