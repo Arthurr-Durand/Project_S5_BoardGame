@@ -55,5 +55,14 @@
 	- Créer un main pour les lier tous 
 	- Tester une partie 
 	- Finir ACHIEVE0
+	
+[ACHIEV0][29/11/2022]
+	- Correction d'un bog majeur 
+	- Création affichage du plateau 
+	- Création du main 
+	- Mise en place du jeu 
 
+	[OBJECTIVES]
+	- Finir enfin l'achiev0 
+	- Lancer une partie 
 	
