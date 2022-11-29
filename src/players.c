@@ -7,18 +7,16 @@
 
 struct players_t;
 
-struct players_t* _player_init(int idx)
+void _player_init(struct players_t* player, int idx)
 {
-    static struct players_t player;
-    player.index = idx;
-    player.pawns_nb = 0;
-    return &player;
+    player->index = idx;
+    player->pawns_nb = 0;
 }
 
-void players_init(struct players_t* players[], int nb_players)
+void players_init(struct players_t players[], int nb_players)
 {
     for (int i = 0; i < nb_players; ++i)
-        players[i] = _player_init(i);
+        _player_init(&players[i], i);
 }
 
 void players_add_pawn(struct players_t* player, struct pawns_t* pawn)

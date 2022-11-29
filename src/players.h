@@ -13,7 +13,7 @@ struct players_t {
 };
 
 /** Inits a list of players */
-void players_init(struct players_t* players[], int nb_players);
+void players_init(struct players_t players[], int nb_players);
 
 /** Adds a pawn to a player */
 void players_add_pawn(struct players_t* player, struct pawns_t* pawn);
