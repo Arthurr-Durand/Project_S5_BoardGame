@@ -43,7 +43,10 @@ void pawns_get_all_moves(struct sets_t* places, struct pawns_t* piece, struct wo
     }
 }
 
-void pawns_moves(struct pawns_t* piece,int idx)
+void pawns_moves(struct world_t* world, struct pawns_t* pawn, int new_position)
 {
-    piece->idx=idx;
+    int position = pawns_get_position(pawn);
+    world_set_sort(world, position, NO_SORT);
+    pawn->idx = new_position;
+    world_set_sort(world, new_position, PAWN);
 }

@@ -24,6 +24,6 @@ int pawns_get_neighbors_nb(const struct neighbors_t neighbors);
 void pawns_get_all_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world);
 
 /** Move a Pawn */
-void pawns_moves(struct pawns_t* piece,int idx);
+void pawns_moves(struct world_t* world, struct pawns_t* pawn, int new_position);
 
 #endif // __PAWNS_H__

@@ -155,10 +155,18 @@ void test_pawns_all_moves()
 void test_pawns_move()
 {
     puts("\ttest_pawns_move:");
+    // init world and pawn
+    struct world_t* world = world_init();
     struct pawns_t pawn;
-    pawns_init(&pawn, 2,0);
-    pawns_moves(&pawn,69);
-    int_test(pawn.idx,69);
+    pawns_init(&pawn, 1, 0);
+    world_set_sort(world, 0, PAWN);
+    int_test(world_get_sort(world, 0), PAWN);
+    int_test(world_get_sort(world, 69), NO_SORT);
+    // move the pawn from 0 to 69
+    pawns_moves(world, &pawn, 69);
+    int_test(world_get_sort(world, 0), NO_SORT);
+    int_test(world_get_sort(world, 69), PAWN);
+    int_test(pawns_get_position(&pawn), 69);
 }
 
 void test_players_init()

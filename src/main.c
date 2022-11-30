@@ -50,10 +50,20 @@ int main()
 
         // Get random pawn
         struct pawns_t* pawn = players_get_random_pawn(&players[turn]);
-        printf("> Player %d choose to move the pawn at the case %d.\n", turn, pawns_get_position(pawn));
+
         // Get random free place
+        struct sets_t set;
+        sets_init(&set);
+        pawns_get_all_moves(&set, pawn, world);
+        int new_place = sets_get_random_place(&set);
         
         // Move the pawn
+        pawns_moves(world, pawn, new_place);
+        printf("> Player %d move the pawn from the case %d to the case %d.\n", turn, pawns_get_position(pawn), new_place);
+
+        // Print the current world
+        puts("> Print game state .\n");
+        print_game(world);
         
         // Checl stop conditions
         
@@ -62,7 +72,6 @@ int main()
         if (round > 10)
             game = 0;
     }
-
 
     return 0;
 }

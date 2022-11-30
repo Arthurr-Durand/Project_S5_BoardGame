@@ -10,19 +10,25 @@
 void print_game(const struct world_t* world)
 {
     for(int i = 0; i < UNIT_MAX; i++) {
-        switch (world_get_sort(world,i))
-        {
+        switch (world_get_sort(world,i)) {
             case PAWN:
-                if (world_get(world, i) == BLACK)
-                    printf("B ");
-                else
-                    printf("W ");
+                switch (world_get(world, i)) {
+                    case BLACK:
+                        printf("B ");
+                        break;
+                    case WHITE:
+                        printf("W ");
+                        break;
+                    default:
+                        printf("N ");
+                        break;
+                }
                 break;
             default:
-                printf("0 ");
+                printf(". ");
                 break;
         }
-        if ((i%10)==9)
+        if (i%10 == 9)
             printf("\n");
     }
     printf("\n");
