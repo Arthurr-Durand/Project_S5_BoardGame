@@ -19,19 +19,19 @@ void sets_list_init(struct sets_t s[], const int nb);
 int sets_get_nb(const struct sets_t* set);
 
 /** Returns the value at nb */
-int sets_get_at_nb(const struct sets_t* set, const int nb);
+int sets_get_place_at(const struct sets_t* set, const int nb);
 
 /** Adds a place to a set */
 void sets_add(struct sets_t* set, int nb);
 
 /** Returns a random place in a set */
-int sets_get_random(struct sets_t* set);
+int sets_get_random_place(struct sets_t* set);
 
 /** Sets the sort of all places in a set */
-void sets_set_sort(struct sets_t* set, struct world_t* world, enum sort_t sort);
+void sets_set_sorts(struct sets_t* set, struct world_t* world, enum sort_t sort);
 
 /** Sets the color of all places in a set */
-void sets_set_color(struct sets_t* set, struct world_t* world, enum color_t color);
+void sets_set_colors(struct sets_t* set, struct world_t* world, enum color_t color);
 
 /** Sets the initial set for a number of players */
 void sets_set_initial_sets(int nb_players, struct sets_t sets[]);

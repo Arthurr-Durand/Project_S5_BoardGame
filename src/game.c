@@ -5,7 +5,7 @@
 #include "world.h"
 #include "geometry.h"
 
-#define UNIT_MAX WIDTH*HEIGHT
+#define UNIT_MAX WORLD_SIZE
 
 void print_game(const struct world_t* world)
 {
@@ -14,16 +14,16 @@ void print_game(const struct world_t* world)
         {
             case PAWN:
                 if (world_get(world, i) == BLACK)
-                    printf("B\t");
+                    printf("B ");
                 else
-                    printf("W\t");
+                    printf("W ");
                 break;
             default:
-                printf("<3\t");
+                printf("0 ");
                 break;
         }
         if ((i%10)==9)
-            printf("\n\n\n");
+            printf("\n");
     }
     printf("\n");
 }

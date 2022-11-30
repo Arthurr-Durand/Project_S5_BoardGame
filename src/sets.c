@@ -27,7 +27,7 @@ int sets_get_nb(const struct sets_t* set)
     return i;
 }
 
-int sets_get_at_nb(const struct sets_t* set, const int nb)
+int sets_get_place_at(const struct sets_t* set, const int nb)
 {
     return (nb < sets_get_nb(set)) ? set->l[nb] : UINT_MAX;
 }
@@ -41,18 +41,18 @@ void sets_add(struct sets_t* s, int p)
     }
 }
 
-int sets_get_random(struct sets_t* s)
+int sets_get_random_place(struct sets_t* s)
 {
     return s->l[rand()%sets_get_nb(s)];
 }
 
-void sets_set_sort(struct sets_t* set, struct world_t* world, enum sort_t sort)
+void sets_set_sorts(struct sets_t* set, struct world_t* world, enum sort_t sort)
 {
     for (int i = 0; i < sets_get_nb(set); ++i)
         world_set_sort(world, i, sort);
 }
 
-void sets_set_color(struct sets_t* set, struct world_t* world, enum color_t color) 
+void sets_set_colors(struct sets_t* set, struct world_t* world, enum color_t color) 
 {
     for (int i = 0; i < sets_get_nb(set); ++i)
         world_set(world, i, color);

@@ -89,11 +89,11 @@ void test_sets()
     int_test(sets_get_nb(&set), 2);
     int_test(world_get(world, 0), NO_COLOR);
     // change color of set to BLACK
-    sets_set_color(&set, world, BLACK);
+    sets_set_colors(&set, world, BLACK);
     int_test(world_get(world, 0), BLACK);
     int_test(world_get_sort(world, 0), NO_SORT);
     // change sort of set to PAWN
-    sets_set_sort(&set, world, PAWN);
+    sets_set_sorts(&set, world, PAWN);
     int_test(world_get_sort(world, 0), PAWN);
 
 }
@@ -118,13 +118,16 @@ void test_sets_set_initial_sets()
 void test_sets_get_random(){
 
     puts("\ttest_sets_get_random :");
+    // world init
     struct world_t* world = world_init();
+    // pawns init
     struct pawns_t pawn;
     pawns_init(&pawn, 2, 0);
     struct sets_t set;
-    pawns_all_moves(&set, &pawn, world);
-    for(int i=0; i<10;i++)
-        int_test(sets_get_random(&set),0);
+    sets_init(&set);
+    pawns_get_all_moves(&set, &pawn, world);
+    for (int i = 0; i < 10; ++i)
+        int_test(sets_get_random_place(&set), 0);
 }
 
 void test_pawns_get_neighbors_nb()
@@ -143,10 +146,10 @@ void test_pawns_all_moves()
     pawns_init(&pawn, 2, 0);
     struct sets_t set;
     sets_init(&set);
-    pawns_all_moves(&set, &pawn, world);
-    int_test(sets_get_at_nb(&set,2),10);
-    int_test(sets_get_at_nb(&set,14),99);
-    int_test(sets_get_at_nb(&set,8),1);
+    pawns_get_all_moves(&set, &pawn, world);
+    int_test(sets_get_place_at(&set,2),10);
+    int_test(sets_get_place_at(&set,14),99);
+    int_test(sets_get_place_at(&set,8),1);
 }
 
 void test_pawns_move()
@@ -169,7 +172,7 @@ void test_players_init()
 }
 
 void test_print_game(){
-    puts("\t le JEU :");
+    puts("\ttest_print_game :");
     struct world_t* world = world_init();
     print_game(world);
 }

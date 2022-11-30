@@ -13,5 +13,4 @@ void print_game(const struct world_t* world);
 // void game_turn(struct players_t player, struct world_t* world);
  */
 
-
 #endif // __GAME_H__
