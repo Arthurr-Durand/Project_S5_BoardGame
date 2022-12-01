@@ -122,7 +122,7 @@ void test_sets_get_random(){
     struct world_t* world = world_init();
     // pawns init
     struct pawns_t pawn;
-    pawns_init(&pawn, 2, 0);
+    pawns_init(&pawn, 2, WHITE, 0);
     struct sets_t set;
     sets_init(&set);
     pawns_get_all_moves(&set, &pawn, world);
@@ -143,7 +143,7 @@ void test_pawns_all_moves()
     struct world_t* world = world_init();
     // pawns init
     struct pawns_t pawn;
-    pawns_init(&pawn, 2, 0);
+    pawns_init(&pawn, 2, WHITE, 0);
     struct sets_t set;
     sets_init(&set);
     pawns_get_all_moves(&set, &pawn, world);
@@ -158,14 +158,19 @@ void test_pawns_move()
     // init world and pawn
     struct world_t* world = world_init();
     struct pawns_t pawn;
-    pawns_init(&pawn, 1, 0);
+    pawns_init(&pawn, 1, WHITE, 0);
     world_set_sort(world, 0, PAWN);
+    world_set(world, 0, pawn.color);
     int_test(world_get_sort(world, 0), PAWN);
+    int_test(world_get(world, 0), WHITE);
     int_test(world_get_sort(world, 69), NO_SORT);
+    int_test(world_get(world, 69), NO_COLOR);
     // move the pawn from 0 to 69
     pawns_moves(world, &pawn, 69);
     int_test(world_get_sort(world, 0), NO_SORT);
+    int_test(world_get(world, 0), NO_COLOR);
     int_test(world_get_sort(world, 69), PAWN);
+    int_test(world_get(world, 69), WHITE);
     int_test(pawns_get_position(&pawn), 69);
 }
 

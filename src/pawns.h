@@ -8,11 +8,12 @@
 /** A struct representing a piece */
 struct pawns_t {
     int max_dep;
-    int idx;
+    enum color_t color;
+    int position;
 };
 
 /** Inits a pawn */
-void pawns_init(struct pawns_t* pawn, int max_dep, int idx);
+void pawns_init(struct pawns_t* pawn, int max_dep, enum color_t color, int position);
 
 /** Returns the position of a pawn */
 int pawns_get_position(const struct pawns_t* pawn);

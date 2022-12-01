@@ -46,7 +46,7 @@ int main()
 
         // Turn
         turn = (turn+1)%PLAYERS_NB;
-        printf("> Turn of player n°%d\n", turn);
+        printf("> Turn of player n°%d (color %d)\n", turn+1, players[turn].color);
 
         // Get random pawn
         struct pawns_t* pawn = players_get_random_pawn(&players[turn]);
@@ -65,11 +65,11 @@ int main()
         puts("> Print game state .\n");
         print_game(world);
         
-        // Checl stop conditions
+        // Check stop conditions TO DO
         
         // End round
         printf("> End of round %d.\n\n", round);
-        if (round > 10)
+        if (round > 15)
             game = 0;
     }
 

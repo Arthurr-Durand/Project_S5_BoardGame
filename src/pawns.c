@@ -10,15 +10,16 @@
 
 struct pawns_t;
 
-void pawns_init(struct pawns_t* pawn, int max_dep, int idx)
+void pawns_init(struct pawns_t* pawn, int max_dep, enum color_t color, int position)
 {
     pawn->max_dep = max_dep;
-    pawn->idx = idx;
+    pawn->color = color;
+    pawn->position = position;
 }
 
 int pawns_get_position(const struct pawns_t* pawn)
 {
-    return pawn->idx;
+    return pawn->position;
 }
 
 int pawns_get_neighbors_nb(const struct neighbors_t neighbors)
@@ -32,9 +33,9 @@ int pawns_get_neighbors_nb(const struct neighbors_t neighbors)
 void pawns_get_all_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world)
 {   
     int idx, d;
-    for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors(piece->idx))); ++k) {
-        idx = get_neighbors(piece->idx).n[k].i;
-        d = get_neighbors(piece->idx).n[k].d;
+    for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors(piece->position))); ++k) {
+        idx = get_neighbors(piece->position).n[k].i;
+        d = get_neighbors(piece->position).n[k].d;
         for (int i=0;i<piece->max_dep;i++) {
             if (!world_get_sort(world, idx))
                 sets_add(places, idx);
@@ -47,6 +48,8 @@ void pawns_moves(struct world_t* world, struct pawns_t* pawn, int new_position)
 {
     int position = pawns_get_position(pawn);
     world_set_sort(world, position, NO_SORT);
-    pawn->idx = new_position;
+    world_set(world, position, NO_COLOR);
+    pawn->position = new_position;
     world_set_sort(world, new_position, PAWN);
+    world_set(world, new_position, pawn->color);
 }

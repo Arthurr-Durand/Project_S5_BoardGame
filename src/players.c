@@ -7,22 +7,22 @@
 
 struct players_t;
 
-void _player_init(struct players_t* player, int idx)
+void _player_init(struct players_t* player, int index, enum color_t color)
 {
-    player->index = idx;
+    player->index = index;
     player->pawns_nb = 0;
+    player->color = color;
 }
 
 void players_init(struct players_t players[], int nb_players)
 {
     for (int i = 0; i < nb_players; ++i)
-        _player_init(&players[i], i);
+        _player_init(&players[i], i, i%(MAX_COLOR-1)+1);
 }
 
-void players_add_pawn(struct players_t* player, int max_dep, int position)
+int players_get_index(const struct players_t* player)
 {
-    pawns_init(&player->pawns[players_get_nb_pawns(player)], max_dep, position);
-    player->pawns_nb++;
+    return player->index;
 }
 
 int players_get_nb_pawns(const struct players_t* player)
@@ -30,6 +30,11 @@ int players_get_nb_pawns(const struct players_t* player)
     return player->pawns_nb;
 }
 
+void players_add_pawn(struct players_t* player, int max_dep, int position)
+{
+    pawns_init(&player->pawns[players_get_nb_pawns(player)], max_dep, player->color, position);
+    player->pawns_nb++;
+}
 
 void players_set_initial_pawns(struct world_t* world, struct players_t players[], const int nb_players, const struct sets_t sets[], int max_dep)
 {
@@ -39,6 +44,7 @@ void players_set_initial_pawns(struct world_t* world, struct players_t players[]
             int position = sets_get_place_at(&sets[i], y);
             players_add_pawn(&players[i], max_dep, position);
             world_set_sort(world, position, PAWN);
+            world_set(world, position, players[i].color);
         }
     }
 }
