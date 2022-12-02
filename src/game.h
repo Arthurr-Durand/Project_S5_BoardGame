@@ -9,7 +9,7 @@
 /** Print the current world */
 void print_game(const struct world_t* world);
 
-/** Check the winning conditions */
+/** Check the simple winning conditions */
 int game_winning_cond(struct players_t* player, struct sets_t set[], struct pawns_t* pawn,int nb_players);
 
 /** Check the complex winning conditions */

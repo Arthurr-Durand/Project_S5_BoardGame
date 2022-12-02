@@ -22,6 +22,9 @@ int players_get_index(const struct players_t* player);
 /** Returns the number of player's pawns */
 int players_get_nb_pawns(const struct players_t* player);
 
+/** Return the color of a player */
+enum color_t players_get_color(const struct players_t* players);
+
 /** Adds a pawn to a player */
 void players_add_pawn(struct players_t* player, int max_dep, int position);
 
