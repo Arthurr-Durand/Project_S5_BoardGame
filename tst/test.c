@@ -64,6 +64,7 @@ void test_get_neighbor()
     int_test(get_neighbor(46, NWEST), 35);
     int_test(get_neighbor(99, SWEST), 8);
 }
+
 void test_get_neighbors()
 {
     puts("\ttest_get_neighbors :");
@@ -128,8 +129,9 @@ void test_sets_get_random(){
     sets_init(&set);
     pawns_get_all_moves(&set, &pawn, world);
     for (int i = 0; i < 10; ++i)
-        int_test(sets_get_random_place(&set), 0);
+        printf("\t\t> %d\n", sets_get_random_place(&set));
 }
+
 void test_set_appartient_sets(){
     puts("\ttest_set_appartient_sets");
     struct sets_t set;

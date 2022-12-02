@@ -12,10 +12,10 @@ void print_game(const struct world_t* world)
             case PAWN:
                 switch (world_get(world, i)) {
                     case BLACK:
-                        printf("\u25cf ");
+                        printf("\u25cb ");
                         break;
                     case WHITE:
-                        printf("\u25cb ");
+                        printf("\u25cf ");
                         break;
                     default:
                         printf("N ");
@@ -53,4 +53,3 @@ int game_complex_winning_cond(struct players_t* player, struct sets_t set[],int 
     }
     return 1;
 }
-
