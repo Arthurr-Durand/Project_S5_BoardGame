@@ -24,6 +24,9 @@ int sets_get_place_at(const struct sets_t* set, const int nb);
 /** Adds a place to a set */
 void sets_add(struct sets_t* set, int nb);
 
+/**  Return Bool  */
+int set_appartient_sets(struct sets_t set[],int idx);
+
 /** Returns a random place in a set */
 int sets_get_random_place(struct sets_t* set);
 
@@ -35,5 +38,6 @@ void sets_set_colors(struct sets_t* set, struct world_t* world, enum color_t col
 
 /** Sets the initial set for a number of players */
 void sets_set_initial_sets(int nb_players, struct sets_t sets[]);
+
 
 #endif // __SETS_H__

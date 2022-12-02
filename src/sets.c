@@ -41,6 +41,16 @@ void sets_add(struct sets_t* s, int p)
     }
 }
 
+int set_appartient_sets(struct sets_t* set,int idx)
+{
+    for (int i=0;set->l[i] != UINT_MAX; ++i)
+        if (set->l[i]==idx)
+            return 1;
+    return 0;
+
+}
+
+
 int sets_get_random_place(struct sets_t* s)
 {
     return s->l[rand()%sets_get_nb(s)];
