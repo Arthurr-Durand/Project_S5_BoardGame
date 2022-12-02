@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 #include "game.h"
 #include "world.h"
@@ -13,6 +14,9 @@
 
 int main()
 {
+    // Init rand
+    srand((unsigned int) time(NULL));
+
     // Init world
     puts("[-] Init world.\n");
     struct world_t* world = world_init();
@@ -28,7 +32,7 @@ int main()
     sets_list_init(sets, PLAYERS_NB);
     sets_set_initial_sets(PLAYERS_NB, sets);
 
-    //Init players pawns
+    // Init players pawns
     puts("[-] Init players pawns.\n");
     players_set_initial_pawns(world, players, PLAYERS_NB, sets, MAX_DEP);
 
@@ -42,7 +46,7 @@ int main()
     while (game) {
         // Round
         round++;
-        printf("> Round %d:\n", round);
+        printf("=============== Round %d ================\n", round);
 
         // Turn
         turn = (turn+1)%PLAYERS_NB;
@@ -68,7 +72,7 @@ int main()
         // Check stop conditions TO DO
         
         // End round
-        printf("> End of round %d.\n\n", round);
+        printf("============ End of round %d ============\n\n", round);
         if (round > 15)
             game = 0;
     }

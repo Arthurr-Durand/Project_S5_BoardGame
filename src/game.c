@@ -2,10 +2,6 @@
 #include <stdio.h>
 
 #include "game.h"
-#include "world.h"
-#include "geometry.h"
-#include "players.h"
-#include "sets.h"
 
 #define UNIT_MAX WORLD_SIZE
 
@@ -16,10 +12,10 @@ void print_game(const struct world_t* world)
             case PAWN:
                 switch (world_get(world, i)) {
                     case BLACK:
-                        printf("B ");
+                        printf("\u25cf ");
                         break;
                     case WHITE:
-                        printf("W ");
+                        printf("\u25cb ");
                         break;
                     default:
                         printf("N ");
@@ -27,23 +23,21 @@ void print_game(const struct world_t* world)
                 }
                 break;
             default:
-                printf(". ");
+                printf("\u00b7 ");
                 break;
         }
-        if (i%10 == 9)
+        if (i%WIDTH == WIDTH-1)
             printf("\n");
     }
-    printf("\n");
 }
-
 
 int game_winning_cond(struct players_t* player, struct sets_t set[], struct pawns_t* pawn,int nb_players)
 {   
-    int i=(players_get_index(player)+1)%nb_players;
-    while (i!=players_get_index(player)){
-        if (set_appartient_sets(&set[i],pawns_get_position(pawn)))
+    int i = (players_get_index(player)+1)%nb_players-1;
+    while (i != players_get_index(player)) {
+        if (set_appartient_sets(&set[i], pawns_get_position(pawn)))
             return 1;
-        i=(i+1)%nb_players;
+        i = (i+1)%nb_players;
     }
     return 0;
 }

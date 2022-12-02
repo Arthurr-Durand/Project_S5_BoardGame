@@ -2,15 +2,14 @@
 #define __GAME_H__
 
 #include "world.h"
+#include "players.h"
+#include "sets.h"
+#include "pawns.h"
 
 /** Print the current world */
 void print_game(const struct world_t* world);
 
-/* 
-// void winning_cond(const struct world_t* world, int nb_players, struct sets_t set[], struct players_t player);
-
-
-// void game_turn(struct players_t player, struct world_t* world);
- */
+/** Check the winning conditions */
+int game_winning_cond(struct players_t* player, struct sets_t set[], struct pawns_t* pawn,int nb_players);
 
 #endif // __GAME_H__
