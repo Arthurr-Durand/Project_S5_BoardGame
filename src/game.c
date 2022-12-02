@@ -33,7 +33,7 @@ void print_game(const struct world_t* world)
 
 int game_winning_cond(struct players_t* player, struct sets_t set[], struct pawns_t* pawn,int nb_players)
 {   
-    int i = (players_get_index(player)+1)%nb_players-1;
+    int i = (players_get_index(player)+1)%nb_players;
     while (i != players_get_index(player)) {
         if (set_appartient_sets(&set[i], pawns_get_position(pawn)))
             return 1;

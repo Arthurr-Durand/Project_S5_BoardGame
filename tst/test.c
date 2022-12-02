@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "geometry.h"
 #include "world.h"
@@ -129,6 +130,20 @@ void test_sets_get_random(){
     for (int i = 0; i < 10; ++i)
         int_test(sets_get_random_place(&set), 0);
 }
+void test_set_appartient_sets(){
+    puts("\ttest_set_appartient_sets");
+    struct sets_t set;
+    sets_init(&set);
+    for(int i=0; i<10;i++)
+        sets_add(&set,i);
+    int_test(set_appartient_sets(&set,9),1);
+    int_test(set_appartient_sets(&set,100),0);
+    int_test(set_appartient_sets(&set,-15),0);
+    int_test(set_appartient_sets(&set,6),1);
+    int_test(set_appartient_sets(&set,200),0);
+    int_test(set_appartient_sets(&set,4),1);
+    int_test(set_appartient_sets(&set,1),1);
+}
 
 void test_pawns_get_neighbors_nb()
 {
@@ -190,8 +205,28 @@ void test_print_game(){
     print_game(world);
 }
 
+void test_game_winning_cond()
+{
+    puts("\ttest_game_winning_cond :");
+    struct world_t* world = world_init();
+    struct players_t players[3];
+    players_init(players, 3);
+    struct sets_t sets[3];
+    sets_list_init(sets, 3);
+    sets_set_initial_sets(3, sets);
+    players_set_initial_pawns(world, players, 3, sets, 1);
+    int_test(game_winning_cond(&players[1], sets, &players[1].pawns[0],3), 0);
+    pawns_moves(world,&players[1].pawns[0],1);
+    pawns_moves(world,&players[0].pawns[1],15);
+    int_test(game_winning_cond(&players[1], sets, &players[1].pawns[0],2), 1);
+}
+
+
+
 int main()
 {
+    srand((unsigned int) time(NULL));
+
     puts("test_geometry.c :");
     test_place_to_string();
     test_dir_to_string();
@@ -207,6 +242,7 @@ int main()
     test_sets();
     test_sets_set_initial_sets();
     test_sets_get_random();
+    test_set_appartient_sets();
 
     puts("test_pawns.c :");
     test_pawns_get_neighbors_nb();
@@ -218,6 +254,7 @@ int main()
 
     puts("test_game.c :");
     test_print_game();
+    test_game_winning_cond();
 
     return 0;
 }
