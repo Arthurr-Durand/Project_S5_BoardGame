@@ -26,9 +26,9 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d) // Fonction faite pour
             if (d == NEAST)
                 return ((HEIGHT-1)*WIDTH);
             break;
-        case 1+((HEIGHT-1)*WIDTH):
+        case ((HEIGHT-1)*WIDTH):
             if (d == SWEST)
-                return WIDTH;
+                return WIDTH-1;
             break;
         case WORLD_SIZE-1:
             if (d == SEAST)
@@ -54,17 +54,17 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d) // Fonction faite pour
                 return (idx-1)%WORLD_SIZE;
             return idx-(WIDTH+d-3);  
         case SEAST:
-            if (idx > (HEIGHT*(WIDTH-1))) //si bord inf
+            if (idx >= (HEIGHT*(WIDTH-1))) //si bord inf
                 return idx+1-(HEIGHT-1)*WIDTH;
             else if (idx%WIDTH==9)
                 return (idx+1)%WORLD_SIZE;
             return idx+(WIDTH-d-3);
         case SOUTH:
-            if (idx > (HEIGHT*(WIDTH-1)))
+            if (idx >= (HEIGHT*(WIDTH-1)))
                 return idx-(HEIGHT-1)*WIDTH;
             return idx+(WIDTH-d-3);
         case SWEST:
-            if (idx > (HEIGHT*(WIDTH-1)))
+            if (idx >= (HEIGHT*(WIDTH-1)))
                 return idx-1-(HEIGHT-1)*WIDTH;
             else if (idx%WIDTH==0)
                 return (idx+(2*WIDTH)-1)%WORLD_SIZE;
