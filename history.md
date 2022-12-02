@@ -65,4 +65,15 @@
 	[OBJECTIVES]
 	- Finir enfin l'achiev0 
 	- Lancer une partie 
-	
+
+[ACHIEV0&1][02/12/2022]
+	- Correction du bog 101
+	- Conditions de victoire (simple et complexe)
+	- Correction du model de randomisation 
+	- Lancement de plusieurs parties complettes 
+	- Décoration du plateau de jeu 
+	- Fin de l'achiev0 
+	- Implémentation du déplacement de la tours 
+
+	[OBJECTIVES]
+	- Finir ACHIEV1 

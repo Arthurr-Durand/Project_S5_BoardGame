@@ -24,6 +24,9 @@ int pawns_get_neighbors_nb(const struct neighbors_t neighbors);
 /** Returns all free neighbors */
 void pawns_get_all_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world);
 
+/** Returns all free tower's neighbors */
+void pawns_get_all_tower_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world);
+
 /** Move a Pawn */
 void pawns_moves(struct world_t* world, struct pawns_t* pawn, int new_position);
 
