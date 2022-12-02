@@ -41,3 +41,16 @@ int game_winning_cond(struct players_t* player, struct sets_t set[], struct pawn
     }
     return 0;
 }
+
+int game_complex_winning_cond(struct players_t* player, struct sets_t set[],int nb_players)
+{   
+    int w=0;
+    int p=players_get_nb_pawns(player);
+    for(int k=0;k<p;k++){
+        w=game_winning_cond(player,set,&player->pawns[k],nb_players);
+        if (w==0)
+            return 0;
+    }
+    return 1;
+}
+
