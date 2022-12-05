@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <getopt.h>
 
 #include "game.h"
 #include "world.h"
@@ -12,8 +13,7 @@
 #define PLAYERS_NB 2
 #define MAX_DEP 1
 
-// int main(int argc, char* argv[])
-int main()
+int main(int argc, char* argv[])
 {
     // Set options
     char* colors[] = {"No color", "Black", "White"};
@@ -22,7 +22,24 @@ int main()
     unsigned int rand_seed = (unsigned int)time(NULL);
 
     // Get options
-    // TO DO
+    int opts;
+    while ((opts = getopt(argc, argv, ":s:t:m:")) != -1) {
+        switch (opts) {
+        case 's':
+            rand_seed = atoi(optarg);
+            break;
+        case 't':
+            end_type = (optarg[0] == 'c') ? 1 : 0;
+            break;
+        case 'm':
+            max_rounds = atoi(optarg);
+        default:
+            break;
+        }
+    }
+    printf("[-] Random seed set to : %d.\n", rand_seed);
+    printf("[-] Maximum number of rounds set to : %d.\n", max_rounds);
+    printf("[-] Victory type is set to : %s.\n\n", end_type ? "complex" : "simple");
     
     // Init rand
     srand(rand_seed);
@@ -49,6 +66,7 @@ int main()
     // Print the current world
     puts("[-] Print current world.\n");
     print_game(world);
+    printf("\n");
 
     // Game start
     unsigned int game = 1, round = 0, turn = rand()%PLAYERS_NB;
