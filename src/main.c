@@ -11,8 +11,9 @@
 
 #define UNIT_MAX WORLD_SIZE
 #define PLAYERS_NB 2
-#define MAX_DEP 2
-#define PAWN_TYPE ELEFUN
+#define STARTING_POSITION 1 // 0 : classic, 1 : BATTLEGROUND
+#define MAX_DEP 10
+#define PAWN_TYPE TOWER
 
 int main(int argc, char* argv[])
 {
@@ -58,7 +59,10 @@ int main(int argc, char* argv[])
     puts("[-] Init players sets.\n");
     struct sets_t sets[PLAYERS_NB];
     sets_list_init(sets, PLAYERS_NB);
-    sets_set_initial_sets(PLAYERS_NB, sets);
+    if (STARTING_POSITION)
+        sets_set_initial_sets_battleground(PLAYERS_NB, sets);
+    else
+        sets_set_initial_sets(PLAYERS_NB, sets);
 
     // Init players pawns
     puts("[-] Init players pawns.\n");
@@ -85,20 +89,21 @@ int main(int argc, char* argv[])
         int old_place;
         int new_place;
         struct sets_t set;
-        int p=0;
-        while(p<1){
-        // Get random pawn
+        int p = 0;
+        while (!p) {
+            // Get random pawn
             pawn = players_get_random_pawn(&players[turn]);
 
-        // Get random free place 
+            // Get random free place 
             sets_init(&set);
             pawns_get_all_moves(&set, pawn, world);
-            if (sets_get_nb(&set)!=0){
-            old_place = pawns_get_position(pawn);
-            new_place = sets_get_random_place(&set);
-            p++;
+            if (sets_get_nb(&set) != 0) {
+                old_place = pawns_get_position(pawn);
+                new_place = sets_get_random_place(&set);
+                p = 1;
             }
         }
+
         // Move the pawn
         pawns_moves(world, pawn, new_place);
         printf("> Player %d move the pawn from the case %d to the case %d.\n", turn+1, old_place, new_place);
