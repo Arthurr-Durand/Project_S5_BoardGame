@@ -209,6 +209,23 @@ void test_pawns_get_all_tower_moves()
     int_test(sets_get_place_at(&set,8),90);  
 }
 
+void test_pawns_get_all_elefun_moves()
+{
+    puts("\ttest_pawns_all_moves:");
+    // world init
+    struct world_t* world = world_init();
+    // pawns init
+    struct pawns_t tower;
+    pawns_init(&tower, 2, WHITE, TOWER, 90);
+    struct sets_t set;
+    sets_init(&set);
+    pawns_get_all_elefun_moves(&set, &tower, world);
+    for (int i =0;i<sets_get_nb(&set);i++)
+        printf("%d\n",sets_get_place_at(&set,i));
+    // int_test(sets_get_place_at(&set,2),30);
+    // int_test(sets_get_place_at(&set,14),5);
+    // int_test(sets_get_place_at(&set,8),90);
+}
 
 void test_players_init()
 {
@@ -270,6 +287,7 @@ int main()
     test_pawns_all_moves();
     test_pawns_move();
     test_pawns_get_all_tower_moves();
+    test_pawns_get_all_elefun_moves();
 
     puts("test_players.c");
     test_players_init();
