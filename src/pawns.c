@@ -56,29 +56,26 @@ void _pawns_get_all_tower_moves(struct sets_t* places, struct pawns_t* piece, st
     for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors(piece->position))); ++k) {
         idx = get_neighbors(piece->position).n[k].i;
         d = get_neighbors(piece->position).n[k].d;
-        switch (d)
-        {
-        case EAST:
-        case WEST:
-        case SOUTH:
-        case NORTH:
-            for (int i=0;i<piece->max_dep;i++) {
-            if (world_get_sort(world, idx))
+        switch (d) {
+            case EAST:
+            case WEST:
+            case SOUTH:
+            case NORTH:
+                for (int i = 0; i < piece->max_dep; i++) {
+                    if (world_get_sort(world, idx))
+                        break;
+                    else
+                        sets_add(places, idx);
+                    idx = get_neighbor(idx,d);
+                }
                 break;
-            else{
-                sets_add(places, idx);
-            }
-            idx = get_neighbor(idx,d);
-            }
-            break;
-        default:
-        break;
+            default:
+                break;
         }
-        
-        
     }
 }
-void pawns_get_all_elefun_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world)
+
+void _pawns_get_all_elefun_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world)
 {
     {   
     int idx, d;
@@ -115,8 +112,8 @@ void pawns_get_all_moves(struct sets_t* places, struct pawns_t* pawn, struct wor
         case TOWER:
             _pawns_get_all_tower_moves(places, pawn, world);
             break;
-        case KNIGHT:
-            _pawns_get_all_knight_moves(places, pawn, world);
+        case ELEFUN:
+            _pawns_get_all_elefun_moves(places, pawn, world);
             break;
         default:
             _pawns_get_all_simle_moves(places, pawn, world);

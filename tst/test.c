@@ -201,12 +201,12 @@ void test_pawns_get_all_tower_moves()
     pawns_init(&tower, 10, WHITE, TOWER, 0);
     struct sets_t set;
     sets_init(&set);
-    pawns_get_all_tower_moves(&set, &tower, world);
+    pawns_get_all_moves(&set, &tower, world);
     // for (int i =0;i<sets_get_nb(&set);i++)
     //     printf("%d\n",sets_get_place_at(&set,i));
     int_test(sets_get_place_at(&set,2),30);
     int_test(sets_get_place_at(&set,14),5);
-    int_test(sets_get_place_at(&set,8),90);  
+    int_test(sets_get_place_at(&set,8),90);
 }
 
 

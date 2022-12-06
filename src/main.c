@@ -100,7 +100,7 @@ int main(int argc, char* argv[])
         
         // Check stop conditions
         if ((!end_type && game_winning_cond(&players[turn], sets, pawn, PLAYERS_NB)) || (end_type && game_complex_winning_cond(&players[turn], sets, PLAYERS_NB))) {
-            printf("> Player %d win the %s game !\n", turn+1, (end_type ? "compex" : "simple"));
+            printf("\n> Player %d win the %s game !\n", turn+1, (end_type ? "compex" : "simple"));
             game = 0;
         }
         
@@ -108,8 +108,10 @@ int main(int argc, char* argv[])
         printf("============ End of round %d ============\n\n", round);
         
         // Check max round
-        if (round >= max_rounds)
+        if (round >= max_rounds) {
+            printf("> Maximum number of rounds reached, there is no winner !\n");
             game = 0;
+        }
     }
 
     return 0;
