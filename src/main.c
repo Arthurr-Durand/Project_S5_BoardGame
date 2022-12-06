@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 
     // Game start
     unsigned int game = 1, round = 0, turn = rand()%PLAYERS_NB;
-    
+
     while (game) {
         // Round
         round++;
@@ -80,16 +80,24 @@ int main(int argc, char* argv[])
         turn = (turn+1)%PLAYERS_NB;
         printf("> Turn of player n°%d (%s)\n", turn+1, colors[players_get_color(&players[turn])]);
 
-        // Get random pawn
-        struct pawns_t* pawn = players_get_random_pawn(&players[turn]);
-
-        // Get random free place
+        struct pawns_t* pawn;
+        int old_place;
+        int new_place;
         struct sets_t set;
-        sets_init(&set);
-        pawns_get_all_moves(&set, pawn, world);
-        int old_place = pawns_get_position(pawn);
-        int new_place = sets_get_random_place(&set);
-        
+        int p=0;
+        while(p<1){
+        // Get random pawn
+            pawn = players_get_random_pawn(&players[turn]);
+
+        // Get random free place 
+            sets_init(&set);
+            pawns_get_all_moves(&set, pawn, world);
+            if (sets_get_nb(&set)!=0){
+            old_place = pawns_get_position(pawn);
+            new_place = sets_get_random_place(&set);
+            p++;
+            }
+        }
         // Move the pawn
         pawns_moves(world, pawn, new_place);
         printf("> Player %d move the pawn from the case %d to the case %d.\n", turn+1, old_place, new_place);
