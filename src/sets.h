@@ -39,5 +39,7 @@ void sets_set_colors(struct sets_t* set, struct world_t* world, enum color_t col
 /** Sets the initial set for a number of players */
 void sets_set_initial_sets(int nb_players, struct sets_t sets[]);
 
+/** Sets the initial battle ground set for a number of player <4 */
+void sets_set_initial_sets_battleground(int nb_players, struct sets_t sets[]);
 
 #endif // __SETS_H__
