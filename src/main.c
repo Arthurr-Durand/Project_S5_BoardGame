@@ -11,7 +11,7 @@
 
 #define UNIT_MAX WORLD_SIZE
 #define PLAYERS_NB 2
-#define STARTING_POSITION 1 // 0 : classic, 1 : BATTLEGROUND
+#define STARTING_POSITION 0 // 0 : classic, 1 : BATTLEGROUND
 #define MAX_DEP 10
 #define PAWN_TYPE TOWER
 
@@ -89,7 +89,7 @@ int main(int argc, char* argv[])
         int old_place;
         int new_place;
         struct sets_t set;
-        int p = 0;
+        /* int p = 0;
         while (!p) {
             // Get random pawn
             pawn = players_get_random_pawn(&players[turn]);
@@ -102,6 +102,13 @@ int main(int argc, char* argv[])
                 new_place = sets_get_random_place(&set);
                 p = 1;
             }
+        } */
+        pawn = players_get_random_pawn(&players[turn]);
+        sets_init(&set);
+        pawns_get_all_moves(&set, pawn, world);
+        if (sets_get_nb(&set) != 0) {
+            old_place = pawns_get_position(pawn);
+            new_place = sets_get_random_place(&set);
         }
 
         // Move the pawn

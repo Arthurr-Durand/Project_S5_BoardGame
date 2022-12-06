@@ -6,8 +6,8 @@
 
 #define UNIT_MAX WORLD_SIZE
 
-static const char* pawn_strings[MAX_COLOR][MAX_TYPE] = {{"\u265d", "\u265c", "\u265e"},
-                                                    {"\u2657", "\u2656", "\u2658"}};
+static const char* pawn_strings[MAX_COLOR][MAX_TYPE] = {{"\u2657", "\u2656", "\u2658"},
+                                                    {"\u265d", "\u265c", "\u265e"}};
 
 void print_game(struct players_t players[], int nb_players)
 {
