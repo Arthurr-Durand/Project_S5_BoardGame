@@ -78,6 +78,36 @@ void _pawns_get_all_tower_moves(struct sets_t* places, struct pawns_t* piece, st
         
     }
 }
+void pawns_get_all_elefun_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world)
+{
+    {   
+    int idx, d;
+    for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors(piece->position))); ++k) {
+        idx = get_neighbors(piece->position).n[k].i;
+        d = get_neighbors(piece->position).n[k].d;
+        switch (d)
+        {
+        case EAST:
+        case WEST:
+        case SOUTH:
+        case NORTH:
+        for (int i=0;i<piece->max_dep;i++) {
+            if (!world_get_sort(world, idx))
+                sets_add(places, idx);
+            idx = get_neighbor(idx,d);
+        }
+            break;
+        default:
+            for (int i=0;i<piece->max_dep-1;i++) {
+                if (!world_get_sort(world, idx))
+                    sets_add(places, idx);
+                idx = get_neighbor(idx,d);
+        }
+        break;
+        }
+    }
+}
+}
 
 void pawns_get_all_moves(struct sets_t* places, struct pawns_t* pawn, struct world_t* world)
 {   
