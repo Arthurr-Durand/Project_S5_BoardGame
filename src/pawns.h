@@ -10,6 +10,7 @@ enum type_t {
     SIMPLE = 0,
     TOWER,
     ELEFUN,
+    MAX_TYPE,
 };
 
 /** A struct representing a piece */

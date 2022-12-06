@@ -22,14 +22,17 @@ int players_get_index(const struct players_t* player);
 /** Returns the number of player's pawns */
 int players_get_nb_pawns(const struct players_t* player);
 
+/** Returns the pawn of an index */
+struct pawns_t* players_get_pawn_at_index(struct players_t* player, int index);
+
 /** Return the color of a player */
 enum color_t players_get_color(const struct players_t* players);
 
 /** Adds a pawn to a player */
-void players_add_pawn(struct players_t* player, int max_dep, int position);
+void players_add_pawn(struct players_t* player, int max_dep, enum type_t type, int position);
 
 /** Sets all world sort in inital sets to pawns */
-void players_set_initial_pawns(struct world_t* world, struct players_t players[], const int nb_players, const struct sets_t sets[], int max_dep);
+void players_set_initial_pawns(struct world_t* world, struct players_t players[], const int nb_players, const struct sets_t sets[], int max_dep, enum type_t type);
 
 /** Return a random player's pawn */
 struct pawns_t* players_get_random_pawn(struct players_t* player);

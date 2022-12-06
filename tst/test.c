@@ -237,12 +237,6 @@ void test_players_init()
     int_test(players[1].index, 1);
 }
 
-void test_print_game(){
-    puts("\ttest_print_game :");
-    struct world_t* world = world_init();
-    print_game(world);
-}
-
 void test_game_winning_cond()
 {
     puts("\ttest_game_winning_cond :");
@@ -252,7 +246,7 @@ void test_game_winning_cond()
     struct sets_t sets[3];
     sets_list_init(sets, 3);
     sets_set_initial_sets(3, sets);
-    players_set_initial_pawns(world, players, 3, sets, 1);
+    players_set_initial_pawns(world, players, 3, sets, 1, SIMPLE);
     int_test(game_winning_cond(&players[1], sets, &players[1].pawns[0],3), 0);
     pawns_moves(world,&players[1].pawns[0],1);
     pawns_moves(world,&players[0].pawns[1],15);
@@ -293,7 +287,6 @@ int main()
     test_players_init();
 
     puts("test_game.c :");
-    test_print_game();
     test_game_winning_cond();
 
     return 0;

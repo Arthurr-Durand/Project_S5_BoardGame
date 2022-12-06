@@ -1,31 +1,32 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "game.h"
 
 #define UNIT_MAX WORLD_SIZE
 
-void print_game(const struct world_t* world)
+static const char* pawn_strings[MAX_COLOR][MAX_TYPE] = {{"\u265d", "\u265c", "\u265e"},
+                                                    {"\u2657", "\u2656", "\u2658"}};
+
+void print_game(struct players_t players[], int nb_players)
 {
-    for(int i = 0; i < UNIT_MAX; i++) {
-        switch (world_get_sort(world,i)) {
-            case PAWN:
-                switch (world_get(world, i)) {
-                    case BLACK:
-                        printf("\u25cb ");
-                        break;
-                    case WHITE:
-                        printf("\u25cf ");
-                        break;
-                    default:
-                        printf("N ");
-                        break;
-                }
-                break;
-            default:
-                printf("\u00b7 ");
-                break;
+    int world_list[WORLD_SIZE][2];
+    for (int i = 0; i < WORLD_SIZE; i++)
+        world_list[i][0] = -1;
+    
+    int nb_pawns, position;
+    for (int x = 0; x < nb_players; x++) {
+        nb_pawns = players_get_nb_pawns(&players[x]);
+        for (int y = 0; y < nb_pawns; y++) {
+            position = pawns_get_position(players_get_pawn_at_index(&players[x], y));
+            world_list[position][0] = players_get_color(&players[x])-1;
+            world_list[position][1] = pawns_get_type(players_get_pawn_at_index(&players[x], y));
         }
+    }
+
+    for (int i = 0; i < WORLD_SIZE; i++) {
+        (world_list[i][0] == -1) ? printf("\u00b7 ") : printf("%s ", pawn_strings[world_list[i][0]][world_list[i][1]]);
         if (i%WIDTH == WIDTH-1)
             printf("\n");
     }
