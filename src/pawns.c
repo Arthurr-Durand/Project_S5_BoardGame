@@ -10,11 +10,17 @@
 
 struct pawns_t;
 
-void pawns_init(struct pawns_t* pawn, int max_dep, enum color_t color, int position)
+void pawns_init(struct pawns_t* pawn, int max_dep, enum color_t color, enum type_t type, int position)
 {
     pawn->max_dep = max_dep;
     pawn->color = color;
+    pawn->type = type;
     pawn->position = position;
+}
+
+enum type_t pawns_get_type(const struct pawns_t* pawn)
+{
+    return pawn->type;
 }
 
 int pawns_get_position(const struct pawns_t* pawn)

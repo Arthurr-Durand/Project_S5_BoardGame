@@ -37,7 +37,7 @@ enum color_t players_get_color(const struct players_t* players)
 
 void players_add_pawn(struct players_t* player, int max_dep, int position)
 {
-    pawns_init(&player->pawns[players_get_nb_pawns(player)], max_dep, player->color, position);
+    pawns_init(&player->pawns[players_get_nb_pawns(player)], max_dep, player->color, SIMPLE, position);
     player->pawns_nb++;
 }
 
