@@ -9,6 +9,7 @@
 enum type_t {
     SIMPLE = 0,
     TOWER,
+    ELEFUN,
 };
 
 /** A struct representing a piece */
@@ -42,5 +43,11 @@ void pawns_get_all_elefun_moves(struct sets_t* places, struct pawns_t* piece, st
 
 /** Move a Pawn */
 void pawns_moves(struct world_t* world, struct pawns_t* pawn, int new_position);
+
+/** PRIVATE FUNCTIONS */
+
+void _pawns_get_all_simple_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world);
+void _pawns_get_all_tower_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world);
+void _pawns_get_all_elefun_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world);
 
 #endif // __PAWNS_H__
