@@ -36,7 +36,7 @@ int pawns_get_neighbors_nb(const struct neighbors_t neighbors)
     return k;
 }
 
-void pawns_get_all_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world)
+void _pawns_get_all_simle_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world)
 {   
     int idx, d;
     for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors(piece->position))); ++k) {
@@ -50,7 +50,7 @@ void pawns_get_all_moves(struct sets_t* places, struct pawns_t* piece, struct wo
     }
 }
 
-void pawns_get_all_tower_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world)
+void _pawns_get_all_tower_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world)
 {   
     int idx, d;
     for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors(piece->position))); ++k) {
@@ -76,6 +76,21 @@ void pawns_get_all_tower_moves(struct sets_t* places, struct pawns_t* piece, str
         }
         
         
+    }
+}
+
+void pawns_get_all_moves(struct sets_t* places, struct pawns_t* pawn, struct world_t* world)
+{   
+    switch (pawns_get_type(pawn)) {
+        case TOWER:
+            _pawns_get_all_tower_moves(places, pawn, world);
+            break;
+        case KNIGHT:
+            _pawns_get_all_knight_moves(places, pawn, world);
+            break;
+        default:
+            _pawns_get_all_simle_moves(places, pawn, world);
+            break;
     }
 }
 
