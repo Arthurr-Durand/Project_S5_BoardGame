@@ -12,8 +12,8 @@
 #define UNIT_MAX WORLD_SIZE
 #define PLAYERS_NB 2
 #define STARTING_POSITION 0 // 0 : classic, 1 : BATTLEGROUND
-#define MAX_DEP 10
-#define PAWN_TYPE TOWER
+#define MAX_DEP 2
+#define PAWN_TYPE ELEFUN
 
 int main(int argc, char* argv[])
 {
@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 
     // Print the current world
     puts("[-] Print current world.\n");
-    print_game(players, PLAYERS_NB);
+    print_game(world, PAWN_TYPE);
     printf("\n");
 
     // Game start
@@ -117,7 +117,7 @@ int main(int argc, char* argv[])
 
         // Print the current world
         puts("> Print game state .\n");
-        print_game(players, PLAYERS_NB);
+        print_game(world, PAWN_TYPE);
         
         // Check stop conditions
         if ((!end_type && game_winning_cond(&players[turn], sets, pawn, PLAYERS_NB)) || (end_type && game_complex_winning_cond(&players[turn], sets, PLAYERS_NB))) {

@@ -9,9 +9,9 @@
 static const char* pawn_strings[MAX_COLOR][MAX_TYPE] = {{"\u2657", "\u2656", "\u2658"},
                                                     {"\u265d", "\u265c", "\u265e"}};
 
-void print_game(struct players_t players[], int nb_players)
+void print_game(const struct world_t* world, enum type_t type)
 {
-    int world_list[WORLD_SIZE][2];
+    /* int world_list[WORLD_SIZE][2];
     for (int i = 0; i < WORLD_SIZE; i++)
         world_list[i][0] = -1;
     
@@ -27,6 +27,14 @@ void print_game(struct players_t players[], int nb_players)
 
     for (int i = 0; i < WORLD_SIZE; i++) {
         (world_list[i][0] == -1) ? printf("\u00b7 ") : printf("%s ", pawn_strings[world_list[i][0]][world_list[i][1]]);
+        if (i%WIDTH == WIDTH-1)
+            printf("\n");
+    } */
+    for (int i = 0; i < UNIT_MAX; i++) {
+        if (world_get_sort(world, i) == PAWN)
+            printf("%s ", pawn_strings[world_get(world, i)-1][type]);
+        else
+            printf("\u00b7 ");
         if (i%WIDTH == WIDTH-1)
             printf("\n");
     }
