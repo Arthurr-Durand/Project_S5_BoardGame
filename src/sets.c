@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "geometry.h"
-#include "world.h"
 #include "sets.h"
 
 #define UINT_MAX WORLD_SIZE

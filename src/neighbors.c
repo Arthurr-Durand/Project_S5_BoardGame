@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "geometry.h"
+
 #include "neighbors.h"
 
 #define UINT_MAX WORLD_SIZE

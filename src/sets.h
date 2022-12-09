@@ -1,7 +1,6 @@
 #ifndef __SETS_H__
 #define __SETS_H__
 
-#include "geometry.h"
 #include "world.h"
 
 /** A struct representing a set of places by their index in the world */

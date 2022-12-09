@@ -1,10 +1,7 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
-#include "world.h"
 #include "players.h"
-#include "sets.h"
-#include "pawns.h"
 
 /** Print the current world */
 void print_game(const struct world_t* world, enum type_t type);

@@ -1,9 +1,7 @@
 #ifndef __PLAYERS_H__
 #define __PLAYERS_H__
 
-#include "geometry.h"
 #include "pawns.h"
-#include "sets.h"
 
 /** A struct representing a player */
 struct players_t {

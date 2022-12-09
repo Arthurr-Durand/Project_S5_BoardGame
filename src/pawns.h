@@ -1,7 +1,6 @@
 #ifndef __PAWNS_H__
 #define __PAWNS_H__
 
-#include "geometry.h"
 #include "neighbors.h"
 #include "sets.h"
 

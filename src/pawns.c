@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "neighbors.h"
-#include "sets.h"
-#include "world.h"
 #include "pawns.h"
 
 #define UINT_MAX WORLD_SIZE

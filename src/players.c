@@ -2,8 +2,7 @@
 #include <stdlib.h>
 
 #include "players.h"
-#include "sets.h"
-#include "world.h"
+
 
 struct players_t;
 
