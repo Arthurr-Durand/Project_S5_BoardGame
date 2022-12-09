@@ -6,10 +6,10 @@
 
 #define UNIT_MAX WORLD_SIZE
 
-static const char* pawn_strings[MAX_COLOR][MAX_TYPE] = {{"\u2657", "\u2656", "\u2658"},
-                                                    {"\u265d", "\u265c", "\u265e"}};
+static const char* pawn_strings[MAX_COLOR][MAX_TYPE] = {{"\u00b7", "\u2657", "\u2656", "\u2658"},
+                                                    {"\u00b7","\u265d", "\u265c", "\u265e"}};
 
-void print_game(const struct world_t* world, enum type_t type)
+void print_game(const struct world_t* world, enum sort_t type)
 {
     /* int world_list[WORLD_SIZE][2];
     for (int i = 0; i < WORLD_SIZE; i++)
