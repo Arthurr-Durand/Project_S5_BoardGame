@@ -14,6 +14,8 @@
 #define STARTING_POSITION 0 // 0 : classic, 1 : BATTLEGROUND
 #define MAX_DEP 1
 #define PAWN_TYPE PAWN_SIMPLE
+#define FORMAT 3  // max 3 pour normal et min 3 pour BG
+#define FORMAE 3 // max 3 pour normal et min 3 pour BG
 
 int main(int argc, char* argv[])
 {
@@ -66,7 +68,7 @@ int main(int argc, char* argv[])
 
     // Init players pawns
     puts("[-] Init players pawns.\n");
-    players_set_initial_pawns(world, players, PLAYERS_NB, sets, MAX_DEP, PAWN_TYPE);
+    players_set_initial_pawns(world, players, PLAYERS_NB, sets, MAX_DEP, PAWN_TYPE, FORMAT, FORMAE);
 
     // Print the current world
     puts("[-] Print current world.\n");
