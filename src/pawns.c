@@ -109,11 +109,36 @@ void pawns_get_all_moves(struct sets_t* places, struct pawns_t* pawn, struct wor
         case PAWN_ELEFUN:
             _pawns_get_all_elefun_moves(places, pawn, world);
             break;
+        case PAWN_KING1ST:
+            _pawns_get_all_kingthefirst(places, world);
+            break;
         default:
             _pawns_get_all_simle_moves(places, pawn, world);
             break;
     }
 }
+
+void _pawns_get_all_kingthefirst(struct sets_t* places, struct world_t* world)
+{   
+    int idx=1;
+    int i;
+    int r;
+    int n=WIDTH*HEIGHT;
+    while(idx <n){
+        r=0;
+        idx++;
+        for (i=1 ; i<=idx ; i++)
+        {
+            if ((idx%i)==0)
+                r++;
+        }
+        if(r==2 && !world_get_sort(world, idx))
+        {
+            sets_add(places, idx);
+        }
+    }
+}
+
 
 void pawns_moves(struct world_t* world, struct pawns_t* pawn, int new_position)
 {

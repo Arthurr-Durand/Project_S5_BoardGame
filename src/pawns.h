@@ -35,5 +35,6 @@ void pawns_moves(struct world_t* world, struct pawns_t* pawn, int new_position);
 void _pawns_get_all_simple_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world);
 void _pawns_get_all_tower_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world);
 void _pawns_get_all_elefun_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world);
+void _pawns_get_all_kingthefirst(struct sets_t* places, struct world_t* world);
 
 #endif // __PAWNS_H__
