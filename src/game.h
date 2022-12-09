@@ -4,7 +4,7 @@
 #include "players.h"
 
 /** Print the current world */
-void print_game(const struct world_t* world, enum sort_t type);
+void print_game(const struct world_t* world);
 
 /** Check the simple winning conditions */
 int game_winning_cond(struct players_t* player, struct sets_t set[], struct pawns_t* pawn, int nb_players);

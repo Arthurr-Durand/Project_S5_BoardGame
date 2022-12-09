@@ -52,13 +52,10 @@ void players_set_initial_pawns(struct world_t* world, struct players_t players[]
         int nb_places = sets_get_nb(&sets[i]);
         for (int y = 0; y < nb_places; ++y) {
             int position = sets_get_place_at(&sets[i], y);
-            if ((position%WIDTH)==(1 || (WIDTH-2)) ){
-                new_type=PAWN_TOWER;
-                printf("coucou\n");
-            }
+            if (position%WIDTH == (1 || WIDTH-1))
+                new_type = PAWN_TOWER;
             else
                 new_type = type;
-                
             players_add_pawn(&players[i], max_dep,new_type, position);
             world_set_sort(world, position, new_type);
             
