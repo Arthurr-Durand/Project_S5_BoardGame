@@ -3,12 +3,6 @@
 #include <string.h>
 #include <time.h>
 
-#include "geometry.h"
-#include "world.h"
-#include "neighbors.h"
-#include "sets.h"
-#include "pawns.h"
-#include "players.h"
 #include "game.h"
 
 void str_test(const char str1[], const char str2[])
@@ -27,7 +21,7 @@ void test_place_to_string()
     str_test(place_to_string(2, 1), "WHITE PAWN");
     str_test(place_to_string(1, 0), "BLACK NO_SORT");
     str_test(place_to_string(3, 0), "ERROR");
-    str_test(place_to_string(0, 3), "ERROR");
+    str_test(place_to_string(0, 3), "NO_COLOR PAWN");
     str_test(place_to_string(-5, 3), "ERROR");
 }
 
@@ -47,7 +41,7 @@ void test_world_set_get()
     struct world_t* world = world_init();
     // set index 0 to WHITE PAWN
     world_set(world, 0, WHITE);
-    world_set_sort(world, 0, PAWN);
+    world_set_sort(world, 0, PAWN_SIMPLE);
     str_test(place_to_string(world_get(world, 0), world_get_sort(world, 0)), "WHITE PAWN");
     // set index 0 to NO_COLOR NO_SORT
     world_set(world, 0, NO_COLOR);
@@ -95,8 +89,8 @@ void test_sets()
     int_test(world_get(world, 0), BLACK);
     int_test(world_get_sort(world, 0), NO_SORT);
     // change sort of set to PAWN
-    sets_set_sorts(&set, world, PAWN);
-    int_test(world_get_sort(world, 0), PAWN);
+    sets_set_sorts(&set, world, PAWN_SIMPLE);
+    int_test(world_get_sort(world, 0), PAWN_SIMPLE);
 
 }
 
@@ -124,7 +118,7 @@ void test_sets_get_random(){
     struct world_t* world = world_init();
     // pawns init
     struct pawns_t pawn;
-    pawns_init(&pawn, 2, WHITE, SIMPLE, 0);
+    pawns_init(&pawn, 2, WHITE, PAWN_SIMPLE, 0);
     struct sets_t set;
     sets_init(&set);
     pawns_get_all_moves(&set, &pawn, world);
@@ -160,7 +154,7 @@ void test_pawns_all_moves()
     struct world_t* world = world_init();
     // pawns init
     struct pawns_t pawn;
-    pawns_init(&pawn, 2, WHITE, SIMPLE, 0);
+    pawns_init(&pawn, 2, WHITE, PAWN_SIMPLE, 0);
     struct sets_t set;
     sets_init(&set);
     pawns_get_all_moves(&set, &pawn, world);
@@ -175,10 +169,10 @@ void test_pawns_move()
     // init world and pawn
     struct world_t* world = world_init();
     struct pawns_t pawn;
-    pawns_init(&pawn, 1, WHITE, SIMPLE, 0);
-    world_set_sort(world, 0, PAWN);
+    pawns_init(&pawn, 1, WHITE, PAWN_SIMPLE, 0);
+    world_set_sort(world, 0, PAWN_SIMPLE);
     world_set(world, 0, pawn.color);
-    int_test(world_get_sort(world, 0), PAWN);
+    int_test(world_get_sort(world, 0), PAWN_SIMPLE);
     int_test(world_get(world, 0), WHITE);
     int_test(world_get_sort(world, 69), NO_SORT);
     int_test(world_get(world, 69), NO_COLOR);
@@ -186,7 +180,7 @@ void test_pawns_move()
     pawns_moves(world, &pawn, 69);
     int_test(world_get_sort(world, 0), NO_SORT);
     int_test(world_get(world, 0), NO_COLOR);
-    int_test(world_get_sort(world, 69), PAWN);
+    int_test(world_get_sort(world, 69), PAWN_SIMPLE);
     int_test(world_get(world, 69), WHITE);
     int_test(pawns_get_position(&pawn), 69);
 }
@@ -198,7 +192,7 @@ void test_pawns_get_all_tower_moves()
     struct world_t* world = world_init();
     // pawns init
     struct pawns_t tower;
-    pawns_init(&tower, 10, WHITE, TOWER, 0);
+    pawns_init(&tower, 10, WHITE, PAWN_TOWER, 0);
     struct sets_t set;
     sets_init(&set);
     pawns_get_all_moves(&set, &tower, world);
@@ -216,7 +210,7 @@ void test_pawns_get_all_elefun_moves()
     struct world_t* world = world_init();
     // pawns init
     struct pawns_t elefun;
-    pawns_init(&elefun, 2, WHITE, TOWER, 90);
+    pawns_init(&elefun, 2, WHITE, PAWN_TOWER, 90);
     struct sets_t set;
     sets_init(&set);
     pawns_get_all_moves(&set, &elefun, world);
@@ -246,7 +240,7 @@ void test_game_winning_cond()
     struct sets_t sets[3];
     sets_list_init(sets, 3);
     sets_set_initial_sets(3, sets);
-    players_set_initial_pawns(world, players, 3, sets, 1, SIMPLE);
+    players_set_initial_pawns(world, players, 3, sets, 1, PAWN_SIMPLE);
     int_test(game_winning_cond(&players[1], sets, &players[1].pawns[0],3), 0);
     pawns_moves(world,&players[1].pawns[0],1);
     pawns_moves(world,&players[0].pawns[1],15);

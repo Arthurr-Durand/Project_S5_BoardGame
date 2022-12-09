@@ -39,20 +39,20 @@ enum color_t players_get_color(const struct players_t* players)
     return players->color;
 }
 
-void players_add_pawn(struct players_t* player, int max_dep, enum type_t type, int position)
+void players_add_pawn(struct players_t* player, int max_dep, enum sort_t type, int position)
 {
     pawns_init(&player->pawns[players_get_nb_pawns(player)], max_dep, player->color, type, position);
     player->pawns_nb++;
 }
 
-void players_set_initial_pawns(struct world_t* world, struct players_t players[], const int nb_players, const struct sets_t sets[], int max_dep, enum type_t type)
+void players_set_initial_pawns(struct world_t* world, struct players_t players[], const int nb_players, const struct sets_t sets[], int max_dep, enum sort_t type)
 {
     for (int i = 0; i < nb_players; ++i) {
         int nb_places = sets_get_nb(&sets[i]);
         for (int y = 0; y < nb_places; ++y) {
             int position = sets_get_place_at(&sets[i], y);
             players_add_pawn(&players[i], max_dep, type, position);
-            world_set_sort(world, position, PAWN);
+            world_set_sort(world, position, type);
             world_set(world, position, players[i].color);
         }
     }

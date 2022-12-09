@@ -13,7 +13,7 @@
 #define PLAYERS_NB 2
 #define STARTING_POSITION 0 // 0 : classic, 1 : BATTLEGROUND
 #define MAX_DEP 2
-#define PAWN_TYPE ELEFUN
+#define PAWN_TYPE PAWN_ELEFUN
 
 int main(int argc, char* argv[])
 {

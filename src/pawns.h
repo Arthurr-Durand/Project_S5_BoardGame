@@ -4,27 +4,19 @@
 #include "neighbors.h"
 #include "sets.h"
 
-/** An enum representing a pawn type */
-enum type_t {
-    SIMPLE = 0,
-    TOWER,
-    ELEFUN,
-    MAX_TYPE,
-};
-
 /** A struct representing a piece */
 struct pawns_t {
     int max_dep;
     enum color_t color;
-    enum type_t type;
+    enum sort_t type;
     int position;
 };
 
 /** Inits a pawn */
-void pawns_init(struct pawns_t* pawn, int max_dep, enum color_t color, enum type_t type, int position);
+void pawns_init(struct pawns_t* pawn, int max_dep, enum color_t color, enum sort_t type, int position);
 
 /** Returns the type of a pawn */
-enum type_t pawns_get_type(const struct pawns_t* pawn);
+enum sort_t pawns_get_type(const struct pawns_t* pawn);
 
 /** Returns the position of a pawn */
 int pawns_get_position(const struct pawns_t* pawn);

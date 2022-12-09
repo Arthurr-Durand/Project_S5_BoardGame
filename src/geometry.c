@@ -5,11 +5,11 @@
 static const char* place_strings[MAX_SORT][MAX_COLOR] = {{"NO_COLOR NO_SORT", "BLACK NO_SORT", "WHITE NO_SORT"},
                                                     {"NO_COLOR PAWN", "BLACK PAWN", "WHITE PAWN"}};
 
-const char* place_to_string(enum color_t c,enum sort_t s)
+const char* place_to_string(enum color_t c, enum sort_t s)
 {
     if ((c < 0 || c >= MAX_COLOR) || (s < 0 || s >= MAX_SORT))
         return "ERROR";
-    return place_strings[s][c];
+    return place_strings[(s!=NO_SORT)][c];
 }
 
 const char* dir_to_string(enum dir_t d)
