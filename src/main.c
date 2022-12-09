@@ -10,9 +10,9 @@
 #include "sets.h"
 
 #define UNIT_MAX WORLD_SIZE
-#define PLAYERS_NB 2
+#define PLAYERS_NB 3
 #define STARTING_POSITION 0 // 0 : classic, 1 : BATTLEGROUND
-#define MAX_DEP 2
+#define MAX_DEP 1
 #define PAWN_TYPE PAWN_SIMPLE
 
 int main(int argc, char* argv[])
@@ -85,39 +85,29 @@ int main(int argc, char* argv[])
         turn = (turn+1)%PLAYERS_NB;
         printf("> Turn of player n°%d (%s)\n", turn+1, colors[players_get_color(&players[turn])]);
 
+        // Get a random pawn
         struct pawns_t* pawn;
+        pawn = players_get_random_pawn(&players[turn]);
+
+        // Get a random moves
         int old_place;
         int new_place;
         struct sets_t set;
-        /* int p = 0;
-        while (!p) {
-            // Get random pawn
-            pawn = players_get_random_pawn(&players[turn]);
-
-            // Get random free place 
-            sets_init(&set);
-            pawns_get_all_moves(&set, pawn, world);
-            if (sets_get_nb(&set) != 0) {
-                old_place = pawns_get_position(pawn);
-                new_place = sets_get_random_place(&set);
-                p = 1;
-            }
-        } */
-        pawn = players_get_random_pawn(&players[turn]);
         sets_init(&set);
         pawns_get_all_moves(&set, pawn, world);
-        if (sets_get_nb(&set) != 0) {
+        if (sets_get_nb(&set)) { // If the pawn can go somewhere.
             old_place = pawns_get_position(pawn);
             new_place = sets_get_random_place(&set);
-        }
 
-        // Move the pawn
-        pawns_moves(world, pawn, new_place);
-        printf("> Player %d move the pawn from the case %d to the case %d.\n", turn+1, old_place, new_place);
-
-        // Print the current world
-        puts("> Print game state .\n");
-        print_game(world);
+            // Move the pawn
+            pawns_moves(world, pawn, new_place);
+            printf("> Player %d moves the pawn from the case %d to the case %d.\n", turn+1, old_place, new_place);
+        
+            // Print the current world
+            puts("> Print game state .\n");
+            print_game(world);
+        } else
+            printf("> Player %d has chosen a pawn that cannot move !\n", turn+1);
         
         // Check stop conditions
         if ((!end_type && game_winning_cond(&players[turn], sets, pawn, PLAYERS_NB)) || (end_type && game_complex_winning_cond(&players[turn], sets, PLAYERS_NB))) {
