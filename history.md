@@ -105,3 +105,15 @@
 [OBJECTIVES]
 	
 	- Comprendre et finir ACHIEV2 
+## [ACHIEV2][06/12/2022]
+
+	- Présentation du projet 
+	- Implémentation d'un nouveau pion 
+	- Affichage du jeu avec plusieurs type de pions 
+	- Test de nouvelles fonctions 
+	- Reflexion sur l'ACHIEV2
+
+[OBJECTIVES]
+
+	- Ameliorer le makefile 
+	- Finir l'ACHIEV2
