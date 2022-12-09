@@ -53,11 +53,11 @@ void players_set_initial_pawns(struct world_t* world, struct players_t players[]
         int nb_places = sets_get_nb(&sets[i]);
         for (int y = 0; y < nb_places; ++y) {
             int position = sets_get_place_at(&sets[i], y);
-            if ((position%(WIDTH/format)) == 0 ){
+            if (formae!=0 && ((position%(WIDTH/format)) == 0 )){
                 new_type = PAWN_TOWER;
                 new_max_dep=WIDTH;
             }
-            else if ((position%(WIDTH/formae)) == 1)
+            else if (formae!=0 && ((position%(WIDTH/formae)) == 1))
             {
                 new_type = PAWN_ELEFUN;
                 new_max_dep=2;

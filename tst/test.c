@@ -221,6 +221,22 @@ void test_pawns_get_all_elefun_moves()
     int_test(sets_get_place_at(&set,7),70);
 }
 
+void test_pawns_get_all_king1st_moves()
+{
+    puts("\ttest_king1st_all_moves:");
+    struct world_t* world = world_init();
+    // pawns init
+    struct pawns_t king1st;
+    pawns_init(&king1st, 2, WHITE, PAWN_KING1ST, 90);
+    struct sets_t set;
+    sets_init(&set);
+    pawns_get_all_moves(&set, &king1st, world);
+    // for (int i =0;i<sets_get_nb(&set);i++)
+    //     printf("%d\n",sets_get_place_at(&set,i));
+    int_test(sets_get_place_at(&set,0),2);
+    int_test(sets_get_place_at(&set,15),53);
+}
+
 void test_players_init()
 {
     puts("\ttest_players_init:");
@@ -240,7 +256,7 @@ void test_game_winning_cond()
     struct sets_t sets[3];
     sets_list_init(sets, 3);
     sets_set_initial_sets(3, sets);
-    players_set_initial_pawns(world, players, 3, sets, 1, PAWN_SIMPLE);
+    players_set_initial_pawns(world, players, 3, sets, 1, PAWN_SIMPLE,0,0);
     int_test(game_winning_cond(&players[1], sets, &players[1].pawns[0],3), 0);
     pawns_moves(world,&players[1].pawns[0],1);
     pawns_moves(world,&players[0].pawns[1],15);
@@ -276,6 +292,7 @@ int main()
     test_pawns_move();
     test_pawns_get_all_tower_moves();
     test_pawns_get_all_elefun_moves();
+    test_pawns_get_all_king1st_moves();
 
     puts("test_players.c");
     test_players_init();

@@ -30,7 +30,8 @@ enum sort_t {
   PAWN_SIMPLE = 1,
   PAWN_TOWER = 2,
   PAWN_ELEFUN = 3,
-  MAX_SORT = 4,   // Total number of different sorts
+  PAWN_KING1ST = 4,
+  MAX_SORT = 5,   // Total number of different sorts
 };
 
 /** Enum defining the possible directions in the world
