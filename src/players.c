@@ -47,13 +47,22 @@ void players_add_pawn(struct players_t* player, int max_dep, enum sort_t type, i
 
 void players_set_initial_pawns(struct world_t* world, struct players_t players[], const int nb_players, const struct sets_t sets[], int max_dep, enum sort_t type)
 {
+    enum sort_t new_type;
     for (int i = 0; i < nb_players; ++i) {
         int nb_places = sets_get_nb(&sets[i]);
         for (int y = 0; y < nb_places; ++y) {
             int position = sets_get_place_at(&sets[i], y);
-            players_add_pawn(&players[i], max_dep, type, position);
-            world_set_sort(world, position, type);
-            world_set(world, position, players[i].color);
+            if ((position%WIDTH)==(1 || (WIDTH-2)) ){
+                new_type=PAWN_TOWER;
+                printf("coucou\n");
+            }
+            else
+                new_type = type;
+                
+            players_add_pawn(&players[i], max_dep,new_type, position);
+            world_set_sort(world, position, new_type);
+            
+            world_set(world, position, players[i].color);            
         }
     }
 }
