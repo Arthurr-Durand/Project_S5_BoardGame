@@ -18,23 +18,16 @@ void pawns_init(struct pawns_t* pawn, int max_dep, enum color_t color, enum sort
 /** Returns the type of a pawn */
 enum sort_t pawns_get_type(const struct pawns_t* pawn);
 
+/** Returns the maximum depth of a pawn */
+int pawns_get_max_dep(const struct pawns_t* pawn);
+
 /** Returns the position of a pawn */
 int pawns_get_position(const struct pawns_t* pawn);
 
 /** Returns the numbers of pawn's neighbors */
 int pawns_get_neighbors_nb(const struct neighbors_t neighbors);
 
-/** Returns all free neighbors */
-void pawns_get_all_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world);
-
 /** Move a Pawn */
 void pawns_moves(struct world_t* world, struct pawns_t* pawn, int new_position);
-
-/** PRIVATE FUNCTIONS */
-
-void _pawns_get_all_simple_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world);
-void _pawns_get_all_tower_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world);
-void _pawns_get_all_elefun_moves(struct sets_t* places, struct pawns_t* piece, struct world_t* world);
-void _pawns_get_all_kingthefirst(struct sets_t* places, struct world_t* world);
 
 #endif // __PAWNS_H__

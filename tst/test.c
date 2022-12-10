@@ -91,7 +91,6 @@ void test_sets()
     // change sort of set to PAWN
     sets_set_sorts(&set, world, PAWN_SIMPLE);
     int_test(world_get_sort(world, 0), PAWN_SIMPLE);
-
 }
 
 void test_sets_set_initial_sets()
@@ -111,17 +110,14 @@ void test_sets_set_initial_sets()
     int_test(sets_get_nb(&sets[2]), 10);
 }
 
-void test_sets_get_random(){
-
+void test_sets_get_random()
+{
     puts("\ttest_sets_get_random :");
-    // world init
-    struct world_t* world = world_init();
-    // pawns init
-    struct pawns_t pawn;
-    pawns_init(&pawn, 2, WHITE, PAWN_SIMPLE, 0);
+    struct world_ext_t world_ext;
+    world_ext_init(&world_ext, 2, 0, 1, PAWN_SIMPLE, 0, 0);
     struct sets_t set;
     sets_init(&set);
-    pawns_get_all_moves(&set, &pawn, world);
+    world_ext_get_all_moves(&world_ext, &set, players_get_pawn_at_index(world_ext_get_player_nb(&world_ext, 0), 0));
     for (int i = 0; i < 10; ++i)
         printf("\t\t> %d\n", sets_get_random_place(&set));
 }
@@ -147,22 +143,6 @@ void test_pawns_get_neighbors_nb()
     int_test(pawns_get_neighbors_nb(get_neighbors(33)),8);
 }
 
-void test_pawns_all_moves()
-{
-    puts("\ttest_pawns_all_moves:");
-    // world init
-    struct world_t* world = world_init();
-    // pawns init
-    struct pawns_t pawn;
-    pawns_init(&pawn, 2, WHITE, PAWN_SIMPLE, 0);
-    struct sets_t set;
-    sets_init(&set);
-    pawns_get_all_moves(&set, &pawn, world);
-    int_test(sets_get_place_at(&set,2),10);
-    int_test(sets_get_place_at(&set,14),99);
-    int_test(sets_get_place_at(&set,8),1);
-}
-
 void test_pawns_move()
 {
     puts("\ttest_pawns_move:");
@@ -183,58 +163,6 @@ void test_pawns_move()
     int_test(world_get_sort(world, 69), PAWN_SIMPLE);
     int_test(world_get(world, 69), WHITE);
     int_test(pawns_get_position(&pawn), 69);
-}
-
-void test_pawns_get_all_tower_moves()
-{
-    puts("\ttest_tower_all_moves:");
-    // world init
-    struct world_t* world = world_init();
-    // pawns init
-    struct pawns_t tower;
-    pawns_init(&tower, 10, WHITE, PAWN_TOWER, 0);
-    struct sets_t set;
-    sets_init(&set);
-    pawns_get_all_moves(&set, &tower, world);
-    // for (int i =0;i<sets_get_nb(&set);i++)
-    //     printf("%d\n",sets_get_place_at(&set,i));
-    int_test(sets_get_place_at(&set,2),30);
-    int_test(sets_get_place_at(&set,14),5);
-    int_test(sets_get_place_at(&set,8),90);
-}
-
-void test_pawns_get_all_elefun_moves()
-{
-    puts("\ttest_elefun_all_moves:");
-    // world init
-    struct world_t* world = world_init();
-    // pawns init
-    struct pawns_t elefun;
-    pawns_init(&elefun, 2, WHITE, PAWN_TOWER, 90);
-    struct sets_t set;
-    sets_init(&set);
-    pawns_get_all_moves(&set, &elefun, world);
-    // for (int i =0;i<sets_get_nb(&set);i++)
-    //     printf("%d\n",sets_get_place_at(&set,i));
-    int_test(sets_get_place_at(&set,2),99);
-    int_test(sets_get_place_at(&set,0),0);
-    int_test(sets_get_place_at(&set,7),70);
-}
-
-void test_pawns_get_all_king1st_moves()
-{
-    puts("\ttest_king1st_all_moves:");
-    struct world_t* world = world_init();
-    // pawns init
-    struct pawns_t king1st;
-    pawns_init(&king1st, 2, WHITE, PAWN_KING1ST, 90);
-    struct sets_t set;
-    sets_init(&set);
-    pawns_get_all_moves(&set, &king1st, world);
-    // for (int i =0;i<sets_get_nb(&set);i++)
-    //     printf("%d\n",sets_get_place_at(&set,i));
-    int_test(sets_get_place_at(&set,0),2);
-    int_test(sets_get_place_at(&set,15),53);
 }
 
 void test_players_init()
@@ -263,7 +191,63 @@ void test_game_winning_cond()
     int_test(game_winning_cond(&players[1], sets, &players[1].pawns[0],2), 1);
 }
 
+void test_world_ext_get_all_moves_simple()
+{
+    puts("\ttest_world_get_all_moves_simple:");
+    struct world_ext_t world_ext;
+    world_ext_init(&world_ext, 2, 0, 2, PAWN_SIMPLE, 0, 0);
+    struct sets_t set;
+    sets_init(&set);
+    world_ext_get_all_moves(&world_ext, &set, players_get_pawn_at_index(world_ext_get_player_nb(&world_ext, 0), 0));
+    int_test(sets_get_place_at(&set,0),11);
+    int_test(sets_get_place_at(&set,3),20);
+    int_test(sets_get_place_at(&set,6),91);
+    int_test(sets_get_place_at(&set,11),88);
+    int_test(sets_get_place_at(&set,12),100);
+}
 
+void test_world_ext_get_all_moves_tower()
+{
+    puts("\ttest_world_get_all_moves_tower:");
+    struct world_ext_t world_ext;
+    world_ext_init(&world_ext, 2, 0, 10, PAWN_TOWER, 0, 0);
+    struct sets_t set;
+    sets_init(&set);
+    world_ext_get_all_moves(&world_ext, &set, players_get_pawn_at_index(world_ext_get_player_nb(&world_ext, 0), 0));
+    int_test(sets_get_place_at(&set,0),10);
+    int_test(sets_get_place_at(&set,3),40);
+    int_test(sets_get_place_at(&set,6),70);
+    int_test(sets_get_place_at(&set,11),100);
+}
+
+void test_world_ext_get_all_moves_elefun()
+{
+    puts("\ttest_world_get_all_moves_elefun:");
+    struct world_ext_t world_ext;
+    world_ext_init(&world_ext, 2, 0, 2, PAWN_ELEFUN, 0, 0);
+    struct sets_t set;
+    sets_init(&set);
+    world_ext_get_all_moves(&world_ext, &set, players_get_pawn_at_index(world_ext_get_player_nb(&world_ext, 0), 0));
+    int_test(sets_get_place_at(&set,0),11);
+    int_test(sets_get_place_at(&set,3),19);
+    int_test(sets_get_place_at(&set,6),80);
+    int_test(sets_get_place_at(&set,11),100);
+}
+
+void test_world_ext_get_all_moves_king1st()
+{
+    puts("\ttest_world_get_all_moves_king1st:");
+    struct world_ext_t world_ext;
+    world_ext_init(&world_ext, 2, 0, 1, PAWN_KING1ST, 0, 0);
+    struct sets_t set;
+    sets_init(&set);
+    world_ext_get_all_moves(&world_ext, &set, players_get_pawn_at_index(world_ext_get_player_nb(&world_ext, 0), 0));
+    int_test(sets_get_place_at(&set,0),11);
+    int_test(sets_get_place_at(&set,3),19);
+    int_test(sets_get_place_at(&set,6),31);
+    int_test(sets_get_place_at(&set,11),61);
+    int_test(sets_get_place_at(&set,19),100);
+}
 
 int main()
 {
@@ -288,17 +272,19 @@ int main()
 
     puts("test_pawns.c :");
     test_pawns_get_neighbors_nb();
-    test_pawns_all_moves();
     test_pawns_move();
-    test_pawns_get_all_tower_moves();
-    test_pawns_get_all_elefun_moves();
-    test_pawns_get_all_king1st_moves();
 
     puts("test_players.c");
     test_players_init();
 
     puts("test_game.c :");
     test_game_winning_cond();
+
+    puts("test_world_ext.c :");
+    test_world_ext_get_all_moves_simple();
+    test_world_ext_get_all_moves_tower();
+    test_world_ext_get_all_moves_elefun();
+    test_world_ext_get_all_moves_king1st();
 
     return 0;
 }

@@ -1,7 +1,7 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
-#include "players.h"
+#include "world_ext.h"
 
 /** Print the current world */
 void print_game(const struct world_t* world);

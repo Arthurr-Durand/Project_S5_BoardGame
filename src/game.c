@@ -6,16 +6,13 @@
 
 #define UNIT_MAX WORLD_SIZE
 
-static const char* pawn_strings[MAX_COLOR][MAX_SORT] = {{"\u00b7", "\u2657", "\u2656", "\u2658"},
-                                                    {"\u00b7","\u265d", "\u265c", "\u265e"}};
+static const char* pawn_strings[MAX_COLOR][MAX_SORT] = {{"\u00b7", "\u2657", "\u2656", "\u2658", "\u2654"},
+                                                    {"\u00b7","\u265d", "\u265c", "\u265e", "\u265a"}};
 
 void print_game(const struct world_t* world)
 {
     for (int i = 0; i < UNIT_MAX; i++) {
-        if (world_get_sort(world, i))
-            printf("%s ", pawn_strings[world_get(world, i)-1][world_get_sort(world, i)]);
-        else
-            printf("\u00b7 ");
+        printf("%s ", pawn_strings[world_get_sort(world, i) ? world_get(world, i)-1 : 0][world_get_sort(world, i)]);
         if (i%WIDTH == WIDTH-1)
             printf("\n");
     }

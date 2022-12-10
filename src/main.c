@@ -4,13 +4,9 @@
 #include <getopt.h>
 
 #include "game.h"
-#include "world.h"
-#include "geometry.h"
-#include "players.h"
-#include "sets.h"
 
 #define UNIT_MAX WORLD_SIZE
-#define PLAYERS_NB 3
+#define PLAYERS_NB 2
 #define STARTING_POSITION 0 // 0 : classic, 1 : BATTLEGROUND
 #define MAX_DEP 1
 #define PAWN_TYPE PAWN_SIMPLE
@@ -19,7 +15,7 @@
 
 int main(int argc, char* argv[])
 {
-    // Set options
+    // Set default options
     char* colors[] = {"No color", "Black", "White"};
     unsigned int end_type = 0; // 0 : victoire simple, 1 : victoire complexe
     unsigned int max_rounds = 2*WIDTH*HEIGHT;
@@ -49,30 +45,13 @@ int main(int argc, char* argv[])
     srand(rand_seed);
 
     // Init world
-    puts("[-] Init world.\n");
-    struct world_t* world = world_init();
-
-    // Init players
-    puts("[-] Init players.\n");
-    struct players_t players[PLAYERS_NB];
-    players_init(players, PLAYERS_NB);
-
-    // Init players sets
-    puts("[-] Init players sets.\n");
-    struct sets_t sets[PLAYERS_NB];
-    sets_list_init(sets, PLAYERS_NB);
-    if (STARTING_POSITION)
-        sets_set_initial_sets_battleground(PLAYERS_NB, sets);
-    else
-        sets_set_initial_sets(PLAYERS_NB, sets);
-
-    // Init players pawns
-    puts("[-] Init players pawns.\n");
-    players_set_initial_pawns(world, players, PLAYERS_NB, sets, MAX_DEP, PAWN_TYPE, FORMAT, FORMAE);
+    puts("[-] Init world, players, sets.\n");
+    struct world_ext_t world_ext;
+    world_ext_init(&world_ext, PLAYERS_NB, STARTING_POSITION, MAX_DEP, PAWN_TYPE, FORMAT, FORMAE);
 
     // Print the current world
     puts("[-] Print current world.\n");
-    print_game(world);
+    print_game(world_ext_get_world(&world_ext));
     printf("\n");
 
     // Game start
@@ -85,34 +64,35 @@ int main(int argc, char* argv[])
 
         // Turn
         turn = (turn+1)%PLAYERS_NB;
-        printf("> Turn of player n°%d (%s)\n", turn+1, colors[players_get_color(&players[turn])]);
+        struct players_t* current_player = world_ext_get_player_nb(&world_ext, turn);
+        printf("> Turn of player n°%d (%s)\n", turn+1, colors[players_get_color(current_player)]);
 
         // Get a random pawn
         struct pawns_t* pawn;
-        pawn = players_get_random_pawn(&players[turn]);
+        pawn = players_get_random_pawn(current_player);
 
         // Get a random moves
         int old_place;
         int new_place;
         struct sets_t set;
         sets_init(&set);
-        pawns_get_all_moves(&set, pawn, world);
+        world_ext_get_all_moves(&world_ext, &set, pawn);
         if (sets_get_nb(&set)) { // If the pawn can go somewhere.
             old_place = pawns_get_position(pawn);
             new_place = sets_get_random_place(&set);
 
             // Move the pawn
-            pawns_moves(world, pawn, new_place);
+            pawns_moves(world_ext_get_world(&world_ext), pawn, new_place);
             printf("> Player %d moves the pawn from the case %d to the case %d.\n", turn+1, old_place, new_place);
         
             // Print the current world
             puts("> Print game state .\n");
-            print_game(world);
+            print_game(world_ext_get_world(&world_ext));
         } else
             printf("> Player %d has chosen a pawn that cannot move !\n", turn+1);
         
         // Check stop conditions
-        if ((!end_type && game_winning_cond(&players[turn], sets, pawn, PLAYERS_NB)) || (end_type && game_complex_winning_cond(&players[turn], sets, PLAYERS_NB))) {
+        if ((!end_type && game_winning_cond(current_player, world_ext_get_initial_sets(&world_ext), pawn, PLAYERS_NB)) || (end_type && game_complex_winning_cond(current_player, world_ext_get_initial_sets(&world_ext), PLAYERS_NB))) {
             printf("\n> Player %d win the %s game !\n", turn+1, (end_type ? "compex" : "simple"));
             game = 0;
         }
