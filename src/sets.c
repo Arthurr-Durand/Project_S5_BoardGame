@@ -30,6 +30,14 @@ int sets_get_place_at(const struct sets_t* set, const int nb)
     return (nb < sets_get_nb(set)) ? set->l[nb] : UINT_MAX;
 }
 
+int sets_get_position_of(const struct sets_t* set, const int place)
+{
+    int position = 0;
+    while ((sets_get_place_at(set, position) != place) && (sets_get_place_at(set, position) != UINT_MAX))
+        position++;
+    return position;
+}
+
 void sets_add(struct sets_t* s, int p)
 {
     int nb = sets_get_nb(s);
@@ -39,15 +47,21 @@ void sets_add(struct sets_t* s, int p)
     }
 }
 
-int set_appartient_sets(struct sets_t* set,int idx)
+void sets_remove(struct sets_t* set, int place)
 {
-    for (int i=0;set->l[i] != UINT_MAX; ++i)
-        if (set->l[i]==idx)
-            return 1;
-    return 0;
-
+    int max_nb = sets_get_nb(set);
+    for (int position = sets_get_position_of(set, place); position <= max_nb; position++) {
+        set->l[position] = set->l[position+1];
+    }
 }
 
+int set_appartient_sets(const struct sets_t* set, const int idx)
+{
+    for (int i = 0; sets_get_place_at(set, i) != UINT_MAX; ++i)
+        if (sets_get_place_at(set, i) == idx)
+            return 1;
+    return 0;
+}
 
 int sets_get_random_place(struct sets_t* s)
 {

@@ -31,6 +31,11 @@ struct sets_t* world_ext_get_initial_sets(struct world_ext_t* world_ext)
     return world_ext->initial_sets;
 }
 
+struct sets_t* world_ext_get_current_sets(struct world_ext_t* world_ext)
+{
+    return world_ext->current_sets;
+}
+
 void _world_ext_get_all_moves_simple(struct world_ext_t* world_ext, struct sets_t* set, struct pawns_t* pawn)
 {
     int idx, d;

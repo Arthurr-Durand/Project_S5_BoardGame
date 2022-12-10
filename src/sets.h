@@ -20,11 +20,17 @@ int sets_get_nb(const struct sets_t* set);
 /** Returns the value at nb */
 int sets_get_place_at(const struct sets_t* set, const int nb);
 
+/** Returns the position of place in a set */
+int sets_get_position_of(const struct sets_t* set, const int place);
+
 /** Adds a place to a set */
 void sets_add(struct sets_t* set, int nb);
 
+/** Removes a place to a set */
+void sets_remove(struct sets_t* set, int place);
+
 /**  Return Bool  */
-int set_appartient_sets(struct sets_t set[],int idx);
+int set_appartient_sets(const struct sets_t* set, const int idx);
 
 /** Returns a random place in a set */
 int sets_get_random_place(struct sets_t* set);

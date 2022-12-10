@@ -13,6 +13,7 @@ void pawns_init(struct pawns_t* pawn, int max_dep, enum color_t color, enum sort
     pawn->color = color;
     pawn->type = type;
     pawn->position = position;
+    pawn->captured = 0;
 }
 
 enum sort_t pawns_get_type(const struct pawns_t* pawn)
@@ -30,12 +31,22 @@ int pawns_get_position(const struct pawns_t* pawn)
     return pawn->position;
 }
 
+int pawns_get_captured(const struct pawns_t* pawn)
+{
+    return pawn->captured;
+}
+
 int pawns_get_neighbors_nb(const struct neighbors_t neighbors)
 {
     int k = 0;
     while (neighbors.n[k].i != UINT_MAX)
         k++;
     return k;
+}
+
+void pawns_set_captured(struct pawns_t* pawn, int captured)
+{
+    pawn->captured = captured;
 }
 
 void pawns_moves(struct world_t* world, struct pawns_t* pawn, int new_position)

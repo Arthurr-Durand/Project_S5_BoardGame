@@ -10,6 +10,7 @@ struct pawns_t {
     enum color_t color;
     enum sort_t type;
     int position;
+    int captured;
 };
 
 /** Inits a pawn */
@@ -24,8 +25,14 @@ int pawns_get_max_dep(const struct pawns_t* pawn);
 /** Returns the position of a pawn */
 int pawns_get_position(const struct pawns_t* pawn);
 
+/** Returns if a pawn is captured */
+int pawns_get_captured(const struct pawns_t* pawn);
+
 /** Returns the numbers of pawn's neighbors */
 int pawns_get_neighbors_nb(const struct neighbors_t neighbors);
+
+/** Sets if a pawn is captured or not */
+void pawns_set_captured(struct pawns_t* pawn, int captured);
 
 /** Move a Pawn */
 void pawns_moves(struct world_t* world, struct pawns_t* pawn, int new_position);

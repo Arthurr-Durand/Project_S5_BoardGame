@@ -118,15 +118,29 @@ void test_sets_get_random()
     struct sets_t set;
     sets_init(&set);
     world_ext_get_all_moves(&world_ext, &set, players_get_pawn_at_index(world_ext_get_player_nb(&world_ext, 0), 0));
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < 5; ++i)
         printf("\t\t> %d\n", sets_get_random_place(&set));
+}
+
+void test_sets_add_remove()
+{
+    puts("\ttest_sets_add :");
+    struct sets_t set;
+    sets_init(&set);
+    sets_add(&set, 5);
+    int_test(sets_get_nb(&set), 1);
+    int_test(sets_get_place_at(&set, 0), 5);
+    puts("\ttest_sets_remove :");
+    sets_remove(&set, 5);
+    int_test(sets_get_nb(&set), 0);
+    int_test(sets_get_place_at(&set, 0), WORLD_SIZE);
 }
 
 void test_set_appartient_sets(){
     puts("\ttest_set_appartient_sets");
     struct sets_t set;
     sets_init(&set);
-    for(int i=0; i<10;i++)
+    for(int i=0; i<10; i++)
         sets_add(&set,i);
     int_test(set_appartient_sets(&set,9),1);
     int_test(set_appartient_sets(&set,100),0);
@@ -268,6 +282,7 @@ int main()
     test_sets();
     test_sets_set_initial_sets();
     test_sets_get_random();
+    test_sets_add_remove();
     test_set_appartient_sets();
 
     puts("test_pawns.c :");
