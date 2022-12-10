@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
             new_place = sets_get_random_place(&set);
 
             // Move the pawn
-            pawns_moves(world_ext_get_world(&world_ext), pawn, new_place);
+            world_ext_pawn_moves(&world_ext, pawn, current_player, new_place);
             printf("> Player %d moves the pawn from the case %d to the case %d.\n", turn+1, old_place, new_place);
         
             // Print the current world

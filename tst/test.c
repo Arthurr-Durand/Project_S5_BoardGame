@@ -136,47 +136,25 @@ void test_sets_add_remove()
     int_test(sets_get_place_at(&set, 0), WORLD_SIZE);
 }
 
-void test_set_appartient_sets(){
-    puts("\ttest_set_appartient_sets");
+void test_sets_is_in_set(){
+    puts("\ttest_sets_is_in_set");
     struct sets_t set;
     sets_init(&set);
     for(int i=0; i<10; i++)
         sets_add(&set,i);
-    int_test(set_appartient_sets(&set,9),1);
-    int_test(set_appartient_sets(&set,100),0);
-    int_test(set_appartient_sets(&set,-15),0);
-    int_test(set_appartient_sets(&set,6),1);
-    int_test(set_appartient_sets(&set,200),0);
-    int_test(set_appartient_sets(&set,4),1);
-    int_test(set_appartient_sets(&set,1),1);
+    int_test(sets_is_in_set(&set,9),1);
+    int_test(sets_is_in_set(&set,100),0);
+    int_test(sets_is_in_set(&set,-15),0);
+    int_test(sets_is_in_set(&set,6),1);
+    int_test(sets_is_in_set(&set,200),0);
+    int_test(sets_is_in_set(&set,4),1);
+    int_test(sets_is_in_set(&set,1),1);
 }
 
 void test_pawns_get_neighbors_nb()
 {
     puts("\ttest_pawns_get_neighbors_nb:");
     int_test(pawns_get_neighbors_nb(get_neighbors(33)),8);
-}
-
-void test_pawns_move()
-{
-    puts("\ttest_pawns_move:");
-    // init world and pawn
-    struct world_t* world = world_init();
-    struct pawns_t pawn;
-    pawns_init(&pawn, 1, WHITE, PAWN_SIMPLE, 0);
-    world_set_sort(world, 0, PAWN_SIMPLE);
-    world_set(world, 0, pawn.color);
-    int_test(world_get_sort(world, 0), PAWN_SIMPLE);
-    int_test(world_get(world, 0), WHITE);
-    int_test(world_get_sort(world, 69), NO_SORT);
-    int_test(world_get(world, 69), NO_COLOR);
-    // move the pawn from 0 to 69
-    pawns_moves(world, &pawn, 69);
-    int_test(world_get_sort(world, 0), NO_SORT);
-    int_test(world_get(world, 0), NO_COLOR);
-    int_test(world_get_sort(world, 69), PAWN_SIMPLE);
-    int_test(world_get(world, 69), WHITE);
-    int_test(pawns_get_position(&pawn), 69);
 }
 
 void test_players_init()
@@ -192,17 +170,14 @@ void test_players_init()
 void test_game_winning_cond()
 {
     puts("\ttest_game_winning_cond :");
-    struct world_t* world = world_init();
-    struct players_t players[3];
-    players_init(players, 3);
-    struct sets_t sets[3];
-    sets_list_init(sets, 3);
-    sets_set_initial_sets(3, sets);
-    players_set_initial_pawns(world, players, 3, sets, 1, PAWN_SIMPLE,0,0);
-    int_test(game_winning_cond(&players[1], sets, &players[1].pawns[0],3), 0);
-    pawns_moves(world,&players[1].pawns[0],1);
-    pawns_moves(world,&players[0].pawns[1],15);
-    int_test(game_winning_cond(&players[1], sets, &players[1].pawns[0],2), 1);
+    struct world_ext_t world_ext;
+    world_ext_init(&world_ext, 3, 0, 1, PAWN_SIMPLE, 0, 0);
+    struct players_t* player0 = world_ext_get_player_nb(&world_ext, 0);
+    struct players_t* player1 = world_ext_get_player_nb(&world_ext, 1);
+    int_test(game_winning_cond(player1, &world_ext_get_initial_sets(&world_ext)[0], players_get_pawn_at_index(player1, 0), 3), 0);
+    world_ext_pawn_moves(&world_ext, players_get_pawn_at_index(player0, 0), player1, 1);
+    world_ext_pawn_moves(&world_ext, players_get_pawn_at_index(player1, 0), player0, 0);
+    int_test(game_winning_cond(player1, &world_ext_get_initial_sets(&world_ext)[0], players_get_pawn_at_index(player1, 0), 3), 1);
 }
 
 void test_world_ext_get_all_moves_simple()
@@ -263,6 +238,27 @@ void test_world_ext_get_all_moves_king1st()
     int_test(sets_get_place_at(&set,19),100);
 }
 
+void test_world_ext_pawn_moves()
+{
+    puts("\ttest_world_ext_pawn_moves :");
+    struct world_ext_t world_ext;
+    world_ext_init(&world_ext, 1, 0, 1, PAWN_SIMPLE, 0, 0);
+    struct world_t* world = world_ext_get_world(&world_ext);
+    struct players_t* player = world_ext_get_player_nb(&world_ext, 0);
+    struct pawns_t* pawn = players_get_pawn_at_index(player, 0);
+    int_test(world_get_sort(world, 0), PAWN_SIMPLE);
+    int_test(world_get(world, 0), BLACK);
+    int_test(world_get_sort(world, 69), NO_SORT);
+    int_test(world_get(world, 69), NO_COLOR);
+    int_test(pawns_get_position(pawn), 0);
+    world_ext_pawn_moves(&world_ext, pawn, player, 69);
+    int_test(world_get_sort(world, 0), NO_SORT);
+    int_test(world_get(world, 0), NO_COLOR);
+    int_test(world_get_sort(world, 69), PAWN_SIMPLE);
+    int_test(world_get(world, 69), BLACK);
+    int_test(pawns_get_position(pawn), 69);
+}
+
 int main()
 {
     srand((unsigned int) time(NULL));
@@ -283,11 +279,10 @@ int main()
     test_sets_set_initial_sets();
     test_sets_get_random();
     test_sets_add_remove();
-    test_set_appartient_sets();
+    test_sets_is_in_set();
 
     puts("test_pawns.c :");
     test_pawns_get_neighbors_nb();
-    test_pawns_move();
 
     puts("test_players.c");
     test_players_init();
@@ -300,6 +295,7 @@ int main()
     test_world_ext_get_all_moves_tower();
     test_world_ext_get_all_moves_elefun();
     test_world_ext_get_all_moves_king1st();
+    test_world_ext_pawn_moves();
 
     return 0;
 }

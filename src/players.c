@@ -10,6 +10,7 @@ void _player_init(struct players_t* player, int index, enum color_t color)
 {
     player->index = index;
     player->pawns_nb = 0;
+    player->captured_pawns_nb = 0;
     player->color = color;
 }
 

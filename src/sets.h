@@ -30,7 +30,7 @@ void sets_add(struct sets_t* set, int nb);
 void sets_remove(struct sets_t* set, int place);
 
 /**  Return Bool  */
-int set_appartient_sets(const struct sets_t* set, const int idx);
+int sets_is_in_set(const struct sets_t* set, const int idx);
 
 /** Returns a random place in a set */
 int sets_get_random_place(struct sets_t* set);

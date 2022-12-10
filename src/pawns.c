@@ -49,12 +49,7 @@ void pawns_set_captured(struct pawns_t* pawn, int captured)
     pawn->captured = captured;
 }
 
-void pawns_moves(struct world_t* world, struct pawns_t* pawn, int new_position)
+void pawns_set_position(struct pawns_t* pawn, int new_position)
 {
-    int position = pawns_get_position(pawn);
-    world_set_sort(world, position, NO_SORT);
-    world_set(world, position, NO_COLOR);
     pawn->position = new_position;
-    world_set_sort(world, new_position, pawns_get_type(pawn));
-    world_set(world, new_position, pawn->color);
 }

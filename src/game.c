@@ -22,7 +22,7 @@ int game_winning_cond(struct players_t* player, struct sets_t set[], struct pawn
 {   
     int i = (players_get_index(player)+1)%nb_players;
     while (i != players_get_index(player)) {
-        if (set_appartient_sets(&set[i], pawns_get_position(pawn)))
+        if (sets_is_in_set(&set[i], pawns_get_position(pawn)))
             return 1;
         i = (i+1)%nb_players;
     }

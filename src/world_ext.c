@@ -8,17 +8,29 @@ void world_ext_init(struct world_ext_t* world_ext, int nb_players, int starting_
     world_ext->world = world_init();
     world_ext->nb_players = nb_players;
     players_init(world_ext->players, nb_players);
+
     sets_list_init(world_ext->initial_sets, nb_players);
     if (starting_position)
         sets_set_initial_sets_battleground(nb_players, world_ext->initial_sets);
     else
         sets_set_initial_sets(nb_players, world_ext->initial_sets);
     players_set_initial_pawns(world_ext->world, world_ext->players, nb_players, world_ext->initial_sets, max_dep, pawn_type, format, formae);
+
+    sets_list_init(world_ext->current_sets, nb_players);
+    for (int p = 0; p < world_ext_get_nb_players(world_ext); p++) {
+        for (int i = 0; i < sets_get_nb(world_ext->initial_sets); i++)
+            sets_add(&world_ext->current_sets[p], sets_get_place_at(world_ext->initial_sets, i));
+    }
 }
 
 struct world_t* world_ext_get_world(struct world_ext_t* world_ext)
 {
     return world_ext->world;
+}
+
+int world_ext_get_nb_players(const struct world_ext_t* world_ext)
+{
+    return world_ext->nb_players;
 }
 
 struct players_t* world_ext_get_player_nb(struct world_ext_t* world_ext, int nb)
@@ -135,4 +147,17 @@ void world_ext_get_all_moves(struct world_ext_t* world_ext, struct sets_t* set, 
             _world_ext_get_all_moves_simple(world_ext, set, pawn);
             break;
     }
+}
+
+void world_ext_pawn_moves(struct world_ext_t* world_ext, struct pawns_t* pawn, struct players_t* player, int new_position)
+{
+    int position = pawns_get_position(pawn);
+    struct world_t* world = world_ext_get_world(world_ext);
+    world_set_sort(world, position, NO_SORT);
+    world_set(world, position, NO_COLOR);
+    sets_remove(&world_ext_get_current_sets(world_ext)[players_get_index(player)], position);
+    pawns_set_position(pawn, new_position);
+    world_set_sort(world, new_position, pawns_get_type(pawn));
+    world_set(world, new_position, pawn->color);
+    sets_add(&world_ext_get_current_sets(world_ext)[players_get_index(player)], new_position);
 }

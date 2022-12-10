@@ -32,10 +32,13 @@ int sets_get_place_at(const struct sets_t* set, const int nb)
 
 int sets_get_position_of(const struct sets_t* set, const int place)
 {
-    int position = 0;
-    while ((sets_get_place_at(set, position) != place) && (sets_get_place_at(set, position) != UINT_MAX))
-        position++;
-    return position;
+    if (sets_is_in_set(set, place)) {
+        for (int i = 0; sets_get_place_at(set, i) != UINT_MAX; ++i) {
+            if (sets_get_place_at(set, i) == place)
+                return i;
+        }
+    }
+    return -1;
 }
 
 void sets_add(struct sets_t* s, int p)
@@ -55,7 +58,7 @@ void sets_remove(struct sets_t* set, int place)
     }
 }
 
-int set_appartient_sets(const struct sets_t* set, const int idx)
+int sets_is_in_set(const struct sets_t* set, const int idx)
 {
     for (int i = 0; sets_get_place_at(set, i) != UINT_MAX; ++i)
         if (sets_get_place_at(set, i) == idx)
