@@ -117,3 +117,14 @@
 
 	- Ameliorer le makefile 
 	- Finir l'ACHIEV2
+
+## [ACHIEV2/3][13/12/2022]
+
+	- Makefile clean
+	- Avancement des achiev2 et 3 
+	- Principalement de la correction de bug et des tests 
+	- SEGMENTATION FAULT 
+
+[OBJECTIES]
+
+	- Finir les deux achievements et surtout corriger les bogs
