@@ -48,14 +48,26 @@ struct sets_t* world_ext_get_current_sets(struct world_ext_t* world_ext)
     return world_ext->current_sets;
 }
 
-void _world_ext_get_all_moves_simple(struct world_ext_t* world_ext, struct sets_t* set, struct pawns_t* pawn)
+int _world_ext_test_capture(struct world_ext_t* world_ext, struct players_t* current_player, int new_position)
+{
+    int current_player_index = players_get_index(current_player);
+    if (sets_is_in_set(&world_ext_get_current_sets(world_ext)[current_player_index], new_position)) // 0 si le pion appartient au joueur
+        return 0;
+    for (int i = 0; i < world_ext_get_nb_players(world_ext); i++) { // 0 si le pion est dans une position de départ
+        if ((i != current_player_index) && sets_is_in_set(&world_ext_get_initial_sets(world_ext)[i], new_position))
+            return 0;
+    }
+    return 1;
+}
+
+void _world_ext_get_all_moves_simple(struct world_ext_t* world_ext, struct sets_t* set, struct players_t* current_player, struct pawns_t* pawn)
 {
     int idx, d;
     for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors(pawns_get_position(pawn)))); ++k) {
         idx = get_neighbors(pawns_get_position(pawn)).n[k].i;
         d = get_neighbors(pawns_get_position(pawn)).n[k].d;
         for (int i = 0; i < pawns_get_max_dep(pawn); i++) {
-            if (!world_get_sort(world_ext_get_world(world_ext), idx))
+            if (!world_get_sort(world_ext_get_world(world_ext), idx) || _world_ext_test_capture(world_ext, current_player, idx))
                 sets_add(set, idx);
             idx = get_neighbor(idx,d);
         }
@@ -131,7 +143,7 @@ void _world_ext_get_all_moves_king1st(struct world_ext_t* world_ext, struct sets
     }
 }
 
-void world_ext_get_all_moves(struct world_ext_t* world_ext, struct sets_t* set, struct pawns_t* pawn)
+void world_ext_get_all_moves(struct world_ext_t* world_ext, struct sets_t* set, struct players_t* current_player, struct pawns_t* pawn)
 {
     switch (pawns_get_type(pawn)) {
         case PAWN_TOWER:
@@ -144,7 +156,7 @@ void world_ext_get_all_moves(struct world_ext_t* world_ext, struct sets_t* set, 
             _world_ext_get_all_moves_king1st(world_ext, set, pawn);
             break;
         default:
-            _world_ext_get_all_moves_simple(world_ext, set, pawn);
+            _world_ext_get_all_moves_simple(world_ext, set, current_player, pawn);
             break;
     }
 }
@@ -153,6 +165,11 @@ void world_ext_pawn_moves(struct world_ext_t* world_ext, struct pawns_t* pawn, s
 {
     int position = pawns_get_position(pawn);
     struct world_t* world = world_ext_get_world(world_ext);
+
+    /* if (world_get_sort(world, new_position)) { // Capture
+
+    } */
+
     world_set_sort(world, position, NO_SORT);
     world_set(world, position, NO_COLOR);
     sets_remove(&world_ext_get_current_sets(world_ext)[players_get_index(player)], position);

@@ -117,7 +117,8 @@ void test_sets_get_random()
     world_ext_init(&world_ext, 2, 0, 1, PAWN_SIMPLE, 0, 0);
     struct sets_t set;
     sets_init(&set);
-    world_ext_get_all_moves(&world_ext, &set, players_get_pawn_at_index(world_ext_get_player_nb(&world_ext, 0), 0));
+    struct players_t* player = world_ext_get_player_nb(&world_ext, 0);
+    world_ext_get_all_moves(&world_ext, &set, player, players_get_pawn_at_index(player, 0));
     for (int i = 0; i < 5; ++i)
         printf("\t\t> %d\n", sets_get_random_place(&set));
 }
@@ -187,7 +188,8 @@ void test_world_ext_get_all_moves_simple()
     world_ext_init(&world_ext, 2, 0, 2, PAWN_SIMPLE, 0, 0);
     struct sets_t set;
     sets_init(&set);
-    world_ext_get_all_moves(&world_ext, &set, players_get_pawn_at_index(world_ext_get_player_nb(&world_ext, 0), 0));
+    struct players_t* player = world_ext_get_player_nb(&world_ext, 0);
+    world_ext_get_all_moves(&world_ext, &set, player, players_get_pawn_at_index(player, 0));
     int_test(sets_get_place_at(&set,0),11);
     int_test(sets_get_place_at(&set,3),20);
     int_test(sets_get_place_at(&set,6),91);
@@ -202,7 +204,8 @@ void test_world_ext_get_all_moves_tower()
     world_ext_init(&world_ext, 2, 0, 10, PAWN_TOWER, 0, 0);
     struct sets_t set;
     sets_init(&set);
-    world_ext_get_all_moves(&world_ext, &set, players_get_pawn_at_index(world_ext_get_player_nb(&world_ext, 0), 0));
+    struct players_t* player = world_ext_get_player_nb(&world_ext, 0);
+    world_ext_get_all_moves(&world_ext, &set, player, players_get_pawn_at_index(player, 0));
     int_test(sets_get_place_at(&set,0),10);
     int_test(sets_get_place_at(&set,3),40);
     int_test(sets_get_place_at(&set,6),70);
@@ -216,7 +219,8 @@ void test_world_ext_get_all_moves_elefun()
     world_ext_init(&world_ext, 2, 0, 2, PAWN_ELEFUN, 0, 0);
     struct sets_t set;
     sets_init(&set);
-    world_ext_get_all_moves(&world_ext, &set, players_get_pawn_at_index(world_ext_get_player_nb(&world_ext, 0), 0));
+    struct players_t* player = world_ext_get_player_nb(&world_ext, 0);
+    world_ext_get_all_moves(&world_ext, &set, player, players_get_pawn_at_index(player, 0));
     int_test(sets_get_place_at(&set,0),11);
     int_test(sets_get_place_at(&set,3),19);
     int_test(sets_get_place_at(&set,6),80);
@@ -230,7 +234,8 @@ void test_world_ext_get_all_moves_king1st()
     world_ext_init(&world_ext, 2, 0, 1, PAWN_KING1ST, 0, 0);
     struct sets_t set;
     sets_init(&set);
-    world_ext_get_all_moves(&world_ext, &set, players_get_pawn_at_index(world_ext_get_player_nb(&world_ext, 0), 0));
+    struct players_t* player = world_ext_get_player_nb(&world_ext, 0);
+    world_ext_get_all_moves(&world_ext, &set, player, players_get_pawn_at_index(player, 0));
     int_test(sets_get_place_at(&set,0),11);
     int_test(sets_get_place_at(&set,3),19);
     int_test(sets_get_place_at(&set,6),31);
@@ -257,6 +262,22 @@ void test_world_ext_pawn_moves()
     int_test(world_get_sort(world, 69), PAWN_SIMPLE);
     int_test(world_get(world, 69), BLACK);
     int_test(pawns_get_position(pawn), 69);
+}
+
+void test_world_ext_test_capture()
+{
+    puts("\ttest_world_ext_test_capture :");
+    struct world_ext_t world_ext;
+    world_ext_init(&world_ext, 2, 0, 1, PAWN_SIMPLE, 0, 0);
+    struct players_t* player0 = world_ext_get_player_nb(&world_ext, 0);
+    struct players_t* player1 = world_ext_get_player_nb(&world_ext, 1);
+    struct pawns_t* pawn0 = players_get_pawn_at_index(player0, 0);
+    struct pawns_t* pawn1 = players_get_pawn_at_index(player1, 0);
+    world_ext_pawn_moves(&world_ext, pawn1, player1, 10);
+    struct sets_t set;
+    sets_init(&set);
+    world_ext_get_all_moves(&world_ext, &set, player0, pawn0);
+    int_test(sets_is_in_set(&set, 10), 1);
 }
 
 int main()
@@ -296,6 +317,7 @@ int main()
     test_world_ext_get_all_moves_elefun();
     test_world_ext_get_all_moves_king1st();
     test_world_ext_pawn_moves();
+    test_world_ext_test_capture();
 
     return 0;
 }

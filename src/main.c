@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
         int new_place;
         struct sets_t set;
         sets_init(&set);
-        world_ext_get_all_moves(&world_ext, &set, pawn);
+        world_ext_get_all_moves(&world_ext, &set, current_player, pawn);
         if (sets_get_nb(&set)) { // If the pawn can go somewhere.
             old_place = pawns_get_position(pawn);
             new_place = sets_get_random_place(&set);
