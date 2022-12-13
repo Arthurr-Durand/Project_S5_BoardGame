@@ -4,7 +4,7 @@
 #include "geometry.h"
 
 /** The number of relations in the code */
-#define MAX_RELATIONS 1
+#define MAX_RELATIONS 3
 /** The maximum number of neighbors for a place */
 #define MAX_NEIGHBORS 8
 
@@ -36,5 +36,7 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d);
 /** Returns the list of the neighbors of the place `idx`, terminated
     by UINT_MAX.  */
 struct neighbors_t get_neighbors(unsigned int idx);
+
+
 
 #endif // __NEIGHBORS_H__
