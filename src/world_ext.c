@@ -99,7 +99,7 @@ void _world_ext_get_all_moves_elefun(struct world_ext_t* world_ext, struct sets_
             case SOUTH:
             case NORTH:
                 for (int i = 0; i < pawns_get_max_dep(pawn); i++) {
-                    if (!world_get_sort(world_ext_get_world(world_ext), idx))
+                    if ((!world_get_sort(world_ext_get_world(world_ext),idx)) && ((i!=0) || ((pawns_get_max_dep(pawn)%2)!=0)) )
                         sets_add(set, idx);
                     idx = get_neighbor(idx,d);
                 }
