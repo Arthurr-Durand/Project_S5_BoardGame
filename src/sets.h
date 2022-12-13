@@ -42,9 +42,9 @@ void sets_set_sorts(struct sets_t* set, struct world_t* world, enum sort_t sort)
 void sets_set_colors(struct sets_t* set, struct world_t* world, enum color_t color);
 
 /** Sets the initial set for a number of players */
-void sets_set_initial_sets(int nb_players, struct sets_t sets[]);
+void sets_set_initial_sets(int nb_players, struct sets_t initial_sets[], struct sets_t current_sets[]);
 
 /** Sets the initial battle ground set for a number of player <4 */
-void sets_set_initial_sets_battleground(int nb_players, struct sets_t sets[]);
+void sets_set_initial_sets_battleground(int nb_players, struct sets_t sets[], struct sets_t current_sets[]);
 
 #endif // __SETS_H__

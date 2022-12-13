@@ -106,8 +106,12 @@ void test_sets_set_initial_sets()
     sets_init(&sets[0]);
     sets_init(&sets[1]);
     sets_init(&sets[2]);
+    struct sets_t c_sets[3];
+    sets_init(&c_sets[0]);
+    sets_init(&c_sets[1]);
+    sets_init(&c_sets[2]);
     // set_initials_sets
-    sets_set_initial_sets(3, sets);
+    sets_set_initial_sets(3, sets, c_sets);
     int_test(sets_get_nb(&sets[0]), 10);
     int_test(sets_get_nb(&sets[2]), 10);
 }

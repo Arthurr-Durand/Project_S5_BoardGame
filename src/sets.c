@@ -83,25 +83,27 @@ void sets_set_colors(struct sets_t* set, struct world_t* world, enum color_t col
         world_set(world, i, color);
 }
 
-void sets_set_initial_sets(int nb_players, struct sets_t sets[])
+void sets_set_initial_sets(int nb_players, struct sets_t initial_sets[], struct sets_t current_sets[])
 {
     for(int i = 0; i < nb_players; i++) {
         int p = 0;
         for (int k =((HEIGHT/nb_players)*WIDTH); k < (((HEIGHT/nb_players)+1)*WIDTH); k++) {
-            sets_add(&sets[i], ((i*WIDTH*HEIGHT)/nb_players)+p);
+            sets_add(&initial_sets[i], ((i*WIDTH*HEIGHT)/nb_players)+p);
+            sets_add(&current_sets[i], ((i*WIDTH*HEIGHT)/nb_players)+p);
             p+=1;
         }
     }
     
 }
 
-void sets_set_initial_sets_battleground(int nb_players, struct sets_t sets[])
+void sets_set_initial_sets_battleground(int nb_players, struct sets_t initial_sets[], struct sets_t current_sets[])
 {
     for(int i = 0; i < nb_players; i++) {
         int p = 1;
         for (int k =((HEIGHT/nb_players)*WIDTH)+1; k < (((HEIGHT/nb_players)+1)*WIDTH)-1; k++) {
             for (int j=1;j<((WIDTH-(2*nb_players))/nb_players)+1;j++){
-                sets_add(&sets[i], ((i*WIDTH*HEIGHT)/nb_players)+p+WIDTH*j); 
+                sets_add(&initial_sets[i], ((i*WIDTH*HEIGHT)/nb_players)+p+WIDTH*j);
+                sets_add(&current_sets[i], ((i*WIDTH*HEIGHT)/nb_players)+p+WIDTH*j);
             }
             p+=1;
         }

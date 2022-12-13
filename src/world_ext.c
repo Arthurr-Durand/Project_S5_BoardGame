@@ -12,17 +12,12 @@ void world_ext_init(struct world_ext_t* world_ext, int nb_players, int starting_
     players_init(world_ext->players, nb_players);
 
     sets_list_init(world_ext->initial_sets, nb_players);
-    if (starting_position)
-        sets_set_initial_sets_battleground(nb_players, world_ext->initial_sets);
-    else
-        sets_set_initial_sets(nb_players, world_ext->initial_sets);
-    players_set_initial_pawns(world_ext->world, world_ext->players, nb_players, world_ext->initial_sets, max_dep, pawn_type, format, formae);
-
     sets_list_init(world_ext->current_sets, nb_players);
-    for (int p = 0; p < world_ext_get_nb_players(world_ext); p++) {
-        for (int i = 0; i < sets_get_nb(world_ext->initial_sets); i++)
-            sets_add(&world_ext->current_sets[p], sets_get_place_at(&world_ext->initial_sets[p], i));
-    }
+    if (starting_position)
+        sets_set_initial_sets_battleground(nb_players, world_ext->initial_sets, world_ext->current_sets);
+    else
+        sets_set_initial_sets(nb_players, world_ext->initial_sets, world_ext->current_sets);
+    players_set_initial_pawns(world_ext->world, world_ext->players, nb_players, world_ext->initial_sets, max_dep, pawn_type, format, formae);
 
     world_ext->nb_captured_pawns = 0;
 }
@@ -120,7 +115,7 @@ void _world_ext_get_all_moves_tower(struct world_ext_t* world_ext, struct sets_t
             case SOUTH:
             case NORTH:
                 for (int i = 0; i < pawns_get_max_dep(pawn); i++) {
-                    if (world_get_sort(world_ext_get_world(world_ext), idx))
+                    if (world_get_sort(world_ext_get_world(world_ext), idx) && !_world_ext_test_capture(world_ext, pawns_get_player_index(pawn), idx))
                         break;
                     else
                         sets_add(set, idx);
@@ -145,12 +140,14 @@ void _world_ext_get_all_moves_elefun(struct world_ext_t* world_ext, struct sets_
                 case WEST:
                 case SOUTH:
                 case NORTH:
-
                     // if ((!world_get_sort(world_ext_get_world(world_ext),idx)) && ((i!=0) || ((pawns_get_max_dep(pawn)%2)!=0)))
-                    if ((!world_get_sort(world_ext_get_world(world_ext),idx)) && ((i!=0)))
-                        sets_add(set, idx);
+                    
+                    // if ((!world_get_sort(world_ext_get_world(world_ext),idx)) && ((i!=0)))
+                    if (i!=0) {
+                        if ((!world_get_sort(world_ext_get_world(world_ext),idx)) || _world_ext_test_capture(world_ext, pawns_get_player_index(pawn), idx))
+                            sets_add(set, idx);
+                    }
                     idx = get_neighbor(idx,d);
-                
                 break;
             default:
                 break;
