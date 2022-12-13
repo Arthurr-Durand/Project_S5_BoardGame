@@ -105,25 +105,22 @@ void _world_ext_get_all_moves_elefun(struct world_ext_t* world_ext, struct sets_
     for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors(pawns_get_position(pawn)))); ++k) {
         idx = get_neighbors(pawns_get_position(pawn)).n[k].i;
         d = get_neighbors(pawns_get_position(pawn)).n[k].d;
-        switch (d) {
-            case EAST:
-            case WEST:
-            case SOUTH:
-            case NORTH:
-                for (int i = 0; i < pawns_get_max_dep(pawn); i++) {
+        for (int i = 0; i < pawns_get_max_dep(pawn); i++) {
+            switch (d) {
+                case EAST:
+                case WEST:
+                case SOUTH:
+                case NORTH:
+
                     // if ((!world_get_sort(world_ext_get_world(world_ext),idx)) && ((i!=0) || ((pawns_get_max_dep(pawn)%2)!=0)))
                     if ((!world_get_sort(world_ext_get_world(world_ext),idx)) && ((i!=0)))
                         sets_add(set, idx);
                     idx = get_neighbor(idx,d);
-                }
+                
                 break;
             default:
-                for (int i = 0; i < pawns_get_max_dep(pawn)-1; i++) {
-                    if (!world_get_sort(world_ext_get_world(world_ext), idx))
-                        sets_add(set, idx);
-                    idx = get_neighbor(idx,d);
-                }
                 break;
+        }
         }
     }
 }
