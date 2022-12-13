@@ -52,7 +52,7 @@ void test_world_set_get()
 void test_get_neighbor()
 {
     puts("\ttest_get_neighbor :");
-    init_neighbors(0);
+    // init_neighbors(0);
     int_test(get_neighbor(90, NEAST), 81);
     int_test(get_neighbor(6, EAST), 7);
     int_test(get_neighbor(28, SEAST), 39);
@@ -63,7 +63,7 @@ void test_get_neighbor()
 void test_get_neighbors()
 {
     puts("\ttest_get_neighbors :");
-    init_neighbors(2);
+    // init_neighbors(2);
     int_test(get_neighbors(0).n[0].i, 11);
     int_test(get_neighbors(0).n[0].d, SEAST);
     int_test(get_neighbors(33).n[0].i, WORLD_SIZE);
@@ -185,7 +185,7 @@ void test_game_winning_cond()
 
 void test_world_ext_get_all_moves_simple()
 {
-    init_neighbors(0);
+    //init_neighbors(0);
     puts("\ttest_world_get_all_moves_simple:");
     struct world_ext_t world_ext;
     world_ext_init(&world_ext, 2, 0, 2, PAWN_SIMPLE, 0, 0);
@@ -202,7 +202,7 @@ void test_world_ext_get_all_moves_simple()
 
 void test_world_ext_get_all_moves_tower()
 {
-    init_neighbors(0);
+    //init_neighbors(0);
     puts("\ttest_world_get_all_moves_tower:");
     struct world_ext_t world_ext;
     world_ext_init(&world_ext, 2, 0, 10, PAWN_TOWER, 0, 0);
@@ -218,7 +218,7 @@ void test_world_ext_get_all_moves_tower()
 
 void test_world_ext_get_all_moves_elefun()
 {
-    init_neighbors(0);
+    //init_neighbors(0);
     puts("\ttest_world_get_all_moves_elefun:");
     struct world_ext_t world_ext;
     world_ext_init(&world_ext, 2, 0, 2, PAWN_ELEFUN, 0, 0);
