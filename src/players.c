@@ -42,7 +42,7 @@ enum color_t players_get_color(const struct players_t* players)
 
 void players_add_pawn(struct players_t* player, int max_dep, enum sort_t type, int position)
 {
-    pawns_init(&player->pawns[players_get_nb_pawns(player)], max_dep, player->color, type, position);
+    pawns_init(&player->pawns[players_get_nb_pawns(player)], players_get_index(player), max_dep, player->color, type, position);
     player->pawns_nb++;
 }
 
@@ -72,9 +72,4 @@ void players_set_initial_pawns(struct world_t* world, struct players_t players[]
             world_set(world, position, players[i].color);            
         }
     }
-}
-
-struct pawns_t* players_get_random_pawn(struct players_t* player)
-{
-    return &player->pawns[rand()%players_get_nb_pawns(player)];
 }

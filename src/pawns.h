@@ -6,6 +6,7 @@
 
 /** A struct representing a piece */
 struct pawns_t {
+    int player_index;
     int max_dep;
     enum color_t color;
     enum sort_t type;
@@ -14,13 +15,16 @@ struct pawns_t {
 };
 
 /** Inits a pawn */
-void pawns_init(struct pawns_t* pawn, int max_dep, enum color_t color, enum sort_t type, int position);
+void pawns_init(struct pawns_t* pawn, int player_index, int max_dep, enum color_t color, enum sort_t type, int position);
 
-/** Returns the type of a pawn */
-enum sort_t pawns_get_type(const struct pawns_t* pawn);
+/** Returns the index of the player that own the pawn */
+int pawns_get_player_index(const struct pawns_t* pawn);
 
 /** Returns the maximum depth of a pawn */
 int pawns_get_max_dep(const struct pawns_t* pawn);
+
+/** Returns the type of a pawn */
+enum sort_t pawns_get_type(const struct pawns_t* pawn);
 
 /** Returns the position of a pawn */
 int pawns_get_position(const struct pawns_t* pawn);

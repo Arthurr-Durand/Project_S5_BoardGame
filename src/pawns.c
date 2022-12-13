@@ -7,8 +7,9 @@
 
 struct pawns_t;
 
-void pawns_init(struct pawns_t* pawn, int max_dep, enum color_t color, enum sort_t type, int position)
+void pawns_init(struct pawns_t* pawn, int player_index, int max_dep, enum color_t color, enum sort_t type, int position)
 {
+    pawn->player_index = player_index;
     pawn->max_dep = max_dep;
     pawn->color = color;
     pawn->type = type;
@@ -16,14 +17,19 @@ void pawns_init(struct pawns_t* pawn, int max_dep, enum color_t color, enum sort
     pawn->captured = 0;
 }
 
-enum sort_t pawns_get_type(const struct pawns_t* pawn)
+int pawns_get_player_index(const struct pawns_t* pawn)
 {
-    return pawn->type;
+    return pawn->player_index;
 }
 
 int pawns_get_max_dep(const struct pawns_t* pawn)
 {
     return pawn->max_dep;
+}
+
+enum sort_t pawns_get_type(const struct pawns_t* pawn)
+{
+    return pawn->type;
 }
 
 int pawns_get_position(const struct pawns_t* pawn)

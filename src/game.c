@@ -18,6 +18,16 @@ void print_game(const struct world_t* world)
     }
 }
 
+void print_captured_pawns(struct world_ext_t* world_ext)
+{
+    struct pawns_t* pawn;
+    for (int i = 0; i < world_ext_get_nb_captured_pawns(world_ext); i++) {
+        pawn = world_ext_get_captured_pawn_at_index(world_ext, i);
+        printf("%s ", pawn_strings[players_get_color(world_ext_get_player_nb(world_ext, pawns_get_player_index(pawn)))-1][pawns_get_type(pawn)]);
+    }
+    printf("\n");
+}
+
 int game_winning_cond(struct players_t* player, struct sets_t set[], struct pawns_t* pawn,int nb_players)
 {   
     int i = (players_get_index(player)+1)%nb_players;

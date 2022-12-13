@@ -60,12 +60,13 @@ int main(int argc, char* argv[])
     // int i=0;
     // int p=0;
     while (game) {
-    //    if ((i%10)==0){
-      //      puts("!GLISSEMENT DE TERRAIN!\n");
-        //    init_neighbors(p);
-        //    p++;
-        //}
-    // init_neighbors(0);
+        // if ((i%10)==0){
+        // puts("!GLISSEMENT DE TERRAIN!\n");
+        // init_neighbors(p);
+        // p++;
+        // }
+        // init_neighbors(0);
+
         // Round
         round++;
         printf("=============== Round %d ================\n", round);
@@ -77,25 +78,28 @@ int main(int argc, char* argv[])
 
         // Get a random pawn
         struct pawns_t* pawn;
-        pawn = players_get_random_pawn(current_player);
+        // pawn = players_get_random_pawn(current_player);
+        pawn = word_ext_get_random_pawn(&world_ext, players_get_index(current_player));
 
         // Get a random moves
         int old_place;
         int new_place;
         struct sets_t set;
         sets_init(&set);
-        world_ext_get_all_moves(&world_ext, &set, current_player, pawn);
+        world_ext_get_all_moves(&world_ext, &set, pawn);
         if (sets_get_nb(&set)) { // If the pawn can go somewhere.
             old_place = pawns_get_position(pawn);
             new_place = sets_get_random_place(&set);
 
             // Move the pawn
-            world_ext_pawn_moves(&world_ext, pawn, current_player, new_place);
+            world_ext_pawn_moves(&world_ext, pawn, new_place);
             printf("> Player %d moves the pawn from the case %d to the case %d.\n", turn+1, old_place, new_place);
         
             // Print the current world
-            puts("> Print game state .\n");
+            puts("> Game state :");
             print_game(world_ext_get_world(&world_ext));
+            puts("\n> Captured pawns :");
+            print_captured_pawns(&world_ext);
         } else
             printf("> Player %d has chosen a pawn that cannot move !\n", turn+1);
         
