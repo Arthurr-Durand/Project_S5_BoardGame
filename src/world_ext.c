@@ -83,8 +83,7 @@ int _world_ext_test_capture(struct world_ext_t* world_ext, int current_player_in
     if (sets_is_in_set(&world_ext_get_current_sets(world_ext)[current_player_index], new_position))
         return 0;
     for (int i = 0; i < world_ext_get_nb_players(world_ext); i++) {
-        if ((i != current_player_index) && sets_is_in_set(&world_ext_get_initial_sets(world_ext)[i], new_position))
-        // if (sets_is_in_set(&world_ext_get_initial_sets(world_ext)[i], new_position))
+        if (sets_is_in_set(&world_ext_get_initial_sets(world_ext)[i], new_position))
             return 0;
     }
     return 1;

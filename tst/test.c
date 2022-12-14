@@ -292,7 +292,7 @@ void test_world_ext_pawn_moves()
     int_test(pawns_get_position(pawn), 69);
 }
 
-void test_world_ext_test_capture()
+void test_world_ext_test_capture_1()
 {
     puts("\ttest_world_ext_test_capture :");
     struct world_ext_t world_ext;
@@ -308,15 +308,26 @@ void test_world_ext_test_capture()
     int_test(sets_is_in_set(&set, 10), 1);
     int_test(sets_is_in_set(&set, 9), 0);
     int_test(sets_is_in_set(&set, 1), 0);
-    /* struct pawns_t* pawn2 = players_get_pawn_at_index(player0, 1);
-    world_ext_pawn_moves(&world_ext, pawn2, 20);
-    world_ext_pawn_moves(&world_ext, pawn1, 1);
-    struct sets_t set1;
-    sets_init(&set1);
-    world_ext_get_all_moves(&world_ext, &set1, pawn0);
-    int_test(sets_is_in_set(&set1, 0), 0);
-    int_test(sets_is_in_set(&set1, 1), 0);
-    int_test(sets_is_in_set(&set1, 10), 1); */
+}
+
+void test_world_ext_test_capture_2()
+{
+    puts("\ttest_world_ext_test_capture :");
+    struct world_ext_t world_ext;
+    world_ext_init(&world_ext, 2, 0, 1, PAWN_SIMPLE, 0, 0);
+    struct players_t* player0 = world_ext_get_player_nb(&world_ext, 0);
+    struct players_t* player1 = world_ext_get_player_nb(&world_ext, 1);
+    struct pawns_t* pawn0 = players_get_pawn_at_index(player0, 0);
+    struct pawns_t* pawn1 = players_get_pawn_at_index(player1, 0);
+    struct pawns_t* pawn2 = players_get_pawn_at_index(player0, 1);
+    world_ext_pawn_moves(&world_ext, pawn0, 10);
+    world_ext_pawn_moves(&world_ext, pawn1, 0);
+    struct sets_t set;
+    sets_init(&set);
+    world_ext_get_all_moves(&world_ext, &set, pawn2);
+    int_test(sets_is_in_set(&set, 10), 0);
+    int_test(sets_is_in_set(&set, 9), 0);
+    int_test(sets_is_in_set(&set, 0), 0);
 }
 
 int main()
@@ -357,7 +368,8 @@ int main()
     test_world_ext_get_all_moves_elefun();
     test_world_ext_get_all_moves_king1st();
     test_world_ext_pawn_moves();
-    test_world_ext_test_capture();
+    test_world_ext_test_capture_1();
+    test_world_ext_test_capture_2();
 
     return 0;
 }
