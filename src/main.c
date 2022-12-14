@@ -7,7 +7,7 @@
 
 #define UNIT_MAX WORLD_SIZE
 #define PLAYERS_NB 2
-#define STARTING_POSITION 0 // 0 : classic, 1 : BATTLEGROUND
+#define STARTING_POSITION 1 // 0 : classic, 1 : BATTLEGROUND
 #define MAX_DEP 1
 #define PAWN_TYPE PAWN_SIMPLE
 #define FORMAT 3  // max 3 pour normal et min 3 pour BG

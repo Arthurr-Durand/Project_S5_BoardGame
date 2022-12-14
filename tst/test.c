@@ -308,6 +308,15 @@ void test_world_ext_test_capture()
     int_test(sets_is_in_set(&set, 10), 1);
     int_test(sets_is_in_set(&set, 9), 0);
     int_test(sets_is_in_set(&set, 1), 0);
+    struct pawns_t* pawn2 = players_get_pawn_at_index(player0, 1);
+    world_ext_pawn_moves(&world_ext, pawn2, 20);
+    world_ext_pawn_moves(&world_ext, pawn1, 1);
+    struct sets_t set1;
+    sets_init(&set1);
+    world_ext_get_all_moves(&world_ext, &set1, pawn0);
+    int_test(sets_is_in_set(&set1, 0), 0);
+    int_test(sets_is_in_set(&set1, 1), 0);
+    int_test(sets_is_in_set(&set1, 10), 1);
 }
 
 int main()

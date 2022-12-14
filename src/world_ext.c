@@ -80,10 +80,10 @@ struct pawns_t* world_ext_get_pawn_at_position(struct world_ext_t* world_ext, in
 
 int _world_ext_test_capture(struct world_ext_t* world_ext, int current_player_index, int new_position)
 {
-    if (sets_is_in_set(&world_ext_get_current_sets(world_ext)[current_player_index], new_position)) // 0 si le pion appartient au joueur
+    if (sets_is_in_set(&world_ext_get_current_sets(world_ext)[current_player_index], new_position))
         return 0;
-    for (int i = 0; i < world_ext_get_nb_players(world_ext); i++) { // 0 si le pion est dans une position de départ
-        if ((i != current_player_index) && sets_is_in_set(&world_ext_get_initial_sets(world_ext)[i], new_position))
+    for (int i = 0; i < world_ext_get_nb_players(world_ext); i++) {
+        if (sets_is_in_set(&world_ext_get_initial_sets(world_ext)[i], new_position))
             return 0;
     }
     return 1;
@@ -140,9 +140,6 @@ void _world_ext_get_all_moves_elefun(struct world_ext_t* world_ext, struct sets_
                 case WEST:
                 case SOUTH:
                 case NORTH:
-                    // if ((!world_get_sort(world_ext_get_world(world_ext),idx)) && ((i!=0) || ((pawns_get_max_dep(pawn)%2)!=0)))
-                    
-                    // if ((!world_get_sort(world_ext_get_world(world_ext),idx)) && ((i!=0)))
                     if (i!=0) {
                         if ((!world_get_sort(world_ext_get_world(world_ext),idx)) || _world_ext_test_capture(world_ext, pawns_get_player_index(pawn), idx))
                             sets_add(set, idx);
