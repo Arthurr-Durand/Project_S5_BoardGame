@@ -47,4 +47,6 @@ void sets_set_initial_sets(int nb_players, struct sets_t initial_sets[], struct 
 /** Sets the initial battle ground set for a number of player <4 */
 void sets_set_initial_sets_battleground(int nb_players, struct sets_t sets[], struct sets_t current_sets[]);
 
+void sets_get_good_places(struct sets_t* set, struct sets_t iniset[]);
+
 #endif // __SETS_H__
