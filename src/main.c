@@ -20,10 +20,10 @@ int main(int argc, char* argv[])
     unsigned int end_type = 0; // 0 : victoire simple, 1 : victoire complexe
     unsigned int max_rounds = 2*WIDTH*HEIGHT;
     unsigned int rand_seed = (unsigned int)time(NULL);
-
+    unsigned int earthquake = 15; 
     // Get options
     int opts;
-    while ((opts = getopt(argc, argv, ":s:t:m:")) != -1) {
+    while ((opts = getopt(argc, argv, ":s:t:m:e:")) != -1) {
         switch (opts) {
         case 's':
             rand_seed = atoi(optarg);
@@ -33,6 +33,10 @@ int main(int argc, char* argv[])
             break;
         case 'm':
             max_rounds = atoi(optarg);
+            break;
+        case 'e':
+            earthquake= atoi(optarg);
+            break;
         default:
             break;
         }
@@ -59,7 +63,7 @@ int main(int argc, char* argv[])
     int p=0;
     while (game) {
 
-        if ((round%10)==0){
+        if ((round%earthquake)==0){
         puts("!GLISSEMENT DE TERRAIN!\n");
         init_neighbors(p%3);
         p++;
