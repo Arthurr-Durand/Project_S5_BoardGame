@@ -234,7 +234,7 @@ void test_world_ext_get_current_sets()
 
 void test_world_ext_get_all_moves_simple()
 {
-    //init_neighbors(0);
+    init_neighbors(0);
     puts("\ttest_world_get_all_moves_simple:");
     struct world_ext_t world_ext;
     world_ext_init(&world_ext, 2, 0, 2, PAWN_SIMPLE, 0, 0);
@@ -251,7 +251,7 @@ void test_world_ext_get_all_moves_simple()
 
 void test_world_ext_get_all_moves_tower()
 {
-    //init_neighbors(0);
+    init_neighbors(0);
     puts("\ttest_world_get_all_moves_tower:");
     struct world_ext_t world_ext;
     world_ext_init(&world_ext, 2, 0, 10, PAWN_TOWER, 0, 0);
@@ -267,7 +267,7 @@ void test_world_ext_get_all_moves_tower()
 
 void test_world_ext_get_all_moves_elefun()
 {
-    //init_neighbors(0);
+    init_neighbors(0);
     puts("\ttest_world_get_all_moves_elefun:");
     struct world_ext_t world_ext;
     world_ext_init(&world_ext, 2, 0, 2, PAWN_ELEFUN, 0, 0);
@@ -282,6 +282,7 @@ void test_world_ext_get_all_moves_elefun()
 
 void test_world_ext_get_all_moves_king1st()
 {
+    init_neighbors(0);
     puts("\ttest_world_get_all_moves_king1st:");
     struct world_ext_t world_ext;
     world_ext_init(&world_ext, 2, 0, 1, PAWN_KING1ST, 0, 0);
@@ -298,6 +299,7 @@ void test_world_ext_get_all_moves_king1st()
 
 void test_world_ext_pawn_moves()
 {
+    init_neighbors(0);
     puts("\ttest_world_ext_pawn_moves :");
     struct world_ext_t world_ext;
     world_ext_init(&world_ext, 1, 0, 1, PAWN_SIMPLE, 0, 0);
@@ -319,6 +321,7 @@ void test_world_ext_pawn_moves()
 
 void test_world_ext_test_capture_1()
 {
+    init_neighbors(0);
     puts("\ttest_world_ext_test_capture :");
     struct world_ext_t world_ext;
     world_ext_init(&world_ext, 2, 0, 1, PAWN_SIMPLE, 0, 0);

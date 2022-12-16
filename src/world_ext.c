@@ -92,9 +92,9 @@ int _world_ext_test_capture(struct world_ext_t* world_ext, int current_player_in
 void _world_ext_get_all_moves_simple(struct world_ext_t* world_ext, struct sets_t* set, struct pawns_t* pawn)
 {
     int idx, d;
-    for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors(pawns_get_position(pawn)))); ++k) {
-        idx = get_neighbors(pawns_get_position(pawn)).n[k].i;
-        d = get_neighbors(pawns_get_position(pawn)).n[k].d;
+    for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors2(pawns_get_position(pawn)))); ++k) {
+        idx = get_neighbors2(pawns_get_position(pawn)).n[k].i;
+        d = get_neighbors2(pawns_get_position(pawn)).n[k].d;
         for (int i = 0; i < pawns_get_max_dep(pawn); i++) {
             if (!world_get_sort(world_ext_get_world(world_ext), idx) || _world_ext_test_capture(world_ext, pawns_get_player_index(pawn), idx))
                 sets_add(set, idx);
@@ -106,9 +106,9 @@ void _world_ext_get_all_moves_simple(struct world_ext_t* world_ext, struct sets_
 void _world_ext_get_all_moves_tower(struct world_ext_t* world_ext, struct sets_t* set, struct pawns_t* pawn)
 {
     int idx, d;
-    for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors(pawns_get_position(pawn)))); ++k) {
-        idx = get_neighbors(pawns_get_position(pawn)).n[k].i;
-        d = get_neighbors(pawns_get_position(pawn)).n[k].d;
+    for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors2(pawns_get_position(pawn)))); ++k) {
+        idx = get_neighbors2(pawns_get_position(pawn)).n[k].i;
+        d = get_neighbors2(pawns_get_position(pawn)).n[k].d;
         switch (d) {
             case EAST:
             case WEST:
@@ -131,9 +131,9 @@ void _world_ext_get_all_moves_tower(struct world_ext_t* world_ext, struct sets_t
 void _world_ext_get_all_moves_elefun(struct world_ext_t* world_ext, struct sets_t* set, struct pawns_t* pawn)
 {
     int idx, d;
-    for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors(pawns_get_position(pawn)))); ++k) {
-        idx = get_neighbors(pawns_get_position(pawn)).n[k].i;
-        d = get_neighbors(pawns_get_position(pawn)).n[k].d;
+    for (int k = 0; k < (pawns_get_neighbors_nb(get_neighbors2(pawns_get_position(pawn)))); ++k) {
+        idx = get_neighbors2(pawns_get_position(pawn)).n[k].i;
+        d = get_neighbors2(pawns_get_position(pawn)).n[k].d;
         for (int i = 0; i < pawns_get_max_dep(pawn); i++) {
             switch (d) {
                 case EAST:
