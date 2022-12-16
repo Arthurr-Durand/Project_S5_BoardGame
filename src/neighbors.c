@@ -6,56 +6,56 @@
 
 #define UINT_MAX WORLD_SIZE
 
-// static enum dir_t t[MAX_DIR];
+static enum dir_t t[MAX_DIR];
 
 struct neighbors_t neighbors[WORLD_SIZE];
 
 /** Initializes the relation between the neighbors, based on an
     integer `seed`. `seed` must be less than MAX_RELATIONS.
     Can be called multiple times. */
-void init_neighbors(unsigned int seed);
-// {
-//     int p=0;
-//     switch(seed) {
-//         case 0: // hocto
-//         p=0;
-//             for(int i=-4;i<MAX_DIR-4;i++){
-//                 t[p] = i;
-//                 p++;
-//             }
-//             t[p]=MAX_DIR;
-//             break;
+void init_neighbors(unsigned int seed)
+{
+    int p=0;
+    switch(seed) {
+        case 0: // hocto
+        p=0;
+            for(int i=-4;i<MAX_DIR-4;i++){
+                if (i!=0){
+                t[p] = i;
+                p++;
+                }
+            }
+            t[p]=MAX_DIR;
+            break;
 
-//         case 1:  // triangular
-//             p=0;
-//             for(int i=2;i<5;i++){
-//                 if ((i%2)!=0)
-//                     t[p]=i;
-//                 else
-//                     t[p]=-i;
-//                 p++;
-//             }   
-//             for(int i=-4;i<-1;i++){
-//                 if ((i%2)!=0)
-//                     t[p]=i;
-//                 else 
-//                     t[p]=-i;
-//                 p++;
-//             }
-//             t[p]=MAX_DIR;
-//             break;
-//         case 2: // square
-//         p=0; 
-//             for(int i=-3;i<MAX_DIR-5;i=i+2){
-//                 t[p]= i;
-//                 p++;
-//             }
-//             t[p]=MAX_DIR;
-//             break;
-//     }
-//     //for(int i=0;i!=MAX_DIR;i++)
-//     //    printf("%d\n",t[i]);
-// }
+        case 1:  // triangular
+            p=0;
+            for(int i=2;i<5;i++){
+                if ((i%2)!=0)
+                    t[p]=i;
+                else
+                    t[p]=-i;
+                p++;
+            }   
+            for(int i=-4;i<-1;i++){
+                if ((i%2)!=0)
+                    t[p]=i;
+                else 
+                    t[p]=-i;
+                p++;
+            }
+            t[p]=MAX_DIR;
+            break;
+        case 2: // square
+        p=0; 
+            for(int i=-3;i<MAX_DIR-5;i=i+2){
+                t[p]= i;
+                p++;
+            }
+            t[p]=MAX_DIR;
+            break;
+    }
+}
 
 /** Returns the neighbor of the place `idx`, in direction `d`, and
     UINT_MAX if there is no such neighbor (or any other kind of error) */
@@ -129,49 +129,38 @@ unsigned int get_neighbor(unsigned int idx, enum dir_t d) // Fonction faite pour
 }
 /** Returns the list of the neighbors of the place `idx`, terminated
     by UINT_MAX.  */
-// struct neighbors_t get_neighbors(unsigned int idx)
-// {
-//     struct neighbors_t voisins;
-//     int p = 0;
-//     int l=0;
-//     int debut;
-//     int fin;
-//     while (t[l]!=MAX_DIR){
-//         l++;
-//     //   printf("%d\n",l);
-//     }
-//     if (l!=6){
-//         for (int k=0 ;t[k]!=MAX_DIR ;k++){
-//             if (get_neighbor(idx,t[k]) != UINT_MAX){
-//                 voisins.n[p].i = get_neighbor(idx,t[k]);
-//                 voisins.n[p].d = t[k];
-//                 p++;
-//             }
-//         }
-//     }
-//     else{
-//         if (idx%2!=0){
-//             debut=0 ;
-//             fin=3;
-//         } 
-//         else {
-//             debut=3 ;
-//             fin=MAX_DIR-3;
-//         }
-//     }
-//     //printf("%d <> %d \n",debut,fin);
-//     for (int k=debut ;k<fin ;k++){
-//             if (get_neighbor(idx,t[k]) != UINT_MAX){
-//                 voisins.n[p].i = get_neighbor(idx,t[k]);
-//                 voisins.n[p].d = t[k];
-//                 p++;
-//             }
-//         } 
-
-//     voisins.n[p].i = UINT_MAX;
-//     voisins.n[p].d = NO_DIR;
-//     return voisins;
-// }
+struct neighbors_t get_neighbors2(unsigned int idx)
+{
+    struct neighbors_t voisins;
+    int p = 0;
+    int l=0;
+    int debut=0;
+    int fin=9;
+    while (t[l]!=MAX_DIR){
+        l++;
+    }
+    if (l==6){
+        if (idx%2!=0){
+            debut=0 ;
+            fin=3;
+        } 
+        else {
+            debut=3 ;
+            fin=MAX_DIR-3;
+        }
+    }
+    for (int k=debut ;k<fin ;k++){
+            if (get_neighbor(idx,t[k]) != UINT_MAX){
+                voisins.n[p].i = get_neighbor(idx,t[k]);
+                //printf("%d\n",t[k]);
+                voisins.n[p].d = t[k];
+                p++;
+            }
+        } 
+    voisins.n[p].i = UINT_MAX;
+    voisins.n[p].d = NO_DIR;
+    return voisins;
+}
 
 struct neighbors_t get_neighbors(unsigned int idx)
 {

@@ -56,16 +56,14 @@ int main(int argc, char* argv[])
 
     // Game start
     unsigned int game = 1, round = 0, turn = rand()%PLAYERS_NB;
-    // init_neighbors(0);
-    // int i=0;
-    // int p=0;
+    int p=0;
     while (game) {
-        // if ((i%10)==0){
-        // puts("!GLISSEMENT DE TERRAIN!\n");
-        // init_neighbors(p);
-        // p++;
-        // }
-        // init_neighbors(0);
+
+        if ((round%10)==0){
+        puts("!GLISSEMENT DE TERRAIN!\n");
+        init_neighbors(p%3);
+        p++;
+        }
 
         // Round
         round++;
@@ -117,7 +115,6 @@ int main(int argc, char* argv[])
             printf("> Maximum number of rounds reached, there is no winner !\n");
             game = 0;
         }
-    // i++;
     }
 
     return 0;
