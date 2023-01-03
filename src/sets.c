@@ -111,22 +111,30 @@ void sets_set_initial_sets_battleground(int nb_players, struct sets_t initial_se
 
 }
 
-void sets_get_good_places(struct sets_t* set, struct sets_t initial_sets[])
-{
-    int a=set->l[0]-initial_sets->l[0];
-    int b=a;
-    for(int i=0;i<sets_get_nb(set);i++){
-        for(int k=0;k<sets_get_nb(initial_sets);k++){
-            if (a>abs(set->l[i]-initial_sets->l[k]))
-                a=abs(set->l[i]-initial_sets->l[k]);    
-        }
-        if (a>b){
-            sets_remove(set,i-1);
-            a=b;
-        }
-        if (b>a){
-            sets_remove(set,i);
-            b=a;
-        }        
-    }
-}
+// void sets_get_good_places(struct sets_t* set, struct sets_t initial_sets[])
+// {
+//     int a;
+//     //int b=a;
+//     int list[sets_get_nb(set)];
+//     for(int i=0;i<sets_get_nb(set);i++){
+//         a=abs(set->l[i]-initial_sets->l[0]);
+//         for(int k=0;k<sets_get_nb(initial_sets);k++){
+//             if (a>abs(set->l[i]-initial_sets->l[k])){
+//                 a=abs(set->l[i]-initial_sets->l[k]);
+//                 printf("coucou %d\n",k);
+//             }  
+//         }
+//         list[i]=a;
+//         printf("%d\n",list[i]);
+//         // //printf("a=%d\n",a);
+//         // printf("place %d\n",set->l[i]);
+//         // if (a>b){
+//         //     sets_remove(set,i-1);
+//         //     a=b;
+//         // }
+//         // if ((b>a) && (i!=0)){
+//         //     sets_remove(set,i);
+//         //     b=a;
+//         // }        
+//     }
+// }
