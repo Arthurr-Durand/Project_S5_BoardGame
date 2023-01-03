@@ -89,11 +89,11 @@ int main(int argc, char* argv[])
         struct sets_t set;
         sets_init(&set);
         world_ext_get_all_moves(&world_ext, &set, pawn);
-        for(int i=0;i<sets_get_nb(&set);i++)
-            printf("du set %d\n",sets_get_place_at(&set,i));
-        sets_get_good_places(&set,&world_ext_get_initial_sets(&world_ext)[turn%PLAYERS_NB+1]);
-        for(int i=0;i<sets_get_nb(&set);i++)
-            printf(" du pas set %d\n",sets_get_place_at(&set,i));
+        // for(int i=0;i<sets_get_nb(&set);i++)
+        //     printf("du set %d\n",sets_get_place_at(&set,i));
+        // sets_get_good_places(&set,&world_ext_get_initial_sets(&world_ext)[turn%PLAYERS_NB+1]);
+        // for(int i=0;i<sets_get_nb(&set);i++)
+        //     printf(" du pas set %d\n",sets_get_place_at(&set,i));
         if (sets_get_nb(&set)) { // If the pawn can go somewhere.
             old_place = pawns_get_position(pawn);
             new_place = sets_get_random_place(&set);
