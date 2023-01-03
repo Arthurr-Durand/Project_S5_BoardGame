@@ -183,6 +183,28 @@ void test_sets_is_in_set(){
     int_test(sets_is_in_set(&set,1),1);
 }
 
+void test_sets_get_good_places()
+{
+    puts("\ttest_sets_get_good_places");
+    // init 2 players
+    struct players_t players[2];
+    players_init(players, 2);
+    // init 2 sets
+    struct sets_t sets[2];
+    sets_init(&sets[0]);
+    sets_init(&sets[1]);
+    struct sets_t c_sets[2];
+    sets_init(&c_sets[0]);
+    sets_init(&c_sets[1]);
+    // set_initials_sets
+    sets_set_initial_sets(2, sets, c_sets);
+    sets_get_good_places(&c_sets[0],&sets[1]);
+    printf("%d\n",sets_get_nb(&c_sets[0]));
+    for (int i=0; i<sets_get_nb(&c_sets[0]);i++){
+        printf("%d\n",sets_get_place_at(&c_sets[0],i));
+    }
+}
+
 void test_pawns_get_neighbors_nb()
 {
     puts("\ttest_pawns_get_neighbors_nb:");
@@ -400,6 +422,9 @@ int main()
     test_world_ext_pawn_moves();
     test_world_ext_test_capture_1();
     test_world_ext_test_capture_2();
+
+
+    //test_sets_get_good_places();
 
     return 0;
 }

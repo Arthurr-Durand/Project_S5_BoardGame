@@ -10,8 +10,8 @@
 #define STARTING_POSITION 0 // 0 : classic, 1 : BATTLEGROUND
 #define MAX_DEP 1
 #define PAWN_TYPE PAWN_SIMPLE
-#define FORMAT 1 // max 3 pour normal et min 3 pour BG
-#define FORMAE 1 // max 3 pour normal et min 3 pour BG
+#define FORMAT 0 // max 3 pour normal et min 3 pour BG
+#define FORMAE 0 // max 3 pour normal et min 3 pour BG
 
 int main(int argc, char* argv[])
 {
@@ -89,6 +89,11 @@ int main(int argc, char* argv[])
         struct sets_t set;
         sets_init(&set);
         world_ext_get_all_moves(&world_ext, &set, pawn);
+        for(int i=0;i<sets_get_nb(&set);i++)
+            printf("%d\ndu set",sets_get_place_at(&set,i));
+        sets_get_good_places(&set,&world_ext_get_initial_sets(&world_ext)[turn%PLAYERS_NB]);
+        for(int i=0;i<sets_get_nb(&set);i++)
+            printf(" du pas set %d\n",sets_get_place_at(&set,i));
         if (sets_get_nb(&set)) { // If the pawn can go somewhere.
             old_place = pawns_get_position(pawn);
             new_place = sets_get_random_place(&set);

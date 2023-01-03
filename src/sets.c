@@ -113,12 +113,12 @@ void sets_set_initial_sets_battleground(int nb_players, struct sets_t initial_se
 
 void sets_get_good_places(struct sets_t* set, struct sets_t initial_sets[])
 {
-    int a= &set[0]-&initial_sets[0];
+    int a=set->l[0]-initial_sets->l[0];
     int b=a;
     for(int i=0;i<sets_get_nb(set);i++){
         for(int k=0;k<sets_get_nb(initial_sets);k++){
-            if (a>&set[i]-&initial_sets[k])
-                a=&set[i]-&initial_sets[k];    
+            if (a>abs(set->l[i]-initial_sets->l[k]))
+                a=abs(set->l[i]-initial_sets->l[k]);    
         }
         if (a>b){
             sets_remove(set,i-1);
