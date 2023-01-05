@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <getopt.h>
+#include <math.h>
 
 #include "game.h"
 
@@ -10,17 +11,17 @@
 #define STARTING_POSITION 0 // 0 : classic, 1 : BATTLEGROUND
 #define MAX_DEP 1
 #define PAWN_TYPE PAWN_SIMPLE
-#define FORMAT 0 // max 3 pour normal et min 3 pour BG
-#define FORMAE 0 // max 3 pour normal et min 3 pour BG
+#define FORMAT 0 // max 3 for classic and min 3 pour BATTLEGROUND
+#define FORMAE 0 // max 3 for classic and min 3 pour BATTLEGROUND
 
 int main(int argc, char* argv[])
 {
     // Set default options
     char* colors[] = {"No color", "Black", "White"};
-    unsigned int end_type = 0; // 0 : victoire simple, 1 : victoire complexe
+    unsigned int end_type = 0; // 0 : simple victory, 1 : complex victory
     unsigned int max_rounds = 2*WIDTH*HEIGHT;
     unsigned int rand_seed = (unsigned int)time(NULL);
-    unsigned int earthquake = 15; 
+    unsigned int earthquake = 0;
     // Get options
     int opts;
     while ((opts = getopt(argc, argv, ":s:t:m:e:")) != -1) {
@@ -35,15 +36,19 @@ int main(int argc, char* argv[])
             max_rounds = atoi(optarg);
             break;
         case 'e':
-            earthquake= atoi(optarg);
+            if (atoi(optarg) > 0)
+                earthquake = atoi(optarg);
             break;
         default:
             break;
         }
     }
+    if (!earthquake)
+        earthquake = sqrt(max_rounds);
     printf("[-] Random seed set to : %d.\n", rand_seed);
     printf("[-] Maximum number of rounds set to : %d.\n", max_rounds);
-    printf("[-] Victory type is set to : %s.\n\n", end_type ? "complex" : "simple");
+    printf("[-] Victory type is set to : %s.\n", end_type ? "complex" : "simple");
+    printf("[-] Number of rounds before each earthquake is set to : %d.\n\n", earthquake);
     
     // Init rand
     srand(rand_seed);

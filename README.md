@@ -13,6 +13,8 @@
 >    - [Nettoyage](#nettoyage)
 >- [Remerciements](#tests)
 
+---
+
 
 ## Description du projet
 
@@ -40,6 +42,7 @@ git clone https://<user>@thor.enseirb-matmeca.fr/git/projetss5-17132
 cd projetss5-17132
 ```
 
+
 ## Utilisation
 
 
@@ -54,12 +57,12 @@ Une fois la compilation effectué, un executable est disponible sous le nom de `
 
 ### Execution
 
-Plusieurs options sont disponibles lors de l'éxecution :
+Plusieurs options sont disponibles lors de l'éxecution, si les arguments des options sont incorrectes, le programme prendra en compte les valeurs par défaut.
 ```
--s <entier>: Initialise le générateur aléatoire.        (défaut: aléatoire)
--t <s/c>: Fixe le type de victoire.                     (défaut: simple)
--m <entier>: Fixe le nombre maximal de tours.           (défaut: 2*world_size)
--e <1/0>: Active/Désactive les changements de terrains. (défaut: activé)
+-s <entier>: Initialise le générateur aléatoire.            (défaut: aléatoire)
+-t <s/c>: Fixe le type de victoire.                         (défaut: simple)
+-m <entier>: Fixe le nombre maximal de tours.               (défaut: 2 fois la taille du monde)
+-e <entier>: Active/Désactive les changements de terrains.  (défaut: racine carrée de la taille du monde)
 ```
 
 Elle sont à spécifier après le nom de l'executable.
