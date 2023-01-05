@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 
-#include "game.h"
+#include "neighbors.h"
 #include "test_utilities.h"
 
 

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 
-#include "game.h"
+#include "sets.h"
 #include "test_utilities.h"
 
 
@@ -33,9 +33,6 @@ void test_sets()
 void test_sets_set_initial_sets()
 {
     puts("\ttest_sets_set_initial_sets");
-    // init 3 players
-    struct players_t players[3];
-    players_init(players, 3);
     // init 3 sets
     struct sets_t sets[3];
     sets_init(&sets[0]);
@@ -54,14 +51,11 @@ void test_sets_set_initial_sets()
 void test_sets_get_random()
 {
     puts("\ttest_sets_get_random :");
-    struct world_ext_t world_ext;
-    init_neighbors(2);
-    world_ext_init(&world_ext, 2, 0, 1, PAWN_SIMPLE, 0, 0);
     struct sets_t set;
     sets_init(&set);
-    struct players_t* player = world_ext_get_player_nb(&world_ext, 0);
-    world_ext_get_all_moves(&world_ext, &set, players_get_pawn_at_index(player, 0));
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < 10; i++)
+        sets_add(&set, i);
+    for (int i = 0; i < 10; i++)
         printf("\t\t> %d\n", sets_get_random_place(&set));
 }
 
