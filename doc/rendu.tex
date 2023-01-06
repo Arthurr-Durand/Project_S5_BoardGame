@@ -1,4 +1,5 @@
 \documentclass{article}
+
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{amsmath}
@@ -6,6 +7,7 @@
 \usepackage{tabto}
 \usepackage{multicol}
 
+\graphicspath{{img/}}
 
 \title{Rendu Projet S5-17132}
 \author{Durand Arthur /||/ Hamouche Luxel}
@@ -62,7 +64,7 @@
         \\
         Il faut definir un plateau de jeu pour l'utilisateur. Nous avons decidé de faire celui-ci de forme torique afin rendre le jeu plus modulable. Il a donc fallut nous affranchire des effets de bord à l'aide de modulo. Ce choix a aussi été fait pour des raisons d'entisipation des futures modifications qui seront plus faciles en partant d'un modèle très généraliste tel que le tore.\\
         \begin{center}
-        \includegraphics[scale=0.3]{220px-Torus_cycles2.svg.png}
+        \includegraphics[scale=0.3]{tor.png}
         \end{center}
         
         
@@ -71,21 +73,21 @@
 \centering
 \begin{subfigure}{0.3\textwidth}
 \centering
-\includegraphics[width=\textwidth]{1-uniform_n1.svg.png}
+\includegraphics[width=\textwidth]{plateauhexa.png}
 \caption{Pavage hexagonale}
 \label{label_de_l_image_1}
 \end{subfigure}
 \quad
 \begin{subfigure}{0.3\textwidth}
 \centering
-\includegraphics[width=\textwidth]{1200px-Tiling_Regular_4-4_Square.svg.png}
+\includegraphics[width=\textwidth]{quadrillage.png}
 \caption{Pavage carré}
 \label{label_de_l_image_2}
 \end{subfigure}
 \quad 
 \begin{subfigure}{0.3\textwidth}
 \centering
-\includegraphics[width=\textwidth]{640px-Tiling_Regular_3-6_Triangular.svg.png}
+\includegraphics[width=\textwidth]{plateautri.png}
 \caption{Pavage Triangulaire}
 \label{label_de_l_image_3}
 \end{subfigure}
