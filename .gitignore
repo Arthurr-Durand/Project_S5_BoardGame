@@ -10,3 +10,5 @@ test_world_ext
 test_world
 *.aux
 *.log
+*.synctex.gz
+*.toc
