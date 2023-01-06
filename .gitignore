@@ -1,10 +1,12 @@
 *.o
 project
-test_project
 test_game
 test_geometry
 test_neighbors
 test_pawns
 test_players
 test_sets
+test_world_ext
 test_world
+*.aux
+*.log
