@@ -11,8 +11,9 @@
 #define STARTING_POSITION 0 // 0 : classic, 1 : BATTLEGROUND
 #define MAX_DEP 1
 #define PAWN_TYPE PAWN_SIMPLE
-#define FORMAT 0 // max 3 for classic and min 3 pour BATTLEGROUND
-#define FORMAE 0 // max 3 for classic and min 3 pour BATTLEGROUND
+#define FORMAT 3 // max 3 for classic and min 3 pour BATTLEGROUND
+#define FORMAE 3 // max 3 for classic and min 3 pour BATTLEGROUND
+#define CHANCE_OF_RELEASE 50 // between 0 and 100, the % of chances to release a captured pawn
 
 int main(int argc, char* argv[])
 {
@@ -57,6 +58,8 @@ int main(int argc, char* argv[])
     puts("[-] Init world, players, sets.\n");
     struct world_ext_t world_ext;
     world_ext_init(&world_ext, PLAYERS_NB, STARTING_POSITION, MAX_DEP, PAWN_TYPE, FORMAT, FORMAE);
+    int p = 0;
+    init_neighbors(0);
 
     // Print the current world
     puts("[-] Print current world.\n");
@@ -65,18 +68,21 @@ int main(int argc, char* argv[])
 
     // Game start
     unsigned int game = 1, round = 0, turn = rand()%PLAYERS_NB;
-    int p=0;
     while (game) {
 
-        if ((round%earthquake)==0){
-        puts("!GLISSEMENT DE TERRAIN!\n");
-        init_neighbors(p%3);
-        p++;
+        if (round != 0 && (round%earthquake)==0){
+            puts("!GLISSEMENT DE TERRAIN!\n");
+            p++;
+            init_neighbors(p%3);
         }
 
         // Round
         round++;
         printf("=============== Round %d ================\n", round);
+
+        // Release
+        if (world_ext_get_nb_captured_pawns(&world_ext))
+            world_ext_try_release(&world_ext, CHANCE_OF_RELEASE);
 
         // Turn
         turn = (turn+1)%PLAYERS_NB;
@@ -104,8 +110,10 @@ int main(int argc, char* argv[])
             new_place = sets_get_random_place(&set);
 
             // Move the pawn
-            world_ext_pawn_moves(&world_ext, pawn, new_place);
+            int capture = world_ext_pawn_moves(&world_ext, pawn, new_place);
             printf("> Player %d moves the pawn from the case %d to the case %d.\n", turn+1, old_place, new_place);
+            if (capture != UNIT_MAX)
+                printf("> Pawn at the place %d has been captured.\n", capture);
         
             // Print the current world
             puts("> Game state :");

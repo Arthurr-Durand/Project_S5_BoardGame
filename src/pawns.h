@@ -23,6 +23,9 @@ int pawns_get_player_index(const struct pawns_t* pawn);
 /** Returns the maximum depth of a pawn */
 int pawns_get_max_dep(const struct pawns_t* pawn);
 
+/** Returns the color of a pawn */
+enum color_t pawns_get_color(const struct pawns_t* pawn);
+
 /** Returns the type of a pawn */
 enum sort_t pawns_get_type(const struct pawns_t* pawn);
 
