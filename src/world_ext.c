@@ -64,6 +64,13 @@ void world_ext_add_captured_pawn(struct world_ext_t* world_ext, struct pawns_t* 
     world_ext->nb_captured_pawns++;
 }
 
+void world_ext_remove_captured_pawn(struct world_ext_t* world_ext, int index)
+{
+    for (int i = index; i < world_ext_get_nb_captured_pawns(world_ext)-1; i++)
+        world_ext->captured_pawns[i] = world_ext->captured_pawns[i+1];
+    world_ext->nb_captured_pawns--;
+}
+
 struct pawns_t* world_ext_get_pawn_at_position(struct world_ext_t* world_ext, int position)
 {
     struct players_t* player;
@@ -187,20 +194,22 @@ void world_ext_get_all_moves(struct world_ext_t* world_ext, struct sets_t* set, 
     }
 }
 
-void world_ext_pawn_moves(struct world_ext_t* world_ext, struct pawns_t* pawn, int new_position)
+int world_ext_pawn_moves(struct world_ext_t* world_ext, struct pawns_t* pawn, int new_position)
 {
     int position = pawns_get_position(pawn);
     struct world_t* world = world_ext_get_world(world_ext);
     int current_player_index = pawns_get_player_index(pawn);
+    int capture = UINT_MAX;
 
     if (world_get_sort(world, new_position)) { // Capture
         struct pawns_t* captured_pawn = world_ext_get_pawn_at_position(world_ext, new_position);
         int captured_player_index = pawns_get_player_index(captured_pawn);
         world_set_sort(world, new_position, NO_SORT);
         world_set(world, new_position, NO_COLOR);
-        pawns_set_position(captured_pawn, UINT_MAX);
+        pawns_set_captured(captured_pawn, 1);
         sets_remove(&world_ext_get_current_sets(world_ext)[captured_player_index], new_position);
         world_ext_add_captured_pawn(world_ext, captured_pawn);
+        capture = new_position;
     }
 
     world_set_sort(world, position, NO_SORT);
@@ -210,10 +219,37 @@ void world_ext_pawn_moves(struct world_ext_t* world_ext, struct pawns_t* pawn, i
     world_set_sort(world, new_position, pawns_get_type(pawn));
     world_set(world, new_position, pawn->color);
     sets_add(&world_ext_get_current_sets(world_ext)[current_player_index], new_position);
+
+    return capture;
 }
 
 struct pawns_t* word_ext_get_random_pawn(struct world_ext_t* world_ext, int current_player_index)
 {
     int rd = rand()%sets_get_nb(&world_ext_get_current_sets(world_ext)[current_player_index]);
     return world_ext_get_pawn_at_position(world_ext, sets_get_place_at(&world_ext_get_current_sets(world_ext)[current_player_index], rd));
+}
+
+void world_ext_try_release(struct world_ext_t* world_ext, int chances)
+{
+    struct world_t* world = world_ext_get_world(world_ext);
+    for (int i = 0; i < world_ext_get_nb_captured_pawns(world_ext); i++) {
+        struct pawns_t* pawn = world_ext_get_captured_pawn_at_index(world_ext, i);
+        int player_index = pawns_get_player_index(pawn);
+        int position = pawns_get_position(pawn);
+        if (world_get_sort(world, position) == NO_SORT) {
+            int rd = rand()%100; // from 0 to 99
+            if(rd < chances) {
+                world_set_sort(world, position, pawns_get_type(pawn));
+                world_set(world, position, pawns_get_color(pawn));
+                pawns_set_captured(pawn, 0);
+                sets_add(&world_ext_get_current_sets(world_ext)[player_index], position);
+                world_ext_remove_captured_pawn(world_ext, i);
+                printf("> The pawn in %d has been released (%d/100, less than %d was needed).\n", position, rd, chances);
+            } else {
+                printf("> The pawn in %d cannot be released (%d/100, less than %d was needed).\n", position, rd, chances);
+            }
+        } else {
+            printf("> The pawn in %d cannot be released (the place is not free).\n", position);
+        }
+    }
 }

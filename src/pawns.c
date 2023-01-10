@@ -27,6 +27,11 @@ int pawns_get_max_dep(const struct pawns_t* pawn)
     return pawn->max_dep;
 }
 
+enum color_t pawns_get_color(const struct pawns_t* pawn)
+{
+    return pawn->color;
+}
+
 enum sort_t pawns_get_type(const struct pawns_t* pawn)
 {
     return pawn->type;

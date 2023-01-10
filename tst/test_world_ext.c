@@ -152,6 +152,37 @@ void test_world_ext_test_capture_2()
     int_test(sets_is_in_set(&set, 0), 0);
 }
 
+void test_world_ext_release()
+{
+    puts("\ttest_world_ext_release :");
+    struct world_ext_t world_ext;
+    world_ext_init(&world_ext, 2, 0, 1, PAWN_SIMPLE, 0, 0);
+    struct players_t* player0 = world_ext_get_player_nb(&world_ext, 0);
+    struct players_t* player1 = world_ext_get_player_nb(&world_ext, 1);
+    struct pawns_t* pawn0 = players_get_pawn_at_index(player0, 0);
+    struct pawns_t* pawn1 = players_get_pawn_at_index(player1, 0);
+    int_test(world_ext_get_nb_captured_pawns(&world_ext), 0);
+    int_test(sets_get_nb(&world_ext_get_current_sets(&world_ext)[0]), 10);
+    int_test(pawns_get_captured(pawn0), 0);
+    world_ext_pawn_moves(&world_ext, pawn1, 0); // Capture
+    int_test(world_ext_get_nb_captured_pawns(&world_ext), 1);
+    int_test(sets_get_nb(&world_ext_get_current_sets(&world_ext)[0]), 9);
+    int_test(pawns_get_captured(pawn0), 1);
+    world_ext_try_release(&world_ext, 100); // Release must fail because the place isn't empty
+    int_test(world_ext_get_nb_captured_pawns(&world_ext), 1);
+    int_test(sets_get_nb(&world_ext_get_current_sets(&world_ext)[0]), 9);
+    int_test(pawns_get_captured(pawn0), 1);
+    world_ext_pawn_moves(&world_ext, pawn1, 10); // The place is now empty
+    world_ext_try_release(&world_ext, 0); // Release must fail because the probabilty is set to 0
+    int_test(world_ext_get_nb_captured_pawns(&world_ext), 1);
+    int_test(sets_get_nb(&world_ext_get_current_sets(&world_ext)[0]), 9);
+    int_test(pawns_get_captured(pawn0), 1);
+    world_ext_try_release(&world_ext, 100); // Release must be a success because the probabilty is set to 100
+    int_test(world_ext_get_nb_captured_pawns(&world_ext), 0);
+    int_test(sets_get_nb(&world_ext_get_current_sets(&world_ext)[0]), 10);
+    int_test(pawns_get_captured(pawn0), 0);
+}
+
 int main()
 {
     puts("test_world_ext.c :");
@@ -163,6 +194,7 @@ int main()
     test_world_ext_pawn_moves();
     test_world_ext_test_capture_1();
     test_world_ext_test_capture_2();
+    test_world_ext_release();
 
     return 0;
 }
