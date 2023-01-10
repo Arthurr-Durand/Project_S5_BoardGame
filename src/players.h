@@ -7,7 +7,7 @@
 struct players_t {
     int index;
     int pawns_nb;
-    struct pawns_t pawns[WORLD_SIZE];
+    struct pawns_t pawns[WORLD_SIZE/2];
     enum color_t color;
 };
 

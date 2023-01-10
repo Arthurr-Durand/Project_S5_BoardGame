@@ -45,7 +45,7 @@ void players_add_pawn(struct players_t* player, int max_dep, enum sort_t type, i
     player->pawns_nb++;
 }
 
-void players_set_initial_pawns(struct world_t* world, struct players_t players[], const int nb_players, const struct sets_t sets[], int max_dep, enum sort_t type,int format,int formae)
+void players_set_initial_pawns(struct world_t* world, struct players_t players[], const int nb_players, const struct sets_t sets[], int max_dep, enum sort_t type, int format, int formae)
 {
     enum sort_t new_type;
     int new_max_dep;
@@ -53,7 +53,7 @@ void players_set_initial_pawns(struct world_t* world, struct players_t players[]
         int nb_places = sets_get_nb(&sets[i]);
         for (int y = 0; y < nb_places; ++y) {
             int position = sets_get_place_at(&sets[i], y);
-            if (formae!=0 && ((position%(WIDTH/format)) == 0)){
+            if (format!=0 && ((position%(WIDTH/format)) == 0)){
                 new_type = PAWN_TOWER;
                 new_max_dep = WIDTH;
             }
