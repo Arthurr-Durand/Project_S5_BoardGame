@@ -74,7 +74,7 @@ Elle sont à spécifier après le nom de l'executable.
 ### Tests
 
 Des tests sont disponibles afin de vérifier le bon fonctionement du logiciel. Ils sont regroupés par fichiers et peuvent être lancées **individuelements** ou **ensemble**. \
-Pour les lancer individuelements, on peut utiliser les commandes.
+Pour tester un fichier individuellement, on peut utiliser les commandes.
 ```sh
 make test_<fichier>
 ./test_<fichier>
@@ -92,6 +92,13 @@ Les différents fichiers testables sont :
 Pour **compiler** et **éxectuer** tout les tests en même temps, on utilisera la commande :
 ```sh
 make test
+```
+
+### Rapport
+
+Un rapport LaTeX est disponnible, il peut être compilé simplement avec la commande :
+```sh
+make doc
 ```
 
 ### Nettoyage
