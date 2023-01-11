@@ -5,10 +5,10 @@
 
 /** A struct representing a player */
 struct players_t {
-    int index;
-    int pawns_nb;
-    struct pawns_t pawns[WORLD_SIZE/2];
-    enum color_t color;
+	int index;
+	int pawns_nb;
+	struct pawns_t pawns[WORLD_SIZE / 2];
+	enum color_t color;
 };
 
 /** Inits a list of players */
@@ -32,4 +32,4 @@ void players_add_pawn(struct players_t* player, int max_dep, enum sort_t type, i
 /** Sets all world sort in inital sets to pawns */
 void players_set_initial_pawns(struct world_t* world, struct players_t players[], const int nb_players, const struct sets_t sets[], int max_dep, enum sort_t type, int foramt, int forame);
 
-#endif // __PLAYERS_H__
+#endif	// __PLAYERS_H__

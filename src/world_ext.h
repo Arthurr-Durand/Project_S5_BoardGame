@@ -4,13 +4,13 @@
 #include "players.h"
 
 struct world_ext_t {
-    struct world_t* world;
-    int nb_players;
-    struct players_t players[WORLD_SIZE];
-    struct sets_t initial_sets[WORLD_SIZE];
-    struct sets_t current_sets[WORLD_SIZE];
-    int nb_captured_pawns;
-    struct pawns_t* captured_pawns[WORLD_SIZE];
+	struct world_t* world;
+	int nb_players;
+	struct players_t players[WORLD_SIZE];
+	struct sets_t initial_sets[WORLD_SIZE];
+	struct sets_t current_sets[WORLD_SIZE];
+	int nb_captured_pawns;
+	struct pawns_t* captured_pawns[WORLD_SIZE];
 };
 
 void world_ext_init(struct world_ext_t* world_ext, int nb_players, int starting_position, int max_dep, enum sort_t pawn_type, int format, int formae);
@@ -43,4 +43,4 @@ struct pawns_t* word_ext_get_random_pawn(struct world_ext_t* world_ext, int curr
 
 void world_ext_try_release(struct world_ext_t* world_ext, int chances);
 
-#endif // __WORLD_EXT_H__
+#endif	// __WORLD_EXT_H__
