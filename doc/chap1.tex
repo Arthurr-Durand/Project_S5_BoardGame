@@ -1,7 +1,24 @@
 \chapter{Introduction}
+Notre projet se base sur l'exemple d'un mansuba, considéré comme l'ancêtre Perse des échecs dont le principe majeur est de mettre l'adversaire mat. Le but est donc d'implémenter tout un systeme de jeu et de relations afin de produire un jeu de plateau dans l'esprit du mansuba ou des échecs.
 
-\section{Présentation de l'équipe}
 
 \section{Présentation du projet}
 \subsection{Règles}
+    Le jeu est soumis à certaines règle afin d'encadrer sa création. Pour mieux comprendre les différentes implémentations, voici les principales : \\
+    \begin{itemize}
+        \item[\textdagger] Le monde: Il est représnté par un ensemble de positions. Il est également définit par sa longueur et sa largeur qui en les mutltipliants nous donne le nombre maximum de posistions.\\
+        
+        \item[\textdagger] Les relations : C'est se qui relie les positions entre elles en fonctions des directions. On peut de ce fait définir \textbf{les voisins} comme toutes les positions qui sont reliées entre elles. On a donc un maximum de voisins en fonction des déplacements autorisés.
+        \\
+        \item[\textdagger] Déplacement simple: Il est définit comme étant le changement de position pour une position voisine disponible.
+        \\
+        \item[\textdagger] Saut simple : Il est possible si la position voisine n'est pas disponible de sauter par dessus l'obstacle. Cependant si la position derrière est occuper ou que la structure du monde ne le permet le saut est impossible.
+        \\
+        \item[\textdagger] Victoire : Elle définit l'arret du jeu, soit car le nombre de tour max est atteint, soit car un joueur a réussit avec une pièce à atteindre les positions de départ de l'autre joueur.
+        \\
+    \end{itemize}
 \subsection{Stratégie de résolution}
+
+    Notre stratégie pour effectuer ce projet est basé sur les tests ainsi que sur la modularité. \\
+    En effet tout au long du projet nous avons fait  en sorte que toutes les valeurs utilisées puissent varier en fonctions des demandes de l'utilisateur. On a donc utilisés le moins de constantes possible pour pouvoir répondre à des changements basique sans rajouter ou changer tout une partie du projet. \\
+    Egalement notre méthode pour implémenter de nouvelles fonctionalités est dites par les tests. Pour cela on fait une liste d'objectif de la fonctionalité, chaque objectif est testé avant de passer au suivant pour être sûr que la fonctionalité marche correctement une fois implémenté.
