@@ -6,13 +6,13 @@
 /** Print the current world */
 void print_game(const struct world_t* world);
 
-/** Print captured paws */
+/** Print captured pawns */
 void print_captured_pawns(struct world_ext_t* world_ext);
 
-/** Check the simple winning conditions */
+/** Check simple winning conditions */
 int game_winning_cond(struct players_t* player, struct sets_t set[], struct pawns_t* pawn, int nb_players);
 
-/** Check the complex winning conditions */
-int game_complex_winning_cond(struct players_t* player, struct sets_t set[],int nb_players);
+/** Check complex winning conditions */
+int game_complex_winning_cond(struct players_t* player, struct sets_t set[], int nb_players);
 
-#endif // __GAME_H__
+#endif	// __GAME_H__

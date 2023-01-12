@@ -6,12 +6,12 @@
 
 /** A struct representing a piece */
 struct pawns_t {
-    int player_index;
-    int max_dep;
-    enum color_t color;
-    enum sort_t type;
-    int position;
-    int captured;
+	int player_index;
+	int max_dep;
+	enum color_t color;
+	enum sort_t type;
+	int position;
+	int captured;
 };
 
 /** Inits a pawn */
@@ -44,4 +44,4 @@ void pawns_set_captured(struct pawns_t* pawn, int captured);
 /** Set a new position*/
 void pawns_set_position(struct pawns_t* pawn, int new_position);
 
-#endif // __PAWNS_H__
+#endif	// __PAWNS_H__
