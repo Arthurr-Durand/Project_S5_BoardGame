@@ -7,13 +7,13 @@
 #include "game.h"
 
 #define UNIT_MAX WORLD_SIZE
-#define PLAYERS_NB 2            // Max 2 pour un BATTLEGROUND 10*10
-#define STARTING_POSITION 0	   // 0 : classic, 1 : BATTLEGROUND
-#define MAX_DEP 1              // Max deplacement de la pièce de remplissage 
-#define PAWN_TYPE PAWN_SIMPLE  // Type de la pièce de remplissage 
-#define FORMAT 3			  // max 3 for classic and min 3 pour BATTLEGROUND
-#define FORMAE 3			  // max 3 for classic and min 3 pour BATTLEGROUND
-#define CHANCE_OF_RELEASE 50  // between 0 and 100, the % of chances to release a captured pawn
+#define PLAYERS_NB 2		   // Numbers of players
+#define STARTING_POSITION 1	   // 0 : "classic", 1 : "BATTLEGROUND"
+#define MAX_DEP 1			   // Maximum displacement of the filler piece
+#define PAWN_TYPE PAWN_SIMPLE  // Type of formation filler (i.e default pawn)
+#define FORMAT 3			   // Max 3 for "classic" and min 3 pour "BATTLEGROUND"
+#define FORMAE 3			   // Max 3 for "classic" and min 3 pour "BATTLEGROUND"
+#define CHANCE_OF_RELEASE 50   // Between 0 and 100, the % of chances to release a captured pawn
 
 int main(int argc, char* argv[])
 {
@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 	unsigned int game = 1, round = 0, turn = rand() % PLAYERS_NB;
 	while (game) {
 		if (round != 0 && (round % earthquake) == 0) {
-			puts("!GLISSEMENT DE TERRAIN!\n");
+			puts("!LANDSLIDE!\n");
 			p++;
 			init_neighbors(p % 3);
 		}

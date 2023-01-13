@@ -8,7 +8,7 @@
 >- [Installation](#installation)
 >- [Utilisation](#utilisation)
 >    - [Compilation](#compilation)
->    - [Execution](#execution)
+>    - [Exécution](#execution)
 >    - [Tests](#tests)
 >    - [Nettoyage](#nettoyage)
 >- [Remerciements](#tests)
@@ -18,15 +18,15 @@
 
 ## Description du projet
 
-Ce projet à pour but de créer un "proto-jeu" de plateaux permettant de jouer des parties de jeux de plateaux divers. L'objectif étant d'obtenir un jeu générique très facilement modifiable et paramétrable.
+Ce projet a pour but de créer un "proto-jeu" de plateaux permettant de jouer des parties de jeux de plateaux divers, l'objectif étant d'obtenir un jeu générique très facilement modifiable et paramétrable.
 Il répond au [sujet Mansuba](https://www.labri.fr/perso/renault/working/teaching/projets/2022-23-S5-Mansuba.php) réalisé dans le cadre du projet de semestre 5 proposés aux étudiants de l'ENSEIRB-MATMECA.
-Le dépot est disponible sur la [forge de l'école](
+Le dépôt est disponible sur la [forge de l'école](
 https://thor.enseirb-matmeca.fr/ruby/projects/projetss5).
 
 
 ## Prérequis
 
-Ce projet necessite l'installation de `git`, `make` ainsi que le compilateur `gcc`.
+Ce projet nécessite l'installation de `git`, `make` ainsi que le compilateur `gcc`.
 ```sh
 sudo apt-get install git
 sudo apt-get install make
@@ -36,7 +36,7 @@ sudo apt-get install gcc
 
 ## Installation
 
-Avant de commencer, il est neccessaire de cloner le dépot git disponible sur la forge de l'ENSEIRB-MATMECA.
+Avant de commencer, il est néccessaire de cloner le dépot git disponible sur la [forge de l'ENSEIRB-MATMECA](https://thor.enseirb-matmeca.fr/).
 ```sh
 git clone https://<user>@thor.enseirb-matmeca.fr/git/projetss5-17132
 cd projetss5-17132
@@ -48,16 +48,16 @@ cd projetss5-17132
 
 ### Compilation
 
-Par défaut, les dimenssions du monde sont de 10 par 10. Cependant il est possible d'indiquer des dimensions personnaliséés durant la compilation :
+Par défaut, les dimensions du monde sont de 10 par 10. Cependant, il est possible d'indiquer des dimensions personnalisées durant la compilation :
 ```sh
 make project WIDTH=<width> HEIGHT=<height>
 ```
-Une fois la compilation effectué, un executable est disponible sous le nom de `project`.
+Une fois la compilation effectué, un exécutable est disponible sous le nom de `project`.
 
 
-### Execution
+### Exécution
 
-Plusieurs options sont disponibles lors de l'éxecution, si les arguments des options sont incorrectes, le programme prendra en compte les valeurs par défaut.
+Plusieurs options sont disponibles lors de l'exécution, si les arguments des options sont incorrects, le programme prendra en compte les valeurs par défaut.
 ```
 -s <entier>: Initialise le générateur aléatoire.            (défaut: aléatoire)
 -t <s/c>: Fixe le type de victoire.                         (défaut: simple)
@@ -65,7 +65,7 @@ Plusieurs options sont disponibles lors de l'éxecution, si les arguments des op
 -e <entier>: Active/Désactive les changements de terrains.  (défaut: racine carrée de la taille du monde)
 ```
 
-Elle sont à spécifier après le nom de l'executable.
+Elles sont à spécifier après le nom de l'exécutable.
 ```sh
 ./project [Options]
 ```
@@ -73,7 +73,7 @@ Elle sont à spécifier après le nom de l'executable.
 
 ### Tests
 
-Des tests sont disponibles afin de vérifier le bon fonctionement du logiciel. Ils sont regroupés par fichiers et peuvent être lancées **individuelements** ou **ensemble**. \
+Des tests sont disponibles afin de vérifier le bon fonctionnement du logiciel. Ils sont regroupés par fichiers et peuvent être lancés **individuellements** ou **ensemble**. \
 Pour tester un fichier individuellement, on peut utiliser les commandes.
 ```sh
 make test_<fichier>
@@ -89,14 +89,14 @@ Les différents fichiers testables sont :
 - world_ext
 - game
 
-Pour **compiler** et **éxectuer** tout les tests en même temps, on utilisera la commande :
+Pour **compiler** et **exécuter** tout les tests en même temps, on utilisera la commande :
 ```sh
 make test
 ```
 
 ### Rapport
 
-Un rapport LaTeX est disponnible, il peut être compilé dans le fichier `doc/` en utilisant `pdflatex` :
+Un rapport LaTeX est disponible, il peut être compilé dans le fichier `doc/` en utilisant `pdflatex` :
 ```sh
 cd doc/
 pdflatex report.tex
@@ -104,10 +104,11 @@ pdflatex report.tex
 
 ### Nettoyage
 
-Les fichiers de compilations ainsi que les executables peuvent être supprimé du dépot avec la commande :
+Les fichiers de compilations ainsi que les exécutables peuvent être supprimés du dépôt avec la commande :
 ```sh
 make clean
 ```
 
 ## Remerciements
-.
+
+Un grand merci aux équipes pédagogiques qui nous ont accompagnés dans ce projet. Vos précieux conseils nous ont permis de mener ce projet à un stade aussi avancé.

@@ -1,16 +1,21 @@
 \chapter{Conclusion}
 
 \section{Difficultés rencontrées}
-    \subsection{Structure et affichage}
-        Lors des premiers affichages il nous était impossible d'afficher le monde en raison d'un problème d'initialisation des structures. Nous passions par une variable globales ce qui ne empêchais de déclarer plusiseurs variables de chaque structure.\\
-    \subsection{Taille du monde}
-        Nous avons également remarqué des problèmes en lien avec la taille de notre monde, en effet, pour des plateaux très grands (de l'ordre de 900 cases, et avec moitier moins de pions), notre jeu ne fonctionne plus pour ce qui nous sembles être des raisons de gestion de mémoire. Nous pensons que ce problème pourrait être résolu en utilisant des \texttt{mallocs()} et des \texttt{free()}. 
-\section{Bilan du Projet}
-    Nous avons réussi à faire un jeu qui fonctionne de 2 à 12 joueurs (en fonction de la taille du monde), sur un plateau torique de 9 à 700 cases, avec 4 types de pièces différentes.\\
-    Le jeu admet 2 possibilitées de départs et de victoires. Il comprend aussi des changements de terrain (avec 3 géométries disponibles) en cours de partie et un systeme de capture de pièce. La partie est capable de se jouer toute seule en choissisant aléatoirement les pièces et leurs déplacements. Le plateau est affiché tour par tour et affiche aussi à l'utilisateur les coups joués et des informations sur les évenements du jeu.
+    Nous avons rencontré quelques difficultés lors de la réalisation de ce projet, en voici quelques-uns.
     \medbreak
-    \noindent Il nous reste maintenant à implémenter des déplacements guidés qui permettrons au pièces de se déplacer en direction des objectifs de fin de partie.
+    \begin{itemize}
+        \item[$\bullet$] Lors des premiers affichages il nous était impossible d'afficher le monde en raison d'un problème d'initialisation des structures. Nous passions par une variable globale ce qui empêchait de déclarer plusieurs variables de chaque structure.
+        \medbreak
+        \item[$\bullet$] Nous avons également remarqué des problèmes en lien avec la taille de notre monde, en effet, pour des plateaux très très grands (de l'ordre de 10000 cases, et avec moitié moins de pions), notre jeu ne fonctionne plus pour ce qui nous semble être des raisons de gestion de mémoire. Ce problème est querellé avec le nombre maximum de joueurs. Nous pensons que ce problème pourrait être résolu en utilisant des \texttt{mallocs()} et des \texttt{free()}. 
+    \end{itemize}
+
+\section{Bilan du Projet}
+    Nous avons réussi à faire un jeu qui fonctionne de 2 à 10 joueurs (voir plus en fonction de la taille du monde), sur un plateau torique de 9 à 25 000 cases, avec 4 types de pièces différentes.\\
+    Le jeu admet 2 possibilités de départs et de victoires. Il comprend aussi des changements de terrain en cours de partie (avec 3 géométries disponibles) et un système de capture et de libération de pièce. La partie peut se jouer toute seule en choisisant aléatoirement les pièces et leurs déplacements. Le plateau est affiché tour par tour et affiche aussi à l'utilisateur les coups joués et des informations sur les événements du jeu.
+    \medbreak
+    \noindent Il nous resterait maintenant à implémenter des déplacements guidés pour permettre aux pièces de se déplacer en direction des objectifs de fin de partie.
+    
 \section{Ce que le projet nous a apporté}
-    Au cours de ces dernières semaines, nous avons appris à travailler ensemble sur un même code et à se corriger mutuellement. Ainsi, nous nous sommes amélioré en \texttt{C} et avons compris certaines suptilitées du language qui nous étaient encore inconnues. Le projet nous a forgé à l' utilisation d'outils tel que \texttt{Git}, indispensable pour travailler en groupe de manière efficace, ou encore \texttt{Makefile}, qui facilite grandement les taches répetitives des projets de développements. Ces compétences nous seront indispensable dans la suite de notre parcours.  \\
-    Ce projet nous à également appris à produire un rendu qui respecte des demandes précises tout en ayant code lisible et compréhensible. \\
-    L'autonomie laissée lors de ce projet nous aussi a permis de répondre au sujet de manière assez libre. Ceci nous a fait réflechir à la manière de lier les différentes structures et données du projet pour créer par nous même notre architecture de jeu.
+    Au cours de ces dernières semaines, nous avons appris à travailler ensemble sur un même code et à se corriger mutuellement. Ainsi, nous nous sommes amélioré en \texttt{C} et avons compris certaines suptilitées du language qui nous étaient encore inconnues. Le projet nous a forgé à l'utilisation d'outils comme \texttt{Git}, indispensable pour travailler en groupe de manière efficace, ou encore \texttt{Makefile}, qui facilite grandement les tâches répétitives des projets de développements. Ces compétences nous seront indispensables dans la suite de notre parcours.  \\
+    Ce projet nous a également appris à produire un rendu qui respecte des demandes précises tout en ayant un code lisible et compréhensible. \\
+    Pour finir, l'autonomie laissée lors de ce projet nous aussi a permis de répondre au sujet de manière assez libre. Ceci nous a fait réfléchir à la manière de lier les différentes structures et données du projet pour créer par nous-mêmes notre architecture de jeu.
