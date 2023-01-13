@@ -8,7 +8,7 @@
 
 #define UNIT_MAX WORLD_SIZE
 #define PLAYERS_NB 2		   // Numbers of players
-#define STARTING_POSITION 1	   // 0 : "classic", 1 : "BATTLEGROUND"
+#define STARTING_POSITION 0	   // 0 : "classic", 1 : "BATTLEGROUND"
 #define MAX_DEP 1			   // Maximum displacement of the filler piece
 #define PAWN_TYPE PAWN_SIMPLE  // Type of formation filler (i.e default pawn)
 #define FORMAT 3			   // Max 3 for "classic" and min 3 pour "BATTLEGROUND"
