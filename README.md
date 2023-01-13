@@ -96,9 +96,10 @@ make test
 
 ### Rapport
 
-Un rapport LaTeX est disponnible, il peut être compilé simplement avec la commande :
+Un rapport LaTeX est disponnible, il peut être compilé dans le fichier `doc/` en utilisant `pdflatex` :
 ```sh
-make doc
+cd doc/
+pdflatex report.tex
 ```
 
 ### Nettoyage
