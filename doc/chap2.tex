@@ -1,8 +1,8 @@
-\chapter{Environement et jeu}
+\chapter{Environnement et jeu}
 
 \section{Représentation du monde}
     \subsection{Géométrie du monde}
-        La premiere chose à faire était de définir des constantes, stuctures et variables qui allait nous servir tout au long du projet tel que : \\
+        La premiere chose à faire était de définir des constantes, stuctures et variables qui allaient nous servir tout au long du projet telles que : \\
         
         \noindent Les directions :
         \begin{center}
@@ -29,19 +29,19 @@
             \item Taille: WORLD-SIZE,
             \item Longueur: WIDTH,
             \item Largeur: HEIGHT,
-            \item Nombre de maximum de cases: UNIT-MAX,
+            \item Nombre maximum de cases: UNIT-MAX,
             \item Nombre de joueurs: NB-PLAYERS,
         \end{itemize}
         
-        \noindent \\ Avec ces variables, nous avons créés la structure "world" qui nous à permis d'assigner à chaque case du monde une couleur et un état d'occupation, ce qui vas grandement nous servire dans la suite du projet.
+        \noindent \\ Avec ces variables, nous avons créés la structure "world" qui nous a permis d'assigner à chaque case du monde une couleur et un état d'occupation, ce qui va grandement nous servir dans la suite du projet.
         
-    \subsection{Plateau de jeu}
-        Il faut definir un plateau de jeu pour l'utilisateur. Nous avons decidé de faire celui-ci de forme torique afin rendre le jeu plus modulable. Il a donc fallut nous affranchire des effets de bord à l'aide de modulos. Ce choix a aussi été fait pour des raisons d'antissipation des futures modifications, qui seront plus faciles a implémenter en partant d'un modèle très généraliste tel que le tore (Figure \textbf{\ref{fig:tore_de_jeu}}).\\
+    \subsection{Plateau de jeu}\label{part:geometry}
+        Il était nécessaire de définir un plateau de jeu pour l'utilisateur. Nous avons decidé de faire celui-ci de forme torique afin rendre le jeu plus modulable. Il a donc fallut nous affranchire des effets de bord à l'aide de modulos. Ce choix a aussi été fait pour des raisons d'antiçipation de futures modifications, qui seront plus faciles a implémenter en partant d'un modèle très généraliste tel que le tore (Figure \textbf{\ref{fig:tore_de_jeu}}).\\
         \newline
             \begin{figure}[H]
                 \centering
                 \includegraphics[scale=0.4]{tor.png}
-                \caption{tore de jeu}
+                \caption{Tore de jeu}
                 \label{fig:tore_de_jeu}
             \end{figure}
   
@@ -52,28 +52,30 @@
             \begin{subfigure}{0.3\textwidth}
                 \centering
                 \includegraphics[width=\textwidth]{pavage_hexagonal.png}
-                \caption{Pavage hexagonal}
+                \caption{Pavage hexagonal\footnotemark{}}
                 \label{fig:pavage_hexagonal}
             \end{subfigure}
             \quad
             \begin{subfigure}{0.3\textwidth}
                 \centering
                 \includegraphics[width=\textwidth]{pavage_carre.png}
-                \caption{Pavage carré}
+                \caption{Pavage carré\footnotemark{}}
                 \label{fig:pavage_carre}
             \end{subfigure}
             \quad 
             \begin{subfigure}{0.3\textwidth}
                 \centering
                 \includegraphics[width=\textwidth]{pavage_triangulaire.png}
-                \caption{Pavage triangulaire}
+                \caption{Pavage triangulaire\footnotemark{}}
                 \label{fig:pavage_triangulaire}
             \end{subfigure}
             \caption{Les différents pavages disponibles.}
             \label{label_de_la_figure 1}
         \end{figure}
-        
-        
+        \footnotetext{Source: \url{https://fr.wikipedia.org/wiki/Pavage_hexagonal}}
+        \footnotetext{Source: \url{https://fr.wikipedia.org/wiki/Pavage_carr\%C3\%A9}}
+        \footnotetext{Source: \url{https://fr.wikipedia.org/wiki/Pavage_triangulaire}}
+
 \section{Pièces et joueurs}
     \subsection{Pièces}\label{part:pawns}
         Premièrement, nous avons choisis d'implémenter de simple pions, pouvant se déplacer d'une seul case (seulement si celle-ci est vide), pour des raisons de facilité principalement. Par la suite, nous avons incorporés au jeu de nouvelles pieces, le rendant plus interessant. Chaque pièce à un déplacement particulier. \\ 
@@ -90,22 +92,50 @@ struct pawns_t {
     int captured;           // Etat du pion
 };\end{lstlisting}
 
-        \noindent Nous avons implémenté plusieurs types de pions : \\
+        \noindent Nous avons implémenté plusieurs types de pions :
+        \medbreak
             
         \includegraphics[width=0.45cm]{pawn.png} \textbf{Le Pion simpe :} \\
-        Le pion est la pièce basique du jeu, il possède un seul mouvement dans la direction de son choix. Cependant il est possible d'en faire une dame d'echec en augmentant simplement son nombre de mouvement maximum afin qu'il puisse se déplacer sur de plus grandes distances.\\
+        Le pion est la pièce basique du jeu, il possède un seul mouvement dans la direction de son choix. Cependant il est possible d'en faire une dame d'echec en augmentant simplement son nombre de mouvement maximum afin qu'il puisse se déplacer sur de plus grandes distances.
+        \medbreak
+         \begin{figure}[H]
+                \centering
+                \includegraphics[scale=0.3]{img/dep_pawn.png}
+                \caption{Déplacement d'un pion}
+                \label{fig:dep_pawn}
+            \end{figure}
             
-        \includegraphics[width=0.45cm]{tower.png} \textbf{La Tour :} \\
-        Elle peut, comme aux échecs, se déplacer seulement en direction des points cardinaux. Nous avons décidé de limiter ses déplacement au Max(longueur du plateau, largeur du plateau). En effet, sans cette condition, étant donné l'apparence torique de notre plateau, ses movements pourrait être infinis. \\
-            
+        \includegraphics[width=0.45cm]{tower.png} \textbf{La Tour :}\label{part:tower} \\
+        Elle peut, comme aux échecs, se déplacer seulement en direction des points cardinaux. Nous avons décidé de limiter ses déplacement au Max(longueur du plateau, largeur du plateau). En effet, sans cette condition, étant donné l'apparence torique de notre plateau, ses movements pourraient être infinis.
+        \medbreak
+             \begin{figure}[H]
+                \centering
+                \includegraphics[scale=0.3]{img/dep_tower.png}
+                \caption{Déplacement d'une tour}
+                \label{fig:dep_tower}
+            \end{figure}
         \includegraphics[width=0.45cm]{elefun.png} \textbf{L'éléphant :} \\
-        Il se déplace uniquement suivant les 4 directions cardinales, dans le cas de base, il dispose de deux déplacement succésifs, mais cette valeur peux être modifiée. \\
+        Il se déplace uniquement suivant les 4 directions cardinales, dans le cas de base, il dispose de deux déplacement successifs, mais cette valeur peut être modifiée.
+        \medbreak
+            \begin{figure}[H]
+                \centering
+                \includegraphics[scale=0.3]{img/dep_elefun.png}
+                \caption{Déplacement de l'éléphant}
+                \label{fig:dep_éléfun}
+            \end{figure}
             
         \includegraphics[width=0.45cm]{king.png} \textbf{Le Roi premier :} \\
-        Il se téléporte directement sur une case portant un numéro premier, si celle-ci n'est pas occupé par un autre pion. \\
+        Il se téléporte directement sur les cases portant des numéros premiers.
+        \medbreak
+                     \begin{figure}[H]
+                \centering
+                \includegraphics[scale=0.3]{img/dep_king.png}
+                \caption{Déplacement du Roi}
+                \label{fig:dep_king}
+            \end{figure}
     
     \subsection{Joueurs}
-        Un minimum de deux joueurs est nécessaire pour lancer une partie. Chaque joueur est associé à un index unique. Ils possèdent aussi une couleur, un nombre de pièces ainsi qu'un tableau qui les contients. La structure se présente comme ceci :
+        Un minimum de deux joueurs est nécessaire pour lancer une partie. Chaque joueur est associé à un index unique. Ils possèdent aussi une couleur, un nombre de pièces ainsi qu'un tableau qui les contient. La structure se présente comme ceci :
         \begin{lstlisting}
 /** A struct representing a player */
 struct players_t {
@@ -115,9 +145,9 @@ struct players_t {
     enum color_t color;                 // Couleur du joueur
 };\end{lstlisting}
 
-    Le jeu peut également être joué à plus de deux joueurs en fonction de la taille du monde. L'implémentation de joueur tient à respecter l'équilibre du jeu. Donc si le plateau ne permet pas de répartir un certain nombre de joueurs différents à l'initialisation alors cet équilibre est romput. 
+        Le jeu peut également être joué à plus de deux joueurs en fonction de la taille du monde. L'implémentation de joueur tient à respecter l'équilibre du jeu. Donc si le plateau ne permet pas de répartir un certain nombre de joueurs différents à l'initialisation alors cet équilibre est rompu. 
     \subsection{Formations de départ}
-            Pour plus de diversité, nous avons mis en place deux formations de départs différentes. Une premiere, classique, resemblant aux echecs (mais toujours en prennant en considération la forme torique de notre plateau). \\
+            Pour plus de diversité, nous avons mis en place deux formations de départ différentes. Une première, classique, ressemblant aux echecs (mais toujours en prenant en considération la forme torique de notre plateau). \\
             
             \begin{figure}[H]
                 \centering
@@ -126,7 +156,7 @@ struct players_t {
                 \label{fig:depart_classique}
             \end{figure}
 
-            La deuxième formation que nous avons implémentée est plus particulière et présente le plateau sous forme de champs de bataille, avec des énorme blocs de pièces séparés par des tranchés. Cette formation avait à l'origine pour but de tester la réaction des pièces lorsqu'elles sont entourées de plein d'autres. \\
+            La deuxième formation que nous avons implémentée est plus particulière et présente le plateau sous forme de champs de bataille, avec des énorme blocs de pièces séparés par des tranchées. Cette formation avait à l'origine pour but de tester la réaction des pièces lorsqu'elles sont entourées de plein d'autres. \\
             
             \begin{figure}[H]
                 \centering
@@ -135,30 +165,22 @@ struct players_t {
                 \label{fig:depart_champ_de_bataille}
             \end{figure}
 
-            Le type de pions qui composent ces formations est modulable. Par défaut, la formation est remplie avec des pions simples. Néanmoins il est possible de changer cette pièce par défaut, ou encore d'ajouter un certain nombre de pièces "spéciales" en plus de la pièce par défaut. La position de ces pièces est choisie par le programme. Pour celà nous avons implémenté un algorithme qui, en fonction du nombre de pièces spéciales à placer, choisis une formation qui soit identique pour chaque joueur et qui ne crée pas de déséquilibre entre les joueurs, et ceci quelque soit le nombre de joueur. \\
-            La figure \textbf{\ref{fig:depart_classique_a_4}} montre les positions de départ pour une partie lancée avec 4 joueurs, sur un monde de taille $10\times10$, avec  $2$ tours (pièce) par joueurs.
-            
-            \begin{figure}[H]
-                \centering
-                \includegraphics[scale=0.6]{img/depart_classique_a_4.png}
-                \caption{Départ classique à 4}
-                \label{fig:depart_classique_a_4}
-            \end{figure}
+            Les types de pions qui composent ces formations sont modulables. Par défaut, la formation est remplie avec des pions simples. Néanmoins il est possible de changer cette pièce par défaut, ou encore d'ajouter un certain nombre de pièces "spéciales" en plus de la pièce par défaut. 
             
     \section{Boucle de jeu}
 
         \subsection{Sélection des options}
-            Toujours dans le but d'augmenter la modularité de notre jeu, nous avons rendu un maximum d'options au choix de joueur lors du l'exécution. Les choix se font par l'intermédiaire de paramètres à ajouter lors de l'exécution du programme. Si les options sont écrites de manières incorrectes, le programme ne les prendra pas en compte et utilisera des valeurs par défaut.
+            Toujours dans le but d'augmenter la modularité de notre jeu, nous avons rendu un maximum d'options au choix du joueur lors de l'exécution. Les choix se font par l'intermédiaire de paramètres à ajouter lors de l'exécution du programme. Si les options sont écrites de manière incorrecte, le programme ne les prendra pas en compte et utilisera des valeurs par défaut.
             
         \subsection{Déroulement d'une partie}
-            Lorsque le programme est lancé, le programme initalise un "monde extérieur", que nous verons plus tard et qui contient le plateau de jeu, les joueurs et leur pièces. \\
+            Lorsque le programme est lancé, le programme initalise un "monde extérieur", que nous verrons plus tard et qui contient le plateau de jeu, les joueurs et leurs pièces. \\
             \newline
-            Au début de chaque tour un controle sur le changement de térrain est effectué afin de le modifié si il est nécéssaire d'après les options de l'utilisateur. \\
-            Ensuite une pièce du joueur est choisit au hasard pour se déplace dans l'une des cases accessible aléatoirement. Puis on vérifie si il y a un vainquer  ou si le max de tours à été atteint. Dans ce cas précis le jeu s'arrete et l'indique à l'utilisateur sinon on passe au tour suivant.
+            Au début de chaque tour, un contrôle sur le changement de terrain est effectué afin de le modifier (s'il est nécessaire, d'après les options de l'utilisateur). \\
+            Ensuite, une pièce du joueur est choisie au hasard pour se déplacer dans l'une des cases accessibles aléatoirement. Puis, on vérifie s'il y a un vainqueur ou si le max de tours à été atteint. Dans ce cas précis le jeu s'arrete et l'indique à l'utilisateur sinon on passe au tour suivant.
             
         \subsection{Conditions de victoire}
-            Notre jeu admet deux conditions de victoire différente :\\
+            Notre jeu admet deux conditions de victoire différentes :
             \begin{itemize}
-                \item La première signe la fin du jeu dès lors qu'une piece arrive dans les positions de départs de l'adversaire. Cette condition est 'simple' afin de véifier les déplacements de nos pieces et le bon fonctionnement du jeu.\\
-                \item La seconde elle nécésite que la totalité des pieces arrivent dans les positions de départ de ou des adversaires. Celle-ci est beaucoup plus complèxe et nécéssite des déplacements guidé pour l'atteindre. Cependant elle permet de faire durer plus longtemps les arties notament en mode 'Champ de bataille' afin de voir beaucoup d'intéractions.
+                \item La première signe la fin du jeu dès lors qu'une pièce atteind les positions de départ de l'adversaire. Cette condition est dite "simple". Et permet de facilement vérifier les déplacements de nos pièces et le bon fonctionnement du jeu.
+                \item La seconde nécessite que la totalité des pièces arrive dans les positions de départ de, ou des adversaires. Celle-ci est beaucoup plus complexe et nécessite des déplacements guidés pour l'atteindre. Cependant elle permet de faire durer plus longtemps les parties notamment en mode "champ de bataille" afin de voir beaucoup d'intéractions. Cette condition est dite "complexe".
             \end{itemize}

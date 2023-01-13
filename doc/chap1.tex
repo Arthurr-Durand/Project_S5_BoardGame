@@ -6,19 +6,19 @@ Notre projet se base sur l'exemple d'un mansuba, considéré comme l'ancêtre Pe
 \subsection{Règles}
     Le jeu est soumis à certaines règle afin d'encadrer sa création. Pour mieux comprendre les différentes implémentations, voici les principales : \\
     \begin{itemize}
-        \item[\textdagger] Le monde: Il est représnté par un ensemble de positions. Il est également définit par sa longueur et sa largeur qui en les mutltipliants nous donne le nombre maximum de posistions.\\
+        \item[\textdagger] Le monde: Il est représenté par un ensemble de positions. Il est également définit par sa longueur et sa largeur qui en les multipliants nous donne le nombre maximum de positions.\\
         
-        \item[\textdagger] Les relations : C'est se qui relie les positions entre elles en fonctions des directions. On peut de ce fait définir \textbf{les voisins} comme toutes les positions qui sont reliées entre elles. On a donc un maximum de voisins en fonction des déplacements autorisés.
+        \item[\textdagger] Les relations : C'est ce qui relie les positions entre elles en fonction des directions. On peut de ce fait définir \textbf{les voisins} comme toutes les positions qui sont reliées entre elles. On a donc un maximum de voisins en fonction des déplacements autorisés.
         \\
         \item[\textdagger] Déplacement simple: Il est définit comme étant le changement de position pour une position voisine disponible.
         \\
-        \item[\textdagger] Saut simple : Il est possible si la position voisine n'est pas disponible de sauter par dessus l'obstacle. Cependant si la position derrière est occuper ou que la structure du monde ne le permet le saut est impossible.
+        \item[\textdagger] Saut simple : Il est possible, si la position voisine n'est pas disponible, de sauter par dessus l'obstacle. Cependant si la position derrière est occupée ou que la structure du monde ne le permet pas, le saut est impossible.
         \\
-        \item[\textdagger] Victoire : Elle définit l'arret du jeu, soit car le nombre de tour max est atteint, soit car un joueur a réussit avec une pièce à atteindre les positions de départ de l'autre joueur.
+        \item[\textdagger] Victoire : Elle définit l'arret du jeu, soit car le nombre de tour maximum est atteint, soit car un joueur a réussi à atteindre les positions de départ de l'autre joueur avec une de ces pièces.
         \\
     \end{itemize}
 \subsection{Stratégie de résolution}
 
-    Notre stratégie pour effectuer ce projet est basé sur les tests ainsi que sur la modularité. \\
-    En effet tout au long du projet nous avons fait  en sorte que toutes les valeurs utilisées puissent varier en fonctions des demandes de l'utilisateur. On a donc utilisés le moins de constantes possible pour pouvoir répondre à des changements basique sans rajouter ou changer tout une partie du projet. \\
-    Egalement notre méthode pour implémenter de nouvelles fonctionalités est dites par les tests. Pour cela on fait une liste d'objectif de la fonctionalité, chaque objectif est testé avant de passer au suivant pour être sûr que la fonctionalité marche correctement une fois implémenté.
+    Notre stratégie pour effectuer ce projet est basée sur les tests ainsi que sur la modularité. \\
+    En effet tout au long du projet nous avons fait  en sorte que toutes les valeurs utilisées puissent varier en fonctions des demandes de l'utilisateur. On a donc utilisé le moins de constantes possible pour pouvoir répondre à des changements basique sans rajouter ou changer tout une partie du projet. \\
+    Egalement notre méthode pour implémenter de nouvelles fonctionalités est dite par les tests. Pour cela on fait une liste d'objectifs de la fonctionnalité, chaque objectif est testé avant de passer au suivant pour être sûr que la fonctionnalité marche correctement une fois implémentée.
