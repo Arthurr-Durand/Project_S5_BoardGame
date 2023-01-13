@@ -14,7 +14,7 @@
 #define WORLD_SIZE (WIDTH*HEIGHT)
 
 /** The number of players in a game */
-#define MAX_PLAYERS 2
+#define MAX_PLAYERS 10
 
 /** Enum defining the possible colors in the world */
 enum color_t {

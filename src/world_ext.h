@@ -6,9 +6,9 @@
 struct world_ext_t {
 	struct world_t* world;
 	int nb_players;
-	struct players_t players[WORLD_SIZE];
-	struct sets_t initial_sets[WORLD_SIZE];
-	struct sets_t current_sets[WORLD_SIZE];
+	struct players_t players[MAX_PLAYERS];
+	struct sets_t initial_sets[MAX_PLAYERS];
+	struct sets_t current_sets[MAX_PLAYERS];
 	int nb_captured_pawns;
 	struct pawns_t* captured_pawns[WORLD_SIZE];
 };

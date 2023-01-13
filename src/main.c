@@ -7,10 +7,10 @@
 #include "game.h"
 
 #define UNIT_MAX WORLD_SIZE
-#define PLAYERS_NB 2
-#define STARTING_POSITION 0	 // 0 : classic, 1 : BATTLEGROUND
-#define MAX_DEP 1
-#define PAWN_TYPE PAWN_SIMPLE
+#define PLAYERS_NB 2            // Max 2 pour un BATTLEGROUND 10*10
+#define STARTING_POSITION 0	   // 0 : classic, 1 : BATTLEGROUND
+#define MAX_DEP 1              // Max deplacement de la pièce de remplissage 
+#define PAWN_TYPE PAWN_SIMPLE  // Type de la pièce de remplissage 
 #define FORMAT 3			  // max 3 for classic and min 3 pour BATTLEGROUND
 #define FORMAE 3			  // max 3 for classic and min 3 pour BATTLEGROUND
 #define CHANCE_OF_RELEASE 50  // between 0 and 100, the % of chances to release a captured pawn
