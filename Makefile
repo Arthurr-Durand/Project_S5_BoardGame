@@ -26,4 +26,4 @@ test_%: src/%.o tst/test_utilities.o tst/test_%.o src/geometry.o src/world.o src
 	$(CC) -g -O0 $^ -o $@
 
 clean:
-	rm -f project test_* */*.o
+	rm -f project test_* */*.o */*.aux */*.log */*.tox */*.out */*.toc
